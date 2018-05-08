@@ -10,48 +10,29 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Contracts\Events\Dispatcher;
+use App\Mail\VerifyMail;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {
 
     protected $redirectTo = '/home';
 
+    private $mailer;
+    private $dispatcher;
 
-    public function __construct()
+    public function __construct(Mailer $mailer, Dispatcher $dispatcher)
     {
         $this->middleware('guest');
+        $this->mailer = $mailer;
+        $this->dispatcher = $dispatcher;
     }
 
-// from trait RegistersUsers
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-    protected function create(array $data)
-    {
-        $user = return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'verify_token' => Str::random(),
-            'status' => User::STATUS_WAIT,
-            'role' => User::ROLE_USER,
-        ]);
-
-        Mail::to($user->email)->send(new VerifyMail($user));
-        return $user;
-    }
-
+// метод верификации - дергается Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
     public function verify($token)
     {
         if (!$user = User::where('verify_token', $token)->first()) {
@@ -72,16 +53,32 @@ class RegisterController extends Controller
     }
 
 // from trait RegistersUsers
-    public function register(Request $request)
+    public function showRegistrationForm()
     {
-        $this->validator($request->all())->validate();
+        return view('auth.register');
+    }
 
-        event(new Registered($user = $this->create($request->all())));
 
-        $this->guard()->login($user);
+// from trait RegistersUsers
+// тут добавлены два метода - validate()-перенесен в RegisterRequest и create()
+    public function register(RegisterRequest $request)
+    {
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'verify_token' => Str::random(),
+            'status' => User::STATUS_WAIT,
+            'role' => User::ROLE_USER,
+        ]);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        $this->mailer->to($user->email)->send(new VerifyMail($user));
+
+
+        event(new Registered($user));
+
+        return redirect()->route('login')
+                ->with('success', 'Check your email and click on the link to verify.');
     }
 
 // from trait RegistersUsers
@@ -92,6 +89,9 @@ class RegisterController extends Controller
 // from trait RegistersUsers
     protected function registered(Request $request, $user)
     {
-        //
+        $this->guard()->logout();
+
+        return redirect()->route('login')
+                        ->with('success', 'Check your email and click on the link to verify.');
     }
 }

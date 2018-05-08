@@ -4,14 +4,16 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Sluggable;
 
     public const STATUS_WAIT = 'wait';
     public const STATUS_ACTIVE = 'active';
-    public const STATUS_BAN = 'ban';
+    public const STATUS_BANNED = 'banned';
 
     public const ROLE_USER = 'user';
     public const ROLE_MODERATOR = 'moderator';
@@ -19,10 +21,34 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status', 'verify_token', 'role', 'image', 'slug', 'likesNumber', 'commentsNumber'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+    public function isWait(): bool
+    {
+        return $this->status === self::STATUS_WAIT;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public function isBanned(): bool
+    {
+        return $this->status === self::STATUS_BANNED;
+    }
 }

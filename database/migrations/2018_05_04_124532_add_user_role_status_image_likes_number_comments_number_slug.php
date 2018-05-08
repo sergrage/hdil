@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddUserRoleStatusImageLikesNumberCommentsNumberSlug extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
@@ -19,21 +15,17 @@ class AddUserRoleStatusImageLikesNumberCommentsNumberSlug extends Migration
             $table->string('role', 16);
             $table->string('image')->nullable();
             $table->string('slug');
-            $table->integer('likesNumber')->nullable();
-            $table->integer('commentsNumber')->nullable();
+            $table->integer('likesNumber')->default(0);
+            $table->integer('commentsNumber')->default(0);
         });
 
         DB::table('users')->update([
             'role' => 'user',
             'status' => 'active',
-        });
+        ]);
+   
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('user', function (Blueprint $table) {
