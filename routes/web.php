@@ -11,20 +11,19 @@ Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 // Проверка email
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
-
-
-Route::get('/admin', 'Admin\HomeController@index')->name('admin.home');
-
 // Страница Админки
+// Route::get('/administrator', 'LTE\HomeController@index')->name('lte');
+// Route::resource('users', 'LTE\UsersController');
 
-// Route::group(
-// 	[
-//         'prefix' => 'admin',
-//         'as' => 'admin.',
-//         'namespace' => 'Admin',
-//         'middleware' => ['auth'],
-//     ],
-//     function () {
-// 		Route::get('/', 'HomeController@index')->name('home');
-// 		Route::resource('users', 'UsersController');
-// });
+
+Route::group(
+	[
+        'prefix' => 'administrator',
+        'as' => 'lte.',
+        'namespace' => 'LTE',
+        'middleware' => ['auth'],
+    ],
+    function () {
+		Route::get('/', 'HomeController@index')->name('lte');
+		Route::resource('/users', 'UsersController');
+});

@@ -2,48 +2,57 @@ let mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
- | Mix Asset Management
+ | HDIL
  |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
+*/
 
 
+// mix
+//     .setPublicPath('public/build')
+//     .setResourceRoot('/build/')
+//     .js('resources/assets/js/app.js', 'js')
+//     .sass('resources/assets/sass/app.scss', 'css')
+//     .version();
 
-mix.setPublicPath('public/build')
-   .setResourceRoot('/build/')
-   .js('resources/assets/js/app.js', 'js')
-   .sass('resources/assets/sass/app.scss', 'css')
-   .version();
+/*
+ |--------------------------------------------------------------------------
+ | ADMIN LTE
+ |--------------------------------------------------------------------------
+*/
+
+mix.setPublicPath('public/admin')
+	.setResourceRoot('/admin/')
+	.styles([
+		'resources/adminLTE/admin/bootstrap/css/bootstrap.min.css',
+		'resources/adminLTE/admin/font-awesome/4.5.0/css/font-awesome.min.css',
+		'resources/adminLTE/admin/ionicons/2.0.1/css/ionicons.min.css',
+		'resources/adminLTE/admin/plugins/iCheck/minimal/_all.css',
+		'resources/adminLTE/admin/plugins/datepicker/datepicker3.css',
+		'resources/adminLTE/admin/plugins/select2/select2.min.css',
+		'resources/adminLTE/admin/plugins/datatables/dataTables.bootstrap.css',
+		'resources/adminLTE/admin/dist/css/AdminLTE.min.css',
+		'resources/adminLTE/admin/dist/css/skins/_all-skins.min.css'
+	], 'css/admin.css')
+    .scripts([
+		'resources/adminLTE/admin/plugins/jQuery/jquery-2.2.3.min.js',
+		'resources/adminLTE/admin/bootstrap/js/bootstrap.min.js',
+		'resources/adminLTE/admin/plugins/select2/select2.full.min.js',
+		'resources/adminLTE/admin/plugins/datepicker/bootstrap-datepicker.js',
+		'resources/adminLTE/admin/plugins/datatables/jquery.dataTables.min.js',
+		'resources/adminLTE/admin/plugins/datatables/dataTables.bootstrap.min.js',
+		'resources/adminLTE/admin/plugins/slimScroll/jquery.slimscroll.min.js',
+		'resources/adminLTE/admin/plugins/fastclick/fastclick.js',
+		'resources/adminLTE/admin/plugins/iCheck/icheck.min.js',
+		'resources/adminLTE/admin/dist/js/app.min.js',
+		'resources/adminLTE/admin/dist/js/demo.js',
+		'resources/adminLTE/admin/dist/js/scripts.js'
+	], 'js/admin.js')
+    .version();
 
 
-mix.styles([
-	'resource/adminLTE/plugins/font-awesome/css/font-awesome.min.css',
-	'resource/adminLTE/dist/css/adminlte.min.css',
-	'resource/adminLTE/plugins/iCheck/flat/blue.css',
-	'resource/adminLTE/plugins/morris/morris.css',
-	'resource/adminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css',
-	'resource/adminLTE/plugins/datepicker/datepicker3.css',
-	'resource/adminLTE/plugins/daterangepicker/daterangepicker-bs3.css',
-	'resource/adminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
-	], 'public/admin/css/adminLTE.css');
+mix.copy('resources/adminLTE/admin/bootstrap/fonts', 'public/admin/fonts');
+mix.copy('resources/adminLTE/admin/dist/fonts', 'public/admin/fonts');
+mix.copy('resources/adminLTE/admin/dist/img', 'public/admin/img');
+mix.copy('resources/adminLTE/admin/plugins/iCheck/minimal/blue.png', 'public/admin/css');
 
-mix.scripts([
-	'resource/adminLTE/plugins/jquery/jquery.min.js',
-	'resource/adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js',
-	'resource/adminLTE/plugins/morris/morris.min.js',
-	'resource/adminLTE/plugins/sparkline/jquery.sparkline.min.js',
-	'resource/adminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js',
-	'resource/adminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
-	'resource/adminLTE/plugins/knob/jquery.knob.js',
-	'resource/adminLTE/plugins/daterangepicker/daterangepicker.js',
-	'resource/adminLTE/plugins/datepicker/bootstrap-datepicker.js',
-	'resource/adminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js',
-	'resource/adminLTE/plugins/slimScroll/jquery.slimscroll.min.js',
-	'resource/adminLTE/plugins/fastclick/fastclick.js',
-	'resource/adminLTE/dist/js/pages/dashboard.js',
-	'resource/adminLTE/dist/js/demo.js',
-	], 'public/admin/js/adminLTE.js')
+
