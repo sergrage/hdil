@@ -51,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->status === self::STATUS_BANNED;
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function getImage()
+    {
+        if($this->image){
+            return '/admin/img/user2-160x160.jpg';
+        }
+        return '/admin/img/user2-160x160.jpg';
+    }
+
+    
 }

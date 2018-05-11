@@ -11,73 +11,77 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('id', 'desc')->paginate(100);
         return view('lte.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('lte.users.create', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'  =>  'required|string|max:255',
+            'email' =>  'required|email|string|max:255|unique:users',
+        ]);
+
+        $user = User::create([
+            'name'  =>  $request['name'],
+            'email' =>  $request['email'],
+            'status' => User::STATUS_ACTIVE,
+            'role' => User::ROLE_USER,
+        ]);
+
+        return redirect()->route('admin.users.show', $user);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('lte.users.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(User $user)
     {
-        //
+        $statuses = [
+            User::STATUS_WAIT => 'wait',
+            User::STATUS_ACTIVE => 'active',
+        ];
+
+        return view('lte.users.edit', compact('user', 'statuses'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, User $user)
     {
-        //
+         $user->validate($request, [
+            'name'  =>  'required',
+            'email' =>  'required|email|unique:users',
+            'image'    =>  'nullable|image',
+            'status' => ['required', 'string', Rule::in([User::STATUS_ACTIVE, User::STATUS_WAIT])],
+            'role' => ['required', 'string', Rule::in([User::ROLE_ADMIN, User::ROLE_USER])],
+        ]);
+
+        $user->update($request->only(['name', 'email', 'status', 'role', 'image']));
+
+        return redirect()->route('admin.users.show', $user);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('lte.users.index');
+    }
+
+    public function unBan(User $user)
+    {   
+        $user->update(['status' => $user::STATUS_ACTIVE]);
+        return redirect()->route('lte.users.index');
     }
 }

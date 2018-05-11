@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('layouts.lte')
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -27,7 +27,7 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <a href="{{route('users.create')}}" class="btn btn-success">Добавить</a>
+                <a href="" class="btn btn-success">Добавить</a>
               </div>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -35,7 +35,8 @@
                   <th>ID</th>
                   <th>Имя</th>
                   <th>E-mail</th>
-                  <th>Аватар</th>
+                  <th>Статус</th>
+                  <th>Роль</th>
                   <th>Действия</th>
                 </tr>
                 </thead>
@@ -45,21 +46,47 @@
 	                  <td>{{$user->id}}</td>
 	                  <td>{{$user->name}}</td>
 	                  <td>{{$user->email}}</td>
+                    <td>
+                    @if($user->isActive())
+                    <span class="label label-success">{{$user->status}}</span>
+                    @endif
+                    @if($user->isWait())
+                    <span class="label label-warning">{{$user->status}}</span>
+                    @endif
+                    @if($user->isBanned())
+	                  <span class="label label-default">{{$user->status}}</span>
+                    @endif
+                    </td>
 	                  <td>
-	                    <img src="{{$user->getImage()}}" alt="" class="img-responsive" width="150">
-	                  </td>
-	                  <td><a href="{{route('users.edit', $user->id)}}" class="fa fa-pencil"></a> 
-	                  {{Form::open(['route'=>['users.destroy', $user->id], 'method'=>'delete'])}}
-	                  <button onclick="return confirm('are you sure?')" type="submit" class="delete">
-	                   <i class="fa fa-remove"></i>
-	                  </button>
+                    @if($user->isAdmin())
+                      <span class="label label-success">{{$user->role}}</span>
+                    @else
+                      <span>{{$user->role}}</span>
+                    @endif
+                    </td>
+                    <td>
+                      <a href="#" class="fa fa-pencil"></a>
+                      
+                      <form method="POST" action="{{ route('lte.users.destroy', $user) }}" class="mr-1">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-link"><i class="fa fa-minus-square text-danger"></i></button>
+                      </form>
 
-	                   {{Form::close()}}
-	                  </td>
+                      @if(!$user->isBanned())
+                        <a href="#" class="btn btn-dark">BAN</a>
+                      @else
+
+                      <form action="{{ route('lte.users.unBan', $user) }}" method="POST"> 
+                          @csrf
+                          <button class="btn btn-light text-danger">UNBAN</button>
+                      </form>
+                        
+                      @endif
+                    </td>
 	                </tr>
                 @endforeach
-
-                </tfoot>
+                </tboby>
               </table>
             </div>
             <!-- /.box-body -->

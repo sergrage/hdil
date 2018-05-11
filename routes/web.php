@@ -24,6 +24,7 @@ Route::group(
         'middleware' => ['auth'],
     ],
     function () {
-		Route::get('/', 'HomeController@index')->name('lte');
+		Route::get('/', 'HomeController@index')->name('admin');
 		Route::resource('/users', 'UsersController');
+		Route::post('/users/{user}', 'UsersController@unBan')->name('users.unBan');
 });
