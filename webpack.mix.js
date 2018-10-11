@@ -6,7 +6,6 @@ let mix = require('laravel-mix');
  |--------------------------------------------------------------------------
 */
 
-
 // mix
 //     .setPublicPath('public/build')
 //     .setResourceRoot('/build/')
@@ -20,39 +19,28 @@ let mix = require('laravel-mix');
  |--------------------------------------------------------------------------
 */
 
-mix.setPublicPath('public/admin')
-	.setResourceRoot('/admin/')
-	.styles([
-		'resources/adminLTE/admin/bootstrap/css/bootstrap.min.css',
-		'resources/adminLTE/admin/font-awesome/4.5.0/css/font-awesome.min.css',
-		'resources/adminLTE/admin/ionicons/2.0.1/css/ionicons.min.css',
-		'resources/adminLTE/admin/plugins/iCheck/minimal/_all.css',
-		'resources/adminLTE/admin/plugins/datepicker/datepicker3.css',
-		'resources/adminLTE/admin/plugins/select2/select2.min.css',
-		'resources/adminLTE/admin/plugins/datatables/dataTables.bootstrap.css',
-		'resources/adminLTE/admin/dist/css/AdminLTE.min.css',
-		'resources/adminLTE/admin/dist/css/skins/_all-skins.min.css'
-	], 'css/admin.css')
+mix.styles([
+    'resources/admin/dist/css/adminlte.min.css',
+    'resources/admin/plugins/font-awesome/css/font-awesome.min.css',
+  ], 'public/admin/css/admin.css')
     .scripts([
-		'resources/adminLTE/admin/plugins/jQuery/jquery-2.2.3.min.js',
-		'resources/adminLTE/admin/bootstrap/js/bootstrap.min.js',
-		'resources/adminLTE/admin/plugins/select2/select2.full.min.js',
-		'resources/adminLTE/admin/plugins/datepicker/bootstrap-datepicker.js',
-		'resources/adminLTE/admin/plugins/datatables/jquery.dataTables.min.js',
-		'resources/adminLTE/admin/plugins/datatables/dataTables.bootstrap.min.js',
-		'resources/adminLTE/admin/plugins/slimScroll/jquery.slimscroll.min.js',
-		'resources/adminLTE/admin/plugins/fastclick/fastclick.js',
-		'resources/adminLTE/admin/plugins/iCheck/icheck.min.js',
-		'resources/adminLTE/admin/dist/js/app.min.js',
-		'resources/adminLTE/admin/dist/js/demo.js',
-		'resources/adminLTE/admin/dist/js/scripts.js'
-	], 'js/admin.js')
+    'resources/admin/plugins/jquery/jquery.min.js',
+    'resources/admin/plugins/bootstrap/js/bootstrap.bundle.min.js',
+    'resources/admin/dist/js/adminlte.min.js',
+  ], 'public/admin/js/admin.js')
     .version();
 
+mix.copy('resources/admin/plugins/font-awesome/fonts', 'public/admin/fonts');
+// mix.copy('resources/adminLTE/admin/dist/fonts', 'public/admin/fonts');
+mix.copy('resources/admin/dist/img', 'public/admin/img');
+// mix.copy('resources/adminLTE/admin/plugins/iCheck/minimal/blue.png', 'public/admin/css');
 
-mix.copy('resources/adminLTE/admin/bootstrap/fonts', 'public/admin/fonts');
-mix.copy('resources/adminLTE/admin/dist/fonts', 'public/admin/fonts');
-mix.copy('resources/adminLTE/admin/dist/img', 'public/admin/img');
-mix.copy('resources/adminLTE/admin/plugins/iCheck/minimal/blue.png', 'public/admin/css');
 
+/*
+ |--------------------------------------------------------------------------
+ | HDIL APP
+ |--------------------------------------------------------------------------
+*/
 
+mix.sass('resources/app/sass/app.scss', 'public/app/css').version();
+mix.copy('resources/app/img', 'public/app/img');

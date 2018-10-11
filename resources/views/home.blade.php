@@ -15,7 +15,14 @@
                     @endif
 
                     You are logged in!
+                    <p>{{ Auth::user()->carbonTest() }}</p> 
                 </div>
+
+                @foreach($users as $user)
+
+                <p> {{ $user->id }} </p>
+
+                @endforeach
             </div>
         </div>
     </div>

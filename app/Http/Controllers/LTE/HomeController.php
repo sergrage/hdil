@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
     public function index()
     {
-       	return view('lte.home');
+       	return view('admin.home');
     }
 }

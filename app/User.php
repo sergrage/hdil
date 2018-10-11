@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Kalnoy\Nestedset\NodeTrait;
+
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -37,6 +40,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function cards()
+        {
+            return $this->hasMany(Card::class);
+        }
+
+    public function comments()
+        {
+            return $this->hasMany(Comment::class);
+        }
+
     public function isWait(): bool
     {
         return $this->status === self::STATUS_WAIT;
@@ -56,6 +69,16 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_ADMIN;
     }
+    
+    public function isModerator(): bool
+        {
+            return $this->role === self::ROLE_MODERATOR;
+        }
+
+    public function isUser(): bool
+    {
+        return $this->role === self::ROLE_USER;
+    }
 
     public function getImage()
     {
@@ -65,5 +88,21 @@ class User extends Authenticatable
         return '/admin/img/user2-160x160.jpg';
     }
 
+    public function carbonTest()
+    {
+
+        $now = Carbon::now();
+        $date = Carbon::parse($this->created_at);
+
+        // Если разница больше 24 часов и статус STATUS_WAIT, то true
+
+        if($now->diffInHours($date) > 24 && $this->isWait()){
+            return 'true';
+        }
+        return false;
+    }
+
     
+
+
 }

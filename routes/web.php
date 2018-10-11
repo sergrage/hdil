@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('can:banned');
 
 Auth::routes();
 
@@ -19,12 +19,21 @@ Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.
 Route::group(
 	[
         'prefix' => 'administrator',
-        'as' => 'lte.',
+        'as' => 'admin.',
         'namespace' => 'LTE',
-        'middleware' => ['auth'],
+        'middleware' => ['auth', 'can:admin-panel', 'can:banned'],
     ],
     function () {
 		Route::get('/', 'HomeController@index')->name('admin');
 		Route::resource('/users', 'UsersController');
-		Route::post('/users/{user}', 'UsersController@unBan')->name('users.unBan');
+		Route::post('/users/{user}/unBan', 'UsersController@unBan')->name('users.unBan');
+        Route::post('/users/{user}/ban', 'UsersController@ban')->name('users.ban');
+        Route::post('/users/{user}/verify', 'UsersController@verify')->name('users.verify');
+		Route::post('/users/clear', 'UsersController@clearUsers')->name('users.clear');
+        Route::resource('/categories', 'CategoryController');
+
+        Route::post('/categories/{category}/up', 'CategoryController@up')->name('category.up');
+        Route::post('/categories/{category}/down', 'CategoryController@down')->name('category.down');
+
+        Route::resource('/cards', 'CardsController');
 });

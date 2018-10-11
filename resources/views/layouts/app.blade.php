@@ -11,22 +11,45 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('app/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('app/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md header">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand header__brand" href="{{ url('/') }}">
+                    How Did I Learn
                 </a>
+                <img src="/app/img/logo.png" alt="Logo" class="pr-lg-5">
+
+                <ul class="navbar-nav ml-lg-5">
+                  <li class="nav-item active">
+                    <a class="nav-link header__link" href="#">Categories</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link header__link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link header__link" href="#">About</a>
+                  </li>
+                </ul>
+
+                <form class="form-inline header__form">
+                    <div class="input-group">
+                      <input type="text" class="form-control header__form" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1">
+                      <div class="input-group-prepend header__find">
+                        <span class="input-group-text header__find__icon" id="basic-addon1">@</span>
+                      </div>
+                    </div>
+                </form>
+
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -41,16 +64,18 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link header__link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li><a class="nav-link header__link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle header__link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('lte.admin') }}">Admin</a>
+                                    @can('admin-panel')
+                                        <a class="dropdown-item" href="{{ route('admin.admin') }}">Admin</a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('cabinet') }}">Cabinet</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
