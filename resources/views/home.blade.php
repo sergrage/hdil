@@ -1,30 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                    <p>{{ Auth::user()->carbonTest() }}</p> 
-                </div>
-
-                @foreach($users as $user)
-
-                <p> {{ $user->id }} </p>
-
-                @endforeach
-            </div>
-        </div>
+<div class="hero container-fluid">
+    <img class="hero__image" src="/app/img/hero-1920.jpg">
+    <div class="hero__text">
+        <h1>Find the best way</h1>
+        <h3>to learn something new</h3>  
+        <a href="#" class="btn hero__btn">learn more</a>  
     </div>
+
+    
 </div>
+
+
 @endsection
