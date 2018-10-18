@@ -5,6 +5,8 @@ namespace App\Http\Controllers\LTE;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Category\CreateRequest;
+use App\Http\Requests\Category\UpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -28,14 +30,8 @@ class CategoryController extends Controller
         return view('admin.categories.create', compact('parents'));
     }
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|unique:categories|max:255',
-            'slug' => 'required|string|unique:categories|max:255',
-            'parent' => 'nullable|integer|exists:categories,id',
-        ]);
-
         $category = Category::create([
             'name' => $request['name'],
             'slug' => $request['slug'],
@@ -57,17 +53,8 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category', 'parents'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(UpdateRequest $request, Category $category)
     {
-        // проверяется уникальность в таблице categories
-        // проверяется наличие в таблице categories данного id
-        $this->validate($request, [
-            'name' => 'required|string|unique:categories|max:255',
-            'slug' => 'required|string|unique:categories|max:255',
-            'parent' => 'nullable|integer|exists:categories,id',
-        ]);
-
-
         $category->update([
             'name' => $request['name'],
             'slug' => $request['slug'],
