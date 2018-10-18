@@ -20,8 +20,8 @@
     <link href="{{ mix('app/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md header">
+    <div class="container-fluid">
+            <nav class="navbar navbar-expand-md header">
             <div class="container">
                 <a class="navbar-brand header__brand" href="{{ url('/') }}">
                     How Did I Learn
@@ -93,10 +93,8 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+        
+            @yield('content')
 </body>
 </html>
