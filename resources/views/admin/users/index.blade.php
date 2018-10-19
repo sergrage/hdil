@@ -1,4 +1,4 @@
-@extends('layouts.lte')
+@extends('layouts.admin')
 
 @section('content')
   
@@ -22,7 +22,7 @@
                 <a href=" {{route('admin.users.create')}}" class="btn btn-success">Add user</a>
                 <form class="d-inline" method="POST" action="{{ route('admin.users.clear') }}" class="mr-1">
                   @csrf
-                  <button class="btn btn-danger">Clean not veifyed users</button>
+                  <button class="btn btn-danger">Clean</button>
                 </form>
               </div>
               <table id="example1" class="table table-bordered table-striped">

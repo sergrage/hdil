@@ -1,4 +1,4 @@
-@extends('layouts.lte')
+@extends('layouts.admin')
 
 @section('content')
     @include('admin.includes._categoriesNav')
@@ -9,7 +9,6 @@
     <form method="POST" action="{{ route('admin.categories.update', $category) }}">
         @csrf
         @method('PUT')
-        {{ dd($errors)  }}
         <div class="form-group">
             <label for="name" class="col-form-label">Name</label>
             <input id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', $category->name) }}" required>

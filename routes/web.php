@@ -7,7 +7,14 @@ Route::get('/', 'HomeController@index')->name('home')->middleware('can:banned');
 
 Auth::routes();
 
+
+
+// Личный кабинет
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+
+// Раполнение профайла после регистрации
+Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
+
 // Проверка email
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
@@ -25,11 +32,14 @@ Route::group(
     ],
     function () {
 		Route::get('/', 'HomeController@index')->name('admin');
-		Route::resource('/users', 'UsersController');
+		
+        Route::resource('/users', 'UsersController');
+
 		Route::post('/users/{user}/unBan', 'UsersController@unBan')->name('users.unBan');
         Route::post('/users/{user}/ban', 'UsersController@ban')->name('users.ban');
         Route::post('/users/{user}/verify', 'UsersController@verify')->name('users.verify');
 		Route::post('/users/clear', 'UsersController@clearUsers')->name('users.clear');
+
         Route::resource('/categories', 'CategoryController');
 
         Route::post('/categories/{category}/up', 'CategoryController@up')->name('category.up');

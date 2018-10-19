@@ -10,14 +10,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('app/js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
     <!-- Styles -->
-    <link href="{{ mix('app/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/app/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
@@ -44,7 +43,7 @@
                     <div class="input-group">
                       <input type="text" class="form-control header__form" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1">
                       <div class="input-group-prepend header__find">
-                        <span class="input-group-text header__find__icon" id="basic-addon1">@</span>
+                        <span class="input-group-text header__find__icon" id="basic-addon1"><i class="fa fa-search"></i></span>
                       </div>
                     </div>
                 </form>
@@ -94,7 +93,38 @@
             </div>
         </nav>
     </div>
-        
-            @yield('content')
+
+
+
+    @yield('content')
+    
+    <div class="container">
+<!-- тут выводятся ошибки заполнения формы -->
+<!--         @if ($errors->any())
+        <ul class="alert alert-danger mt-lg-4">
+            @foreach($errors->all() as $e)
+            <li> {{ $e }} </li>
+            @endforeach
+        </ul>
+        @endif -->
+
+
+<!-- тут флеш сообщение  -->
+        @if (session('success'))
+            <div class="alert alert-success mt-lg-4" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger mt-lg-4" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
+
+
+        <!-- REQUIRED SCRIPTS -->
+    <script src="{{ mix('/app/js/app.js') }}"></script>
 </body>
 </html>

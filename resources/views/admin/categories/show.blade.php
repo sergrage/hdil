@@ -1,4 +1,4 @@
-@extends('layouts.lte')
+@extends('layouts.admin')
 
 @section('content')
       @include('admin.includes._categoriesNav')
@@ -6,7 +6,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Users List</h1>
+      <h1>{{ $category->name }}</h1>
     </section>
 
     <!-- Main content -->
