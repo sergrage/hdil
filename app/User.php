@@ -42,13 +42,18 @@ class User extends Authenticatable
 
     public function cards()
         {
-            return $this->hasMany(Card::class);
+            return $this->hasMany(App\Card::class);
         }
 
     public function comments()
         {
-            return $this->hasMany(Comment::class);
+            return $this->hasMany(App\Comment::class);
         }
+
+    public function skills()
+    {
+        return $this->belongsToMany(App\Skill::class);
+    }
 
     public function isWait(): bool
     {

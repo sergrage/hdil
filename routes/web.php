@@ -15,6 +15,9 @@ Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 // Раполнение профайла после регистрации
 Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
 
+Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
+
+
 // Проверка email
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
