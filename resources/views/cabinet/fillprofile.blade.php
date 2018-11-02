@@ -25,16 +25,16 @@
 
 	    	            <!-- Firstname, Lastname and sex -->
 		                <div class="row">
-		                    <div class="form-group col-md-2">
+<!-- 		                    <div class="form-group col-md-2">
 		                        <select id="input_sex" class="form-control">
 		                            <option value="Mr.">Mr.</option>
 		                            <option value="Ms.">Ms.</option>
 		                        </select>
-		                    </div>
-		                    <div class="form-group col-md-5">
+		                    </div> -->
+		                    <div class="form-group col-md-6">
 		                        <input id="first_name" type="text" class="form-control" placeholder="First name">
 		                    </div>
-		                    <div class="form-group col-md-5">
+		                    <div class="form-group col-md-6">
 		                        <input id="last_name" type="text" class="form-control" placeholder="Last name">
 		                    </div>
 		                </div>
@@ -89,7 +89,7 @@
 	                        	<div class="input-group-prepend">
 						          <div class="input-group-text"><i class="fab fa-facebook fa-2x" style="color:#3b5998"></i></div>
 						        </div>
-                            	<input name="" type="text" class="form-control" id="text" placeholder="Type your password">
+                            	<input name="" type="text" class="form-control" id="text" placeholder="Add your facebook page">
                         	</div>
                         </div>
                         <div class="form-group">
@@ -97,7 +97,7 @@
 	                        	<div class="input-group-prepend">
 						          <div class="input-group-text"><i class="fab  fa-twitter fa-2x" style="color:#1da1f2"></i></div>
 						        </div>
-                            <input name="" type="text" class="form-control" id="text" placeholder="Type your password">
+                            <input name="" type="text" class="form-control" id="text" placeholder="Add your twitter page">
                         </div>
                         </div>
                         <div class="form-group">
@@ -105,7 +105,7 @@
 	                        	<div class="input-group-prepend">
 						          <div class="input-group-text"><i class="fab  fa-linkedin fa-2x" style="color:#007bb5"></i></div>
 						        </div>
-                            <input name="" type="text" class="form-control" id="text" placeholder="Type your password">
+                            <input name="" type="text" class="form-control" id="text" placeholder="Add your linkedin page">
                         </div>
                         </div>
                         <div class="form-group">
@@ -113,7 +113,7 @@
 	                        	<div class="input-group-prepend">
 						          <div class="input-group-text"><i class="fab  fa-instagram fa-2x" style="color:#c32aa3"></i></div>
 						        </div>
-                            <input name="" type="text" class="form-control" id="text" placeholder="Type your password">
+                            <input name="" type="text" class="form-control" id="text" placeholder="Add your instagram page">
                         </div>
                         </div>
                     </div>
@@ -122,9 +122,10 @@
         </div>
 		<div class="mt-4 card"> 
 	        <div class="card-body">
+	        	<a href="#">Read site policy</a>
 		        <div class="form-group form-check">
 				    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-				    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+				    <label class="form-check-label" for="exampleCheck1">I agree with this website policy</label>
 				</div>
 			</div>
 		</div>

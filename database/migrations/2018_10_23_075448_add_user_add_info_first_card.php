@@ -10,8 +10,15 @@ class AddUserAddInfoFirstCard extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('info')->default(false);
-            $table->boolean('card')->default(false);
+            $table->boolean('policy')->default(false);
+            $table->integer('card')->default(0);
+            $table->text('bio');
+            $table->string('firstname', 100);
+            $table->string('lastname', 100);
+            $table->string('facebook', 100);
+            $table->string('twitter', 100);
+            $table->string('linkedin', 100);
+            $table->string('instagram', 100);
         });
 
         DB::table('users')->update([
