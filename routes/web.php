@@ -14,6 +14,7 @@ Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 
 // Раполнение профайла после регистрации
 Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
+Route::put('/fillprofile/{user}', 'Cabinet\FillprofileController@update')->name('fillprofile.update');
 
 Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 

@@ -4,15 +4,37 @@ namespace App\Http\Controllers\Cabinet;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Skill;
 use Validator;
+use App\User;
+
+use App\Http\Requests\Users\FillProfileRequest;
 
 
 class FillprofileController extends Controller
 {
+
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-    	return view('cabinet.fillProfile');
+    	$user = Auth::user();
+
+    	return view('cabinet.fillProfile', compact('user'));
+    }
+
+
+    public function update(FillProfileRequest $request, User $user)
+    {
+    	// dd($request);
+    	$user->update([
+    		'firstname' => $request['firstname'],
+    		'lastname' => $request['lastname'],
+    	]);
     }
 
     public function addMoreSkillsPost(Request $request)

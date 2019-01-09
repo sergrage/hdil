@@ -12,18 +12,18 @@ class AddUserAddInfoFirstCard extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('policy')->default(false);
             $table->integer('card')->default(0);
-            $table->text('bio');
-            $table->string('firstname', 100);
-            $table->string('lastname', 100);
-            $table->string('facebook', 100);
-            $table->string('twitter', 100);
-            $table->string('linkedin', 100);
-            $table->string('instagram', 100);
+            $table->text('bio')->nullable();
+            $table->string('firstname', 100)->nullable();
+            $table->string('lastname', 100)->nullable();
+            $table->string('facebook', 100)->nullable();
+            $table->string('twitter', 100)->nullable();
+            $table->string('linkedin', 100)->nullable();
+            $table->string('instagram', 100)->nullable();
         });
 
         DB::table('users')->update([
-            'info' => false,
-            'card' => false,
+            'policy' => false,
+            'card' => 0,
         ]);
     }
 
@@ -31,8 +31,15 @@ class AddUserAddInfoFirstCard extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('info');
+            $table->dropColumn('policy');
             $table->dropColumn('card');
+            $table->dropColumn('bio');
+            $table->dropColumn('firstname');
+            $table->dropColumn('lastname');
+            $table->dropColumn('facebook');
+            $table->dropColumn('twitter');
+            $table->dropColumn('linkedin');
+            $table->dropColumn('instagram');
         });
     }
 }

@@ -100,13 +100,13 @@
     
     <div class="container">
 <!-- тут выводятся ошибки заполнения формы -->
-<!--         @if ($errors->any())
+        @if ($errors->any())
         <ul class="alert alert-danger mt-lg-4">
             @foreach($errors->all() as $e)
             <li> {{ $e }} </li>
             @endforeach
         </ul>
-        @endif -->
+        @endif
 
 
 <!-- тут флеш сообщение  -->
