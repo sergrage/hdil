@@ -12,12 +12,13 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index(User $user)
 
     {
+        
     	// $users = DB::table('users')->
     	// 		//where('status', '=', 'wait')->
     	// 		where($user->carbonTest(), '=', 'true')->

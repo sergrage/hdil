@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index')->name('home')->middleware('can:banned');
+// Route::get('/', 'HomeController@index')->name('home')->middleware('can:banned');
+Route::get('/', 'HomeController@index')->name('home');
+
 
 Auth::routes();
 
@@ -15,6 +17,7 @@ Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 // Раполнение профайла после регистрации
 Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
 Route::put('/fillprofile/{user}', 'Cabinet\FillprofileController@update')->name('fillprofile.update');
+Route::get('/fillprofile/{user}', 'Cabinet\FillprofileController@edit')->name('fillprofile.edit');
 
 Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 

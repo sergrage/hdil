@@ -9,7 +9,7 @@
 		            <div class="modal-content">
 		                <div class="modal-header">
 		                    <h4 class="modal-title">
-		                    	<a href="#" class="btn btn-info"><i class="far fa-edit"></i> Edit Profile</a>
+		                    	<a href="{{route('fillprofile.edit', $user->id)}}" class="btn btn-info"><i class="far fa-edit"></i> Edit Profile</a>
 		                    	<a href="#" class="btn btn-info"><i class="fas fa-plus"></i> Add Card</a>
 		                    </h4>
 		                </div>

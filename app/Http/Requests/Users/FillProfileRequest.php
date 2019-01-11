@@ -15,8 +15,8 @@ class FillProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname'  => 'string|alpha|max:255|min:2|nullable',
-            'lastname' => 'string|alpha|max:255|min:2|nullable',
+            'firstname'  => 'nullable|string|alpha|max:255|min:2',
+            'lastname' => 'nullable|string|alpha|max:255|min:2',
             'bio' => 'min:50|nullable',
             'facebook' => 'url|regex:/http(?:s):\/\/(?:www\.)facebook\.com\/.+/i|nullable',
             'twitter' => 'url|regex:/http(?:s):\/\/(?:www\.)twitter\.com\/.+/i|nullable',

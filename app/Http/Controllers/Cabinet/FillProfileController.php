@@ -34,34 +34,55 @@ class FillprofileController extends Controller
     	$user->update([
     		'firstname' => $request['firstname'],
     		'lastname' => $request['lastname'],
+    		'policy' => 1,
     	]);
+
+    	return redirect()->route('cabinet', $user);
+
     }
 
-    public function addMoreSkillsPost(Request $request)
+    public function edit()
     {
-    	$rules = [];
+    	$user = Auth::user();
 
+    	// dd($user);
 
-        foreach($request->input('skill') as $key => $value) {
-            $rules["skill.{$key}"] = 'required';
-        }
-
-
-        $validator = Validator::make($request->all(), $rules);
-
-
-        if ($validator->passes()) {
-
-
-            foreach($request->input('skill') as $key => $value) {
-                TagList::create(['skill'=>$value]);
-            }
-
-
-            return response()->json(['success'=>'done']);
-        }
-
-
-        return response()->json(['error'=>$validator->errors()->all()]);
+    	return view('cabinet.editprofile', compact('user'));
     }
+
+    public function destroy()
+    {
+    	# code...
+    	// TODO
+    }
+
+
+
+    // public function addMoreSkillsPost(Request $request)
+    // {
+    // 	$rules = [];
+
+
+    //     foreach($request->input('skill') as $key => $value) {
+    //         $rules["skill.{$key}"] = 'required';
+    //     }
+
+
+    //     $validator = Validator::make($request->all(), $rules);
+
+
+    //     if ($validator->passes()) {
+
+
+    //         foreach($request->input('skill') as $key => $value) {
+    //             TagList::create(['skill'=>$value]);
+    //         }
+
+
+    //         return response()->json(['success'=>'done']);
+    //     }
+
+
+    //     return response()->json(['error'=>$validator->errors()->all()]);
+    // }
 }

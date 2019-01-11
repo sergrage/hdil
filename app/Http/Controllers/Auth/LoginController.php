@@ -64,11 +64,11 @@ class LoginController extends Controller
         		return back()->with('error', 'You are banned. Sorry.');
         	}
 
-            if(!$user->info){
+            if(!$user->policy){
                 return redirect()->route('fillprofile');
             }
 
-        	return redirect()->intended(route('cabinet'));
+        	return redirect()->intended(route('home'));
         }
 
         $this->incrementLoginAttempts($request);
