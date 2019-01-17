@@ -24,17 +24,23 @@ class FillprofileController extends Controller
     {
     	$user = Auth::user();
 
+    	// if($user->policy = 1) {
+    	// 	return redirect()->route('home');
+    	// }
+
     	return view('cabinet.fillProfile', compact('user'));
     }
 
 
-    public function update(FillProfileRequest $request, User $user)
+    public function store(FillProfileRequest $request, User $user)
     {
-    	// dd($request);
+    	dd($request);
+
     	$user->update([
     		'firstname' => $request['firstname'],
     		'lastname' => $request['lastname'],
     		'policy' => 1,
+    		'image' => 'hello'
     	]);
 
     	return redirect()->route('cabinet', $user);
@@ -44,10 +50,13 @@ class FillprofileController extends Controller
     public function edit()
     {
     	$user = Auth::user();
-
-    	// dd($user);
-
     	return view('cabinet.editprofile', compact('user'));
+    }
+
+
+    public function update(User $user)
+    {
+    	# code...
     }
 
     public function destroy()

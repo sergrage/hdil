@@ -128,3 +128,7 @@
     <script src="{{ mix('/app/js/app.js') }}"></script>
 </body>
 </html>
+
+
+@yield('modal')
+

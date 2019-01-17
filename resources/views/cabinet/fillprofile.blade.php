@@ -2,15 +2,13 @@
 
 @section('content')
 
-
-
 <div class="container" style="margin-top: 1em;">
 
 <h1> Fill Profile </h1>
 <hr>
     <!-- Sign up form -->
-    <form action="{{ route('fillprofile.update', $user->id) }}" method="POST" accept-charset="utf-8">
-    	@method('PUT')
+    <form action="{{ route('fillprofile.store', $user->id) }}" method="POST" accept-charset="utf-8">
+ 
         @csrf
         <!-- Sign up card -->
         <div class="card person-card">
@@ -28,8 +26,11 @@
 		                </div>
 		                <!-- Avatar file input -->
 		                <div class="form-group col-md-12">
-						    <label for="exampleFormControlFile1">Choose your avatar</label>
-						    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar">
+						    <label for="upload_image">Choose your avatar</label>
+						    <input type="file" class="form-control-file" id="upload_image" name="avatar">
+						</div>
+						<div id="uploaded_image">
+							
 						</div>
 					</div>
 				</div>
@@ -115,4 +116,14 @@
         </div>
     </form>
 </div>
+
+
+
+@endsection
+
+
+@section('modal')
+
+    @include('partials._modalImage')
+    
 @endsection

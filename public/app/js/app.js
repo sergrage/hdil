@@ -1637,7 +1637,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.1.1 (https://getbootstrap.com/)
+  * Bootstrap v4.1.3 (https://getbootstrap.com/)
   * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
@@ -1708,7 +1708,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): util.js
+   * Bootstrap (v4.1.3): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1785,8 +1785,7 @@ module.exports = {
         }
 
         try {
-          var $selector = $$$1(document).find(selector);
-          return $selector.length > 0 ? selector : null;
+          return document.querySelector(selector) ? selector : null;
         } catch (err) {
           return null;
         }
@@ -1841,7 +1840,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): alert.js
+   * Bootstrap (v4.1.3): alert.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1853,7 +1852,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'alert';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.alert';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -1916,7 +1915,7 @@ module.exports = {
         var parent = false;
 
         if (selector) {
-          parent = $$$1(selector)[0];
+          parent = document.querySelector(selector);
         }
 
         if (!parent) {
@@ -2016,7 +2015,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): button.js
+   * Bootstrap (v4.1.3): button.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2028,7 +2027,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'button';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.button';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -2073,14 +2072,14 @@ module.exports = {
         var rootElement = $$$1(this._element).closest(Selector.DATA_TOGGLE)[0];
 
         if (rootElement) {
-          var input = $$$1(this._element).find(Selector.INPUT)[0];
+          var input = this._element.querySelector(Selector.INPUT);
 
           if (input) {
             if (input.type === 'radio') {
-              if (input.checked && $$$1(this._element).hasClass(ClassName.ACTIVE)) {
+              if (input.checked && this._element.classList.contains(ClassName.ACTIVE)) {
                 triggerChangeEvent = false;
               } else {
-                var activeElement = $$$1(rootElement).find(Selector.ACTIVE)[0];
+                var activeElement = rootElement.querySelector(Selector.ACTIVE);
 
                 if (activeElement) {
                   $$$1(activeElement).removeClass(ClassName.ACTIVE);
@@ -2093,7 +2092,7 @@ module.exports = {
                 return;
               }
 
-              input.checked = !$$$1(this._element).hasClass(ClassName.ACTIVE);
+              input.checked = !this._element.classList.contains(ClassName.ACTIVE);
               $$$1(input).trigger('change');
             }
 
@@ -2103,7 +2102,7 @@ module.exports = {
         }
 
         if (addAriaPressed) {
-          this._element.setAttribute('aria-pressed', !$$$1(this._element).hasClass(ClassName.ACTIVE));
+          this._element.setAttribute('aria-pressed', !this._element.classList.contains(ClassName.ACTIVE));
         }
 
         if (triggerChangeEvent) {
@@ -2180,7 +2179,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): carousel.js
+   * Bootstrap (v4.1.3): carousel.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2192,7 +2191,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'carousel';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.carousel';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -2271,7 +2270,7 @@ module.exports = {
         this.touchTimeout = null;
         this._config = this._getConfig(config);
         this._element = $$$1(element)[0];
-        this._indicatorsElement = $$$1(this._element).find(Selector.INDICATORS)[0];
+        this._indicatorsElement = this._element.querySelector(Selector.INDICATORS);
 
         this._addEventListeners();
       } // Getters
@@ -2305,7 +2304,7 @@ module.exports = {
           this._isPaused = true;
         }
 
-        if ($$$1(this._element).find(Selector.NEXT_PREV)[0]) {
+        if (this._element.querySelector(Selector.NEXT_PREV)) {
           Util.triggerTransitionEnd(this._element);
           this.cycle(true);
         }
@@ -2332,7 +2331,7 @@ module.exports = {
       _proto.to = function to(index) {
         var _this = this;
 
-        this._activeElement = $$$1(this._element).find(Selector.ACTIVE_ITEM)[0];
+        this._activeElement = this._element.querySelector(Selector.ACTIVE_ITEM);
 
         var activeIndex = this._getItemIndex(this._activeElement);
 
@@ -2438,7 +2437,7 @@ module.exports = {
       };
 
       _proto._getItemIndex = function _getItemIndex(element) {
-        this._items = $$$1.makeArray($$$1(element).parent().find(Selector.ITEM));
+        this._items = element && element.parentNode ? [].slice.call(element.parentNode.querySelectorAll(Selector.ITEM)) : [];
         return this._items.indexOf(element);
       };
 
@@ -2463,7 +2462,7 @@ module.exports = {
       _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
         var targetIndex = this._getItemIndex(relatedTarget);
 
-        var fromIndex = this._getItemIndex($$$1(this._element).find(Selector.ACTIVE_ITEM)[0]);
+        var fromIndex = this._getItemIndex(this._element.querySelector(Selector.ACTIVE_ITEM));
 
         var slideEvent = $$$1.Event(Event.SLIDE, {
           relatedTarget: relatedTarget,
@@ -2477,7 +2476,8 @@ module.exports = {
 
       _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
         if (this._indicatorsElement) {
-          $$$1(this._indicatorsElement).find(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
+          var indicators = [].slice.call(this._indicatorsElement.querySelectorAll(Selector.ACTIVE));
+          $$$1(indicators).removeClass(ClassName.ACTIVE);
 
           var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
 
@@ -2490,7 +2490,7 @@ module.exports = {
       _proto._slide = function _slide(direction, element) {
         var _this3 = this;
 
-        var activeElement = $$$1(this._element).find(Selector.ACTIVE_ITEM)[0];
+        var activeElement = this._element.querySelector(Selector.ACTIVE_ITEM);
 
         var activeElementIndex = this._getItemIndex(activeElement);
 
@@ -2656,11 +2656,13 @@ module.exports = {
 
     $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_SLIDE, Carousel._dataApiClickHandler);
     $$$1(window).on(Event.LOAD_DATA_API, function () {
-      $$$1(Selector.DATA_RIDE).each(function () {
-        var $carousel = $$$1(this);
+      var carousels = [].slice.call(document.querySelectorAll(Selector.DATA_RIDE));
+
+      for (var i = 0, len = carousels.length; i < len; i++) {
+        var $carousel = $$$1(carousels[i]);
 
         Carousel._jQueryInterface.call($carousel, $carousel.data());
-      });
+      }
     });
     /**
      * ------------------------------------------------------------------------
@@ -2681,7 +2683,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): collapse.js
+   * Bootstrap (v4.1.3): collapse.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2693,7 +2695,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'collapse';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.collapse';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -2741,14 +2743,17 @@ module.exports = {
         this._isTransitioning = false;
         this._element = element;
         this._config = this._getConfig(config);
-        this._triggerArray = $$$1.makeArray($$$1("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
-        var tabToggles = $$$1(Selector.DATA_TOGGLE);
+        this._triggerArray = $$$1.makeArray(document.querySelectorAll("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
+        var toggleList = [].slice.call(document.querySelectorAll(Selector.DATA_TOGGLE));
 
-        for (var i = 0; i < tabToggles.length; i++) {
-          var elem = tabToggles[i];
+        for (var i = 0, len = toggleList.length; i < len; i++) {
+          var elem = toggleList[i];
           var selector = Util.getSelectorFromElement(elem);
+          var filterElement = [].slice.call(document.querySelectorAll(selector)).filter(function (foundElem) {
+            return foundElem === element;
+          });
 
-          if (selector !== null && $$$1(selector).filter(element).length > 0) {
+          if (selector !== null && filterElement.length > 0) {
             this._selector = selector;
 
             this._triggerArray.push(elem);
@@ -2789,7 +2794,9 @@ module.exports = {
         var activesData;
 
         if (this._parent) {
-          actives = $$$1.makeArray($$$1(this._parent).find(Selector.ACTIVES).filter("[data-parent=\"" + this._config.parent + "\"]"));
+          actives = [].slice.call(this._parent.querySelectorAll(Selector.ACTIVES)).filter(function (elem) {
+            return elem.getAttribute('data-parent') === _this._config.parent;
+          });
 
           if (actives.length === 0) {
             actives = null;
@@ -2824,7 +2831,7 @@ module.exports = {
         $$$1(this._element).removeClass(ClassName.COLLAPSE).addClass(ClassName.COLLAPSING);
         this._element.style[dimension] = 0;
 
-        if (this._triggerArray.length > 0) {
+        if (this._triggerArray.length) {
           $$$1(this._triggerArray).removeClass(ClassName.COLLAPSED).attr('aria-expanded', true);
         }
 
@@ -2865,14 +2872,15 @@ module.exports = {
         this._element.style[dimension] = this._element.getBoundingClientRect()[dimension] + "px";
         Util.reflow(this._element);
         $$$1(this._element).addClass(ClassName.COLLAPSING).removeClass(ClassName.COLLAPSE).removeClass(ClassName.SHOW);
+        var triggerArrayLength = this._triggerArray.length;
 
-        if (this._triggerArray.length > 0) {
-          for (var i = 0; i < this._triggerArray.length; i++) {
+        if (triggerArrayLength > 0) {
+          for (var i = 0; i < triggerArrayLength; i++) {
             var trigger = this._triggerArray[i];
             var selector = Util.getSelectorFromElement(trigger);
 
             if (selector !== null) {
-              var $elem = $$$1(selector);
+              var $elem = $$$1([].slice.call(document.querySelectorAll(selector)));
 
               if (!$elem.hasClass(ClassName.SHOW)) {
                 $$$1(trigger).addClass(ClassName.COLLAPSED).attr('aria-expanded', false);
@@ -2933,11 +2941,12 @@ module.exports = {
             parent = this._config.parent[0];
           }
         } else {
-          parent = $$$1(this._config.parent)[0];
+          parent = document.querySelector(this._config.parent);
         }
 
         var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
-        $$$1(parent).find(selector).each(function (i, element) {
+        var children = [].slice.call(parent.querySelectorAll(selector));
+        $$$1(children).each(function (i, element) {
           _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
         });
         return parent;
@@ -2947,7 +2956,7 @@ module.exports = {
         if (element) {
           var isOpen = $$$1(element).hasClass(ClassName.SHOW);
 
-          if (triggerArray.length > 0) {
+          if (triggerArray.length) {
             $$$1(triggerArray).toggleClass(ClassName.COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
           }
         }
@@ -2956,7 +2965,7 @@ module.exports = {
 
       Collapse._getTargetFromElement = function _getTargetFromElement(element) {
         var selector = Util.getSelectorFromElement(element);
-        return selector ? $$$1(selector)[0] : null;
+        return selector ? document.querySelector(selector) : null;
       };
 
       Collapse._jQueryInterface = function _jQueryInterface(config) {
@@ -3014,7 +3023,8 @@ module.exports = {
 
       var $trigger = $$$1(this);
       var selector = Util.getSelectorFromElement(this);
-      $$$1(selector).each(function () {
+      var selectors = [].slice.call(document.querySelectorAll(selector));
+      $$$1(selectors).each(function () {
         var $target = $$$1(this);
         var data = $target.data(DATA_KEY);
         var config = data ? 'toggle' : $trigger.data();
@@ -3041,7 +3051,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): dropdown.js
+   * Bootstrap (v4.1.3): dropdown.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3053,7 +3063,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'dropdown';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.dropdown';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -3262,14 +3272,16 @@ module.exports = {
         if (!this._menu) {
           var parent = Dropdown._getParentFromElement(this._element);
 
-          this._menu = $$$1(parent).find(Selector.MENU)[0];
+          if (parent) {
+            this._menu = parent.querySelector(Selector.MENU);
+          }
         }
 
         return this._menu;
       };
 
       _proto._getPlacement = function _getPlacement() {
-        var $parentDropdown = $$$1(this._element).parent();
+        var $parentDropdown = $$$1(this._element.parentNode);
         var placement = AttachmentMap.BOTTOM; // Handle dropup
 
         if ($parentDropdown.hasClass(ClassName.DROPUP)) {
@@ -3357,15 +3369,19 @@ module.exports = {
           return;
         }
 
-        var toggles = $$$1.makeArray($$$1(Selector.DATA_TOGGLE));
+        var toggles = [].slice.call(document.querySelectorAll(Selector.DATA_TOGGLE));
 
-        for (var i = 0; i < toggles.length; i++) {
+        for (var i = 0, len = toggles.length; i < len; i++) {
           var parent = Dropdown._getParentFromElement(toggles[i]);
 
           var context = $$$1(toggles[i]).data(DATA_KEY);
           var relatedTarget = {
             relatedTarget: toggles[i]
           };
+
+          if (event && event.type === 'click') {
+            relatedTarget.clickEvent = event;
+          }
 
           if (!context) {
             continue;
@@ -3405,7 +3421,7 @@ module.exports = {
         var selector = Util.getSelectorFromElement(element);
 
         if (selector) {
-          parent = $$$1(selector)[0];
+          parent = document.querySelector(selector);
         }
 
         return parent || element.parentNode;
@@ -3437,7 +3453,7 @@ module.exports = {
 
         if (!isActive && (event.which !== ESCAPE_KEYCODE || event.which !== SPACE_KEYCODE) || isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE)) {
           if (event.which === ESCAPE_KEYCODE) {
-            var toggle = $$$1(parent).find(Selector.DATA_TOGGLE)[0];
+            var toggle = parent.querySelector(Selector.DATA_TOGGLE);
             $$$1(toggle).trigger('focus');
           }
 
@@ -3445,7 +3461,7 @@ module.exports = {
           return;
         }
 
-        var items = $$$1(parent).find(Selector.VISIBLE_ITEMS).get();
+        var items = [].slice.call(parent.querySelectorAll(Selector.VISIBLE_ITEMS));
 
         if (items.length === 0) {
           return;
@@ -3523,7 +3539,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): modal.js
+   * Bootstrap (v4.1.3): modal.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3535,7 +3551,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'modal';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.modal';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -3579,8 +3595,7 @@ module.exports = {
       DATA_TOGGLE: '[data-toggle="modal"]',
       DATA_DISMISS: '[data-dismiss="modal"]',
       FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
-      STICKY_CONTENT: '.sticky-top',
-      NAVBAR_TOGGLER: '.navbar-toggler'
+      STICKY_CONTENT: '.sticky-top'
       /**
        * ------------------------------------------------------------------------
        * Class Definition
@@ -3595,7 +3610,7 @@ module.exports = {
       function Modal(element, config) {
         this._config = this._getConfig(config);
         this._element = element;
-        this._dialog = $$$1(element).find(Selector.DIALOG)[0];
+        this._dialog = element.querySelector(Selector.DIALOG);
         this._backdrop = null;
         this._isShown = false;
         this._isBodyOverflowing = false;
@@ -3852,7 +3867,7 @@ module.exports = {
           this._backdrop.className = ClassName.BACKDROP;
 
           if (animate) {
-            $$$1(this._backdrop).addClass(animate);
+            this._backdrop.classList.add(animate);
           }
 
           $$$1(this._backdrop).appendTo(document.body);
@@ -3946,23 +3961,19 @@ module.exports = {
         if (this._isBodyOverflowing) {
           // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
           //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
-          // Adjust fixed content padding
-          $$$1(Selector.FIXED_CONTENT).each(function (index, element) {
-            var actualPadding = $$$1(element)[0].style.paddingRight;
+          var fixedContent = [].slice.call(document.querySelectorAll(Selector.FIXED_CONTENT));
+          var stickyContent = [].slice.call(document.querySelectorAll(Selector.STICKY_CONTENT)); // Adjust fixed content padding
+
+          $$$1(fixedContent).each(function (index, element) {
+            var actualPadding = element.style.paddingRight;
             var calculatedPadding = $$$1(element).css('padding-right');
             $$$1(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
           }); // Adjust sticky content margin
 
-          $$$1(Selector.STICKY_CONTENT).each(function (index, element) {
-            var actualMargin = $$$1(element)[0].style.marginRight;
+          $$$1(stickyContent).each(function (index, element) {
+            var actualMargin = element.style.marginRight;
             var calculatedMargin = $$$1(element).css('margin-right');
             $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
-          }); // Adjust navbar-toggler margin
-
-          $$$1(Selector.NAVBAR_TOGGLER).each(function (index, element) {
-            var actualMargin = $$$1(element)[0].style.marginRight;
-            var calculatedMargin = $$$1(element).css('margin-right');
-            $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) + _this9._scrollbarWidth + "px");
           }); // Adjust body padding
 
           var actualPadding = document.body.style.paddingRight;
@@ -3973,15 +3984,15 @@ module.exports = {
 
       _proto._resetScrollbar = function _resetScrollbar() {
         // Restore fixed content padding
-        $$$1(Selector.FIXED_CONTENT).each(function (index, element) {
+        var fixedContent = [].slice.call(document.querySelectorAll(Selector.FIXED_CONTENT));
+        $$$1(fixedContent).each(function (index, element) {
           var padding = $$$1(element).data('padding-right');
+          $$$1(element).removeData('padding-right');
+          element.style.paddingRight = padding ? padding : '';
+        }); // Restore sticky content
 
-          if (typeof padding !== 'undefined') {
-            $$$1(element).css('padding-right', padding).removeData('padding-right');
-          }
-        }); // Restore sticky content and navbar-toggler margin
-
-        $$$1(Selector.STICKY_CONTENT + ", " + Selector.NAVBAR_TOGGLER).each(function (index, element) {
+        var elements = [].slice.call(document.querySelectorAll("" + Selector.STICKY_CONTENT));
+        $$$1(elements).each(function (index, element) {
           var margin = $$$1(element).data('margin-right');
 
           if (typeof margin !== 'undefined') {
@@ -3990,10 +4001,8 @@ module.exports = {
         }); // Restore body padding
 
         var padding = $$$1(document.body).data('padding-right');
-
-        if (typeof padding !== 'undefined') {
-          $$$1(document.body).css('padding-right', padding).removeData('padding-right');
-        }
+        $$$1(document.body).removeData('padding-right');
+        document.body.style.paddingRight = padding ? padding : '';
       };
 
       _proto._getScrollbarWidth = function _getScrollbarWidth() {
@@ -4058,7 +4067,7 @@ module.exports = {
       var selector = Util.getSelectorFromElement(this);
 
       if (selector) {
-        target = $$$1(selector)[0];
+        target = document.querySelector(selector);
       }
 
       var config = $$$1(target).data(DATA_KEY) ? 'toggle' : _objectSpread({}, $$$1(target).data(), $$$1(this).data());
@@ -4101,7 +4110,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): tooltip.js
+   * Bootstrap (v4.1.3): tooltip.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4113,7 +4122,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'tooltip';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.tooltip';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -4323,7 +4332,7 @@ module.exports = {
           var attachment = this._getAttachment(placement);
 
           this.addAttachmentClass(attachment);
-          var container = this.config.container === false ? document.body : $$$1(this.config.container);
+          var container = this.config.container === false ? document.body : $$$1(document).find(this.config.container);
           $$$1(tip).data(this.constructor.DATA_KEY, this);
 
           if (!$$$1.contains(this.element.ownerDocument.documentElement, this.tip)) {
@@ -4462,9 +4471,9 @@ module.exports = {
       };
 
       _proto.setContent = function setContent() {
-        var $tip = $$$1(this.getTipElement());
-        this.setElementContent($tip.find(Selector.TOOLTIP_INNER), this.getTitle());
-        $tip.removeClass(ClassName.FADE + " " + ClassName.SHOW);
+        var tip = this.getTipElement();
+        this.setElementContent($$$1(tip.querySelectorAll(Selector.TOOLTIP_INNER)), this.getTitle());
+        $$$1(tip).removeClass(ClassName.FADE + " " + ClassName.SHOW);
       };
 
       _proto.setElementContent = function setElementContent($element, content) {
@@ -4657,15 +4666,18 @@ module.exports = {
         var $tip = $$$1(this.getTipElement());
         var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
 
-        if (tabClass !== null && tabClass.length > 0) {
+        if (tabClass !== null && tabClass.length) {
           $tip.removeClass(tabClass.join(''));
         }
       };
 
-      _proto._handlePopperPlacementChange = function _handlePopperPlacementChange(data) {
+      _proto._handlePopperPlacementChange = function _handlePopperPlacementChange(popperData) {
+        var popperInstance = popperData.instance;
+        this.tip = popperInstance.popper;
+
         this._cleanTipClass();
 
-        this.addAttachmentClass(this._getAttachment(data.placement));
+        this.addAttachmentClass(this._getAttachment(popperData.placement));
       };
 
       _proto._fixTransition = function _fixTransition() {
@@ -4768,7 +4780,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): popover.js
+   * Bootstrap (v4.1.3): popover.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4780,7 +4792,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'popover';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.popover';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -4965,7 +4977,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): scrollspy.js
+   * Bootstrap (v4.1.3): scrollspy.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4977,7 +4989,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'scrollspy';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.scrollspy';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -5059,13 +5071,13 @@ module.exports = {
         this._offsets = [];
         this._targets = [];
         this._scrollHeight = this._getScrollHeight();
-        var targets = $$$1.makeArray($$$1(this._selector));
+        var targets = [].slice.call(document.querySelectorAll(this._selector));
         targets.map(function (element) {
           var target;
           var targetSelector = Util.getSelectorFromElement(element);
 
           if (targetSelector) {
-            target = $$$1(targetSelector)[0];
+            target = document.querySelector(targetSelector);
           }
 
           if (target) {
@@ -5162,7 +5174,9 @@ module.exports = {
           return;
         }
 
-        for (var i = this._offsets.length; i--;) {
+        var offsetLength = this._offsets.length;
+
+        for (var i = offsetLength; i--;) {
           var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
 
           if (isActiveTarget) {
@@ -5182,7 +5196,7 @@ module.exports = {
         queries = queries.map(function (selector) {
           return selector + "[data-target=\"" + target + "\"]," + (selector + "[href=\"" + target + "\"]");
         });
-        var $link = $$$1(queries.join(','));
+        var $link = $$$1([].slice.call(document.querySelectorAll(queries.join(','))));
 
         if ($link.hasClass(ClassName.DROPDOWN_ITEM)) {
           $link.closest(Selector.DROPDOWN).find(Selector.DROPDOWN_TOGGLE).addClass(ClassName.ACTIVE);
@@ -5203,7 +5217,8 @@ module.exports = {
       };
 
       _proto._clear = function _clear() {
-        $$$1(this._selector).filter(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
+        var nodes = [].slice.call(document.querySelectorAll(this._selector));
+        $$$1(nodes).filter(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
       }; // Static
 
 
@@ -5250,9 +5265,10 @@ module.exports = {
 
 
     $$$1(window).on(Event.LOAD_DATA_API, function () {
-      var scrollSpys = $$$1.makeArray($$$1(Selector.DATA_SPY));
+      var scrollSpys = [].slice.call(document.querySelectorAll(Selector.DATA_SPY));
+      var scrollSpysLength = scrollSpys.length;
 
-      for (var i = scrollSpys.length; i--;) {
+      for (var i = scrollSpysLength; i--;) {
         var $spy = $$$1(scrollSpys[i]);
 
         ScrollSpy._jQueryInterface.call($spy, $spy.data());
@@ -5277,7 +5293,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): tab.js
+   * Bootstrap (v4.1.3): tab.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5289,7 +5305,7 @@ module.exports = {
      * ------------------------------------------------------------------------
      */
     var NAME = 'tab';
-    var VERSION = '4.1.1';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.tab';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -5371,7 +5387,7 @@ module.exports = {
         }
 
         if (selector) {
-          target = $$$1(selector)[0];
+          target = document.querySelector(selector);
         }
 
         this._activate(this._element, listElement);
@@ -5453,7 +5469,8 @@ module.exports = {
           var dropdownElement = $$$1(element).closest(Selector.DROPDOWN)[0];
 
           if (dropdownElement) {
-            $$$1(dropdownElement).find(Selector.DROPDOWN_TOGGLE).addClass(ClassName.ACTIVE);
+            var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(Selector.DROPDOWN_TOGGLE));
+            $$$1(dropdownToggleList).addClass(ClassName.ACTIVE);
           }
 
           element.setAttribute('aria-expanded', true);
@@ -5525,7 +5542,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.1): index.js
+   * Bootstrap (v4.1.3): index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5564,6 +5581,1600 @@ module.exports = {
 })));
 //# sourceMappingURL=bootstrap.js.map
 
+
+/***/ }),
+
+/***/ "./node_modules/croppie/croppie.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(setImmediate) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*************************
+ * Croppie
+ * Copyright 2018
+ * Foliotek
+ * Version: 2.6.2
+ *************************/
+ console.log('hihihih');
+(function (root, factory) {
+    if (true) {
+        // AMD. Register as an anonymous module.
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
+        // CommonJS
+        factory(exports);
+    } else {
+        // Browser globals
+        factory((root.commonJsStrict = {}));
+    }
+}(this, function (exports) {
+
+    /* Polyfills */
+    if (typeof Promise !== 'function') {
+        /*! promise-polyfill 3.1.0 */
+        !function(a){function b(a,b){return function(){a.apply(b,arguments)}}function c(a){if("object"!==typeof this)throw new TypeError("Promises must be constructed via new");if("function"!==typeof a)throw new TypeError("not a function");this._state=null,this._value=null,this._deferreds=[],i(a,b(e,this),b(f,this))}function d(a){var b=this;return null===this._state?void this._deferreds.push(a):void k(function(){var c=b._state?a.onFulfilled:a.onRejected;if(null===c)return void(b._state?a.resolve:a.reject)(b._value);var d;try{d=c(b._value)}catch(e){return void a.reject(e)}a.resolve(d)})}function e(a){try{if(a===this)throw new TypeError("A promise cannot be resolved with itself.");if(a&&("object"===typeof a||"function"===typeof a)){var c=a.then;if("function"===typeof c)return void i(b(c,a),b(e,this),b(f,this))}this._state=!0,this._value=a,g.call(this)}catch(d){f.call(this,d)}}function f(a){this._state=!1,this._value=a,g.call(this)}function g(){for(var a=0,b=this._deferreds.length;b>a;a++)d.call(this,this._deferreds[a]);this._deferreds=null}function h(a,b,c,d){this.onFulfilled="function"===typeof a?a:null,this.onRejected="function"===typeof b?b:null,this.resolve=c,this.reject=d}function i(a,b,c){var d=!1;try{a(function(a){d||(d=!0,b(a))},function(a){d||(d=!0,c(a))})}catch(e){if(d)return;d=!0,c(e)}}var j=setTimeout,k="function"===typeof setImmediate&&setImmediate||function(a){j(a,1)},l=Array.isArray||function(a){return"[object Array]"===Object.prototype.toString.call(a)};c.prototype["catch"]=function(a){return this.then(null,a)},c.prototype.then=function(a,b){var e=this;return new c(function(c,f){d.call(e,new h(a,b,c,f))})},c.all=function(){var a=Array.prototype.slice.call(1===arguments.length&&l(arguments[0])?arguments[0]:arguments);return new c(function(b,c){function d(f,g){try{if(g&&("object"===typeof g||"function"===typeof g)){var h=g.then;if("function"===typeof h)return void h.call(g,function(a){d(f,a)},c)}a[f]=g,0===--e&&b(a)}catch(i){c(i)}}if(0===a.length)return b([]);for(var e=a.length,f=0;f<a.length;f++)d(f,a[f])})},c.resolve=function(a){return a&&"object"===typeof a&&a.constructor===c?a:new c(function(b){b(a)})},c.reject=function(a){return new c(function(b,c){c(a)})},c.race=function(a){return new c(function(b,c){for(var d=0,e=a.length;e>d;d++)a[d].then(b,c)})},c._setImmediateFn=function(a){k=a},"undefined"!==typeof module&&module.exports?module.exports=c:a.Promise||(a.Promise=c)}(this);
+    }
+
+    if ( typeof window.CustomEvent !== "function" ) {
+        (function(){
+            function CustomEvent ( event, params ) {
+                params = params || { bubbles: false, cancelable: false, detail: undefined };
+                var evt = document.createEvent( 'CustomEvent' );
+                evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+                return evt;
+            }
+            CustomEvent.prototype = window.Event.prototype;
+            window.CustomEvent = CustomEvent;
+        }());
+    }
+
+    if (!HTMLCanvasElement.prototype.toBlob) {
+        Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+            value: function (callback, type, quality) {
+                var binStr = atob( this.toDataURL(type, quality).split(',')[1] ),
+                len = binStr.length,
+                arr = new Uint8Array(len);
+
+                for (var i=0; i<len; i++ ) {
+                    arr[i] = binStr.charCodeAt(i);
+                }
+
+                callback( new Blob( [arr], {type: type || 'image/png'} ) );
+            }
+        });
+    }
+    /* End Polyfills */
+
+    var cssPrefixes = ['Webkit', 'Moz', 'ms'],
+        emptyStyles = document.createElement('div').style,
+        EXIF_NORM = [1,8,3,6],
+        EXIF_FLIP = [2,7,4,5],
+        CSS_TRANS_ORG,
+        CSS_TRANSFORM,
+        CSS_USERSELECT;
+
+    function vendorPrefix(prop) {
+        if (prop in emptyStyles) {
+            return prop;
+        }
+
+        var capProp = prop[0].toUpperCase() + prop.slice(1),
+            i = cssPrefixes.length;
+
+        while (i--) {
+            prop = cssPrefixes[i] + capProp;
+            if (prop in emptyStyles) {
+                return prop;
+            }
+        }
+    }
+
+    CSS_TRANSFORM = vendorPrefix('transform');
+    CSS_TRANS_ORG = vendorPrefix('transformOrigin');
+    CSS_USERSELECT = vendorPrefix('userSelect');
+
+    function getExifOffset(ornt, rotate) {
+        var arr = EXIF_NORM.indexOf(ornt) > -1 ? EXIF_NORM : EXIF_FLIP,
+            index = arr.indexOf(ornt),
+            offset = (rotate / 90) % arr.length;// 180 = 2%4 = 2 shift exif by 2 indexes
+
+        return arr[(arr.length + index + (offset % arr.length)) % arr.length];
+    }
+
+    // Credits to : Andrew Dupont - http://andrewdupont.net/2009/08/28/deep-extending-objects-in-javascript/
+    function deepExtend(destination, source) {
+        destination = destination || {};
+        for (var property in source) {
+            if (source[property] && source[property].constructor && source[property].constructor === Object) {
+                destination[property] = destination[property] || {};
+                deepExtend(destination[property], source[property]);
+            } else {
+                destination[property] = source[property];
+            }
+        }
+        return destination;
+    }
+
+    function clone(object) {
+        return deepExtend({}, object);
+    }
+
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this, args = arguments;
+            var later = function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
+
+    function dispatchChange(element) {
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            element.dispatchEvent(evt);
+        }
+        else {
+            element.fireEvent("onchange");
+        }
+    }
+
+    //http://jsperf.com/vanilla-css
+    function css(el, styles, val) {
+        if (typeof (styles) === 'string') {
+            var tmp = styles;
+            styles = {};
+            styles[tmp] = val;
+        }
+
+        for (var prop in styles) {
+            el.style[prop] = styles[prop];
+        }
+    }
+
+    function addClass(el, c) {
+        if (el.classList) {
+            el.classList.add(c);
+        }
+        else {
+            el.className += ' ' + c;
+        }
+    }
+
+    function removeClass(el, c) {
+        if (el.classList) {
+            el.classList.remove(c);
+        }
+        else {
+            el.className = el.className.replace(c, '');
+        }
+    }
+
+    function setAttributes(el, attrs) {
+        for (var key in attrs) {
+            el.setAttribute(key, attrs[key]);
+        }
+    }
+
+    function num(v) {
+        return parseInt(v, 10);
+    }
+
+    /* Utilities */
+    function loadImage(src, doExif) {
+        var img = new Image();
+        img.style.opacity = 0;
+        return new Promise(function (resolve) {
+            function _resolve() {
+                img.style.opacity = 1;
+                setTimeout(function () {
+                    resolve(img);
+                }, 1);
+            }
+
+            img.removeAttribute('crossOrigin');
+            if (src.match(/^https?:\/\/|^\/\//)) {
+                img.setAttribute('crossOrigin', 'anonymous');
+            }
+
+            img.onload = function () {
+                if (doExif) {
+                    EXIF.getData(img, function () {
+                        _resolve();
+                    });
+                }
+                else {
+                    _resolve();
+                }
+            };
+            img.src = src;
+        });
+    }
+
+    function naturalImageDimensions(img, ornt) {
+        var w = img.naturalWidth;
+        var h = img.naturalHeight;
+        var orient = ornt || getExifOrientation(img);
+        if (orient && orient >= 5) {
+            var x= w;
+            w = h;
+            h = x;
+        }
+        return { width: w, height: h };
+    }
+
+    /* CSS Transform Prototype */
+    var TRANSLATE_OPTS = {
+        'translate3d': {
+            suffix: ', 0px'
+        },
+        'translate': {
+            suffix: ''
+        }
+    };
+    var Transform = function (x, y, scale) {
+        this.x = parseFloat(x);
+        this.y = parseFloat(y);
+        this.scale = parseFloat(scale);
+    };
+
+    Transform.parse = function (v) {
+        if (v.style) {
+            return Transform.parse(v.style[CSS_TRANSFORM]);
+        }
+        else if (v.indexOf('matrix') > -1 || v.indexOf('none') > -1) {
+            return Transform.fromMatrix(v);
+        }
+        else {
+            return Transform.fromString(v);
+        }
+    };
+
+    Transform.fromMatrix = function (v) {
+        var vals = v.substring(7).split(',');
+        if (!vals.length || v === 'none') {
+            vals = [1, 0, 0, 1, 0, 0];
+        }
+
+        return new Transform(num(vals[4]), num(vals[5]), parseFloat(vals[0]));
+    };
+
+    Transform.fromString = function (v) {
+        var values = v.split(') '),
+            translate = values[0].substring(Croppie.globals.translate.length + 1).split(','),
+            scale = values.length > 1 ? values[1].substring(6) : 1,
+            x = translate.length > 1 ? translate[0] : 0,
+            y = translate.length > 1 ? translate[1] : 0;
+
+        return new Transform(x, y, scale);
+    };
+
+    Transform.prototype.toString = function () {
+        var suffix = TRANSLATE_OPTS[Croppie.globals.translate].suffix || '';
+        return Croppie.globals.translate + '(' + this.x + 'px, ' + this.y + 'px' + suffix + ') scale(' + this.scale + ')';
+    };
+
+    var TransformOrigin = function (el) {
+        if (!el || !el.style[CSS_TRANS_ORG]) {
+            this.x = 0;
+            this.y = 0;
+            return;
+        }
+        var css = el.style[CSS_TRANS_ORG].split(' ');
+        this.x = parseFloat(css[0]);
+        this.y = parseFloat(css[1]);
+    };
+
+    TransformOrigin.prototype.toString = function () {
+        return this.x + 'px ' + this.y + 'px';
+    };
+
+    function getExifOrientation (img) {
+        return img.exifdata ? img.exifdata.Orientation : 1;
+    }
+
+    function drawCanvas(canvas, img, orientation) {
+        var width = img.width,
+            height = img.height,
+            ctx = canvas.getContext('2d');
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.save();
+        switch (orientation) {
+          case 2:
+             ctx.translate(width, 0);
+             ctx.scale(-1, 1);
+             break;
+
+          case 3:
+              ctx.translate(width, height);
+              ctx.rotate(180*Math.PI/180);
+              break;
+
+          case 4:
+              ctx.translate(0, height);
+              ctx.scale(1, -1);
+              break;
+
+          case 5:
+              canvas.width = height;
+              canvas.height = width;
+              ctx.rotate(90*Math.PI/180);
+              ctx.scale(1, -1);
+              break;
+
+          case 6:
+              canvas.width = height;
+              canvas.height = width;
+              ctx.rotate(90*Math.PI/180);
+              ctx.translate(0, -height);
+              break;
+
+          case 7:
+              canvas.width = height;
+              canvas.height = width;
+              ctx.rotate(-90*Math.PI/180);
+              ctx.translate(-width, height);
+              ctx.scale(1, -1);
+              break;
+
+          case 8:
+              canvas.width = height;
+              canvas.height = width;
+              ctx.translate(0, width);
+              ctx.rotate(-90*Math.PI/180);
+              break;
+        }
+        ctx.drawImage(img, 0,0, width, height);
+        ctx.restore();
+    }
+
+    /* Private Methods */
+    function _create() {
+        var self = this,
+            contClass = 'croppie-container',
+            customViewportClass = self.options.viewport.type ? 'cr-vp-' + self.options.viewport.type : null,
+            boundary, img, viewport, overlay, bw, bh;
+
+        self.options.useCanvas = self.options.enableOrientation || _hasExif.call(self);
+        // Properties on class
+        self.data = {};
+        self.elements = {};
+
+        boundary = self.elements.boundary = document.createElement('div');
+        viewport = self.elements.viewport = document.createElement('div');
+        img = self.elements.img = document.createElement('img');
+        overlay = self.elements.overlay = document.createElement('div');
+
+        if (self.options.useCanvas) {
+            self.elements.canvas = document.createElement('canvas');
+            self.elements.preview = self.elements.canvas;
+        }
+        else {
+            self.elements.preview = self.elements.img;
+        }
+
+        addClass(boundary, 'cr-boundary');
+        boundary.setAttribute('aria-dropeffect', 'none');
+        bw = self.options.boundary.width;
+        bh = self.options.boundary.height;
+        css(boundary, {
+            width: (bw + (isNaN(bw) ? '' : 'px')),
+            height: (bh + (isNaN(bh) ? '' : 'px'))
+        });
+
+        addClass(viewport, 'cr-viewport');
+        if (customViewportClass) {
+            addClass(viewport, customViewportClass);
+        }
+        css(viewport, {
+            width: self.options.viewport.width + 'px',
+            height: self.options.viewport.height + 'px'
+        });
+        viewport.setAttribute('tabindex', 0);
+
+        addClass(self.elements.preview, 'cr-image');
+        setAttributes(self.elements.preview, { 'alt': 'preview', 'aria-grabbed': 'false' });
+        addClass(overlay, 'cr-overlay');
+
+        self.element.appendChild(boundary);
+        boundary.appendChild(self.elements.preview);
+        boundary.appendChild(viewport);
+        boundary.appendChild(overlay);
+
+        addClass(self.element, contClass);
+        if (self.options.customClass) {
+            addClass(self.element, self.options.customClass);
+        }
+
+        _initDraggable.call(this);
+
+        if (self.options.enableZoom) {
+            _initializeZoom.call(self);
+        }
+
+        // if (self.options.enableOrientation) {
+        //     _initRotationControls.call(self);
+        // }
+
+        if (self.options.enableResize) {
+            _initializeResize.call(self);
+        }
+    }
+
+    // function _initRotationControls () {
+    //     var self = this,
+    //         wrap, btnLeft, btnRight, iLeft, iRight;
+
+    //     wrap = document.createElement('div');
+    //     self.elements.orientationBtnLeft = btnLeft = document.createElement('button');
+    //     self.elements.orientationBtnRight = btnRight = document.createElement('button');
+
+    //     wrap.appendChild(btnLeft);
+    //     wrap.appendChild(btnRight);
+
+    //     iLeft = document.createElement('i');
+    //     iRight = document.createElement('i');
+    //     btnLeft.appendChild(iLeft);
+    //     btnRight.appendChild(iRight);
+
+    //     addClass(wrap, 'cr-rotate-controls');
+    //     addClass(btnLeft, 'cr-rotate-l');
+    //     addClass(btnRight, 'cr-rotate-r');
+
+    //     self.elements.boundary.appendChild(wrap);
+
+    //     btnLeft.addEventListener('click', function () {
+    //         self.rotate(-90);
+    //     });
+    //     btnRight.addEventListener('click', function () {
+    //         self.rotate(90);
+    //     });
+    // }
+
+    function _hasExif() {
+        return this.options.enableExif && window.EXIF;
+    }
+
+    function _initializeResize () {
+        var self = this;
+        var wrap = document.createElement('div');
+        var isDragging = false;
+        var direction;
+        var originalX;
+        var originalY;
+        var minSize = 50;
+        var maxWidth;
+        var maxHeight;
+        var vr;
+        var hr;
+
+        addClass(wrap, 'cr-resizer');
+        css(wrap, {
+            width: this.options.viewport.width + 'px',
+            height: this.options.viewport.height + 'px'
+        });
+
+        if (this.options.resizeControls.height) {
+            vr = document.createElement('div');
+            addClass(vr, 'cr-resizer-vertical');
+            wrap.appendChild(vr);
+        }
+
+        if (this.options.resizeControls.width) {
+            hr = document.createElement('div');
+            addClass(hr, 'cr-resizer-horisontal');
+            wrap.appendChild(hr);
+        }
+
+        function mouseDown(ev) {
+            if (ev.button !== undefined && ev.button !== 0) return;
+
+            ev.preventDefault();
+            if (isDragging) {
+                return;
+            }
+
+            var overlayRect = self.elements.overlay.getBoundingClientRect();
+
+            isDragging = true;
+            originalX = ev.pageX;
+            originalY = ev.pageY;
+            direction = ev.currentTarget.className.indexOf('vertical') !== -1 ? 'v' : 'h';
+            maxWidth = overlayRect.width;
+            maxHeight = overlayRect.height;
+
+            if (ev.touches) {
+                var touches = ev.touches[0];
+                originalX = touches.pageX;
+                originalY = touches.pageY;
+            }
+
+            window.addEventListener('mousemove', mouseMove);
+            window.addEventListener('touchmove', mouseMove);
+            window.addEventListener('mouseup', mouseUp);
+            window.addEventListener('touchend', mouseUp);
+            document.body.style[CSS_USERSELECT] = 'none';
+        }
+
+        function mouseMove(ev) {
+            var pageX = ev.pageX;
+            var pageY = ev.pageY;
+
+            ev.preventDefault();
+
+            if (ev.touches) {
+                var touches = ev.touches[0];
+                pageX = touches.pageX;
+                pageY = touches.pageY;
+            }
+
+            var deltaX = pageX - originalX;
+            var deltaY = pageY - originalY;
+            var newHeight = self.options.viewport.height + deltaY;
+            var newWidth = self.options.viewport.width + deltaX;
+
+            if (direction === 'v' && newHeight >= minSize && newHeight <= maxHeight) {
+                css(wrap, {
+                    height: newHeight + 'px'
+                });
+
+                self.options.boundary.height += deltaY;
+                css(self.elements.boundary, {
+                    height: self.options.boundary.height + 'px'
+                });
+
+                self.options.viewport.height += deltaY;
+                css(self.elements.viewport, {
+                    height: self.options.viewport.height + 'px'
+                });
+            }
+            else if (direction === 'h' && newWidth >= minSize && newWidth <= maxWidth) {
+                css(wrap, {
+                    width: newWidth + 'px'
+                });
+
+                self.options.boundary.width += deltaX;
+                css(self.elements.boundary, {
+                    width: self.options.boundary.width + 'px'
+                });
+
+                self.options.viewport.width += deltaX;
+                css(self.elements.viewport, {
+                    width: self.options.viewport.width + 'px'
+                });
+            }
+
+            _updateOverlay.call(self);
+            _updateZoomLimits.call(self);
+            _updateCenterPoint.call(self);
+            _triggerUpdate.call(self);
+            originalY = pageY;
+            originalX = pageX;
+        }
+
+        function mouseUp() {
+            isDragging = false;
+            window.removeEventListener('mousemove', mouseMove);
+            window.removeEventListener('touchmove', mouseMove);
+            window.removeEventListener('mouseup', mouseUp);
+            window.removeEventListener('touchend', mouseUp);
+            document.body.style[CSS_USERSELECT] = '';
+        }
+
+        if (vr) {
+            vr.addEventListener('mousedown', mouseDown);
+            vr.addEventListener('touchstart', mouseDown);
+        }
+
+        if (hr) {
+            hr.addEventListener('mousedown', mouseDown);
+            hr.addEventListener('touchstart', mouseDown);
+        }
+
+        this.elements.boundary.appendChild(wrap);
+    }
+
+    function _setZoomerVal(v) {
+        if (this.options.enableZoom) {
+            var z = this.elements.zoomer,
+                val = fix(v, 4);
+
+            z.value = Math.max(z.min, Math.min(z.max, val));
+        }
+    }
+
+    function _initializeZoom() {
+        var self = this,
+            wrap = self.elements.zoomerWrap = document.createElement('div'),
+            zoomer = self.elements.zoomer = document.createElement('input');
+
+        addClass(wrap, 'cr-slider-wrap');
+        addClass(zoomer, 'cr-slider');
+        zoomer.type = 'range';
+        zoomer.step = '0.0001';
+        zoomer.value = 1;
+        zoomer.style.display = self.options.showZoomer ? '' : 'none';
+        zoomer.setAttribute('aria-label', 'zoom');
+
+        self.element.appendChild(wrap);
+        wrap.appendChild(zoomer);
+
+        self._currentZoom = 1;
+
+        function change() {
+            _onZoom.call(self, {
+                value: parseFloat(zoomer.value),
+                origin: new TransformOrigin(self.elements.preview),
+                viewportRect: self.elements.viewport.getBoundingClientRect(),
+                transform: Transform.parse(self.elements.preview)
+            });
+        }
+
+        function scroll(ev) {
+            var delta, targetZoom;
+
+            if(self.options.mouseWheelZoom === 'ctrl' && ev.ctrlKey !== true){
+              return 0; 
+            } else if (ev.wheelDelta) {
+                delta = ev.wheelDelta / 1200; //wheelDelta min: -120 max: 120 // max x 10 x 2
+            } else if (ev.deltaY) {
+                delta = ev.deltaY / 1060; //deltaY min: -53 max: 53 // max x 10 x 2
+            } else if (ev.detail) {
+                delta = ev.detail / -60; //delta min: -3 max: 3 // max x 10 x 2
+            } else {
+                delta = 0;
+            }
+
+            targetZoom = self._currentZoom + (delta * self._currentZoom);
+
+            ev.preventDefault();
+            _setZoomerVal.call(self, targetZoom);
+            change.call(self);
+        }
+
+        self.elements.zoomer.addEventListener('input', change);// this is being fired twice on keypress
+        self.elements.zoomer.addEventListener('change', change);
+
+        if (self.options.mouseWheelZoom) {
+            self.elements.boundary.addEventListener('mousewheel', scroll);
+            self.elements.boundary.addEventListener('DOMMouseScroll', scroll);
+        }
+    }
+
+    function _onZoom(ui) {
+        var self = this,
+            transform = ui ? ui.transform : Transform.parse(self.elements.preview),
+            vpRect = ui ? ui.viewportRect : self.elements.viewport.getBoundingClientRect(),
+            origin = ui ? ui.origin : new TransformOrigin(self.elements.preview);
+
+        function applyCss() {
+            var transCss = {};
+            transCss[CSS_TRANSFORM] = transform.toString();
+            transCss[CSS_TRANS_ORG] = origin.toString();
+            css(self.elements.preview, transCss);
+        }
+
+        self._currentZoom = ui ? ui.value : self._currentZoom;
+        transform.scale = self._currentZoom;
+        self.elements.zoomer.setAttribute('aria-valuenow', self._currentZoom);
+        applyCss();
+
+        if (self.options.enforceBoundary) {
+            var boundaries = _getVirtualBoundaries.call(self, vpRect),
+                transBoundaries = boundaries.translate,
+                oBoundaries = boundaries.origin;
+
+            if (transform.x >= transBoundaries.maxX) {
+                origin.x = oBoundaries.minX;
+                transform.x = transBoundaries.maxX;
+            }
+
+            if (transform.x <= transBoundaries.minX) {
+                origin.x = oBoundaries.maxX;
+                transform.x = transBoundaries.minX;
+            }
+
+            if (transform.y >= transBoundaries.maxY) {
+                origin.y = oBoundaries.minY;
+                transform.y = transBoundaries.maxY;
+            }
+
+            if (transform.y <= transBoundaries.minY) {
+                origin.y = oBoundaries.maxY;
+                transform.y = transBoundaries.minY;
+            }
+        }
+        applyCss();
+        _debouncedOverlay.call(self);
+        _triggerUpdate.call(self);
+    }
+
+    function _getVirtualBoundaries(viewport) {
+        var self = this,
+            scale = self._currentZoom,
+            vpWidth = viewport.width,
+            vpHeight = viewport.height,
+            centerFromBoundaryX = self.elements.boundary.clientWidth / 2,
+            centerFromBoundaryY = self.elements.boundary.clientHeight / 2,
+            imgRect = self.elements.preview.getBoundingClientRect(),
+            curImgWidth = imgRect.width,
+            curImgHeight = imgRect.height,
+            halfWidth = vpWidth / 2,
+            halfHeight = vpHeight / 2;
+
+        var maxX = ((halfWidth / scale) - centerFromBoundaryX) * -1;
+        var minX = maxX - ((curImgWidth * (1 / scale)) - (vpWidth * (1 / scale)));
+
+        var maxY = ((halfHeight / scale) - centerFromBoundaryY) * -1;
+        var minY = maxY - ((curImgHeight * (1 / scale)) - (vpHeight * (1 / scale)));
+
+        var originMinX = (1 / scale) * halfWidth;
+        var originMaxX = (curImgWidth * (1 / scale)) - originMinX;
+
+        var originMinY = (1 / scale) * halfHeight;
+        var originMaxY = (curImgHeight * (1 / scale)) - originMinY;
+
+        return {
+            translate: {
+                maxX: maxX,
+                minX: minX,
+                maxY: maxY,
+                minY: minY
+            },
+            origin: {
+                maxX: originMaxX,
+                minX: originMinX,
+                maxY: originMaxY,
+                minY: originMinY
+            }
+        };
+    }
+
+    function _updateCenterPoint() {
+        var self = this,
+            scale = self._currentZoom,
+            data = self.elements.preview.getBoundingClientRect(),
+            vpData = self.elements.viewport.getBoundingClientRect(),
+            transform = Transform.parse(self.elements.preview.style[CSS_TRANSFORM]),
+            pc = new TransformOrigin(self.elements.preview),
+            top = (vpData.top - data.top) + (vpData.height / 2),
+            left = (vpData.left - data.left) + (vpData.width / 2),
+            center = {},
+            adj = {};
+
+        center.y = top / scale;
+        center.x = left / scale;
+
+        adj.y = (center.y - pc.y) * (1 - scale);
+        adj.x = (center.x - pc.x) * (1 - scale);
+
+        transform.x -= adj.x;
+        transform.y -= adj.y;
+
+        var newCss = {};
+        newCss[CSS_TRANS_ORG] = center.x + 'px ' + center.y + 'px';
+        newCss[CSS_TRANSFORM] = transform.toString();
+        css(self.elements.preview, newCss);
+    }
+
+    function _initDraggable() {
+        var self = this,
+            isDragging = false,
+            originalX,
+            originalY,
+            originalDistance,
+            vpRect,
+            transform;
+
+        function assignTransformCoordinates(deltaX, deltaY) {
+            var imgRect = self.elements.preview.getBoundingClientRect(),
+                top = transform.y + deltaY,
+                left = transform.x + deltaX;
+
+            if (self.options.enforceBoundary) {
+                if (vpRect.top > imgRect.top + deltaY && vpRect.bottom < imgRect.bottom + deltaY) {
+                    transform.y = top;
+                }
+
+                if (vpRect.left > imgRect.left + deltaX && vpRect.right < imgRect.right + deltaX) {
+                    transform.x = left;
+                }
+            }
+            else {
+                transform.y = top;
+                transform.x = left;
+            }
+        }
+
+        function toggleGrabState(isDragging) {
+          self.elements.preview.setAttribute('aria-grabbed', isDragging);
+          self.elements.boundary.setAttribute('aria-dropeffect', isDragging? 'move': 'none');
+        }
+
+        function keyDown(ev) {
+            var LEFT_ARROW  = 37,
+                UP_ARROW    = 38,
+                RIGHT_ARROW = 39,
+                DOWN_ARROW  = 40;
+
+            if (ev.shiftKey && (ev.keyCode === UP_ARROW || ev.keyCode === DOWN_ARROW)) {
+                var zoom = 0.0;
+                if (ev.keyCode === UP_ARROW) {
+                    zoom = parseFloat(self.elements.zoomer.value, 10) + parseFloat(self.elements.zoomer.step, 10)
+                }
+                else {
+                    zoom = parseFloat(self.elements.zoomer.value, 10) - parseFloat(self.elements.zoomer.step, 10)
+                }
+                self.setZoom(zoom);
+            }
+            else if (self.options.enableKeyMovement && (ev.keyCode >= 37 && ev.keyCode <= 40)) {
+                ev.preventDefault();
+                var movement = parseKeyDown(ev.keyCode);
+
+                transform = Transform.parse(self.elements.preview);
+                document.body.style[CSS_USERSELECT] = 'none';
+                vpRect = self.elements.viewport.getBoundingClientRect();
+                keyMove(movement);
+            }
+
+            function parseKeyDown(key) {
+                switch (key) {
+                    case LEFT_ARROW:
+                        return [1, 0];
+                    case UP_ARROW:
+                        return [0, 1];
+                    case RIGHT_ARROW:
+                        return [-1, 0];
+                    case DOWN_ARROW:
+                        return [0, -1];
+                }
+            }
+        }
+
+        function keyMove(movement) {
+            var deltaX = movement[0],
+                deltaY = movement[1],
+                newCss = {};
+
+            assignTransformCoordinates(deltaX, deltaY);
+
+            newCss[CSS_TRANSFORM] = transform.toString();
+            css(self.elements.preview, newCss);
+            _updateOverlay.call(self);
+            document.body.style[CSS_USERSELECT] = '';
+            _updateCenterPoint.call(self);
+            _triggerUpdate.call(self);
+            originalDistance = 0;
+        }
+
+        function mouseDown(ev) {
+            if (ev.button !== undefined && ev.button !== 0) return;
+
+            ev.preventDefault();
+            if (isDragging) return;
+            isDragging = true;
+            originalX = ev.pageX;
+            originalY = ev.pageY;
+
+            if (ev.touches) {
+                var touches = ev.touches[0];
+                originalX = touches.pageX;
+                originalY = touches.pageY;
+            }
+            toggleGrabState(isDragging);
+            transform = Transform.parse(self.elements.preview);
+            window.addEventListener('mousemove', mouseMove);
+            window.addEventListener('touchmove', mouseMove);
+            window.addEventListener('mouseup', mouseUp);
+            window.addEventListener('touchend', mouseUp);
+            document.body.style[CSS_USERSELECT] = 'none';
+            vpRect = self.elements.viewport.getBoundingClientRect();
+        }
+
+        function mouseMove(ev) {
+            ev.preventDefault();
+            var pageX = ev.pageX,
+                pageY = ev.pageY;
+
+            if (ev.touches) {
+                var touches = ev.touches[0];
+                pageX = touches.pageX;
+                pageY = touches.pageY;
+            }
+
+            var deltaX = pageX - originalX,
+                deltaY = pageY - originalY,
+                newCss = {};
+
+            if (ev.type === 'touchmove') {
+                if (ev.touches.length > 1) {
+                    var touch1 = ev.touches[0];
+                    var touch2 = ev.touches[1];
+                    var dist = Math.sqrt((touch1.pageX - touch2.pageX) * (touch1.pageX - touch2.pageX) + (touch1.pageY - touch2.pageY) * (touch1.pageY - touch2.pageY));
+
+                    if (!originalDistance) {
+                        originalDistance = dist / self._currentZoom;
+                    }
+
+                    var scale = dist / originalDistance;
+
+                    _setZoomerVal.call(self, scale);
+                    dispatchChange(self.elements.zoomer);
+                    return;
+                }
+            }
+
+            assignTransformCoordinates(deltaX, deltaY);
+
+            newCss[CSS_TRANSFORM] = transform.toString();
+            css(self.elements.preview, newCss);
+            _updateOverlay.call(self);
+            originalY = pageY;
+            originalX = pageX;
+        }
+
+        function mouseUp() {
+            isDragging = false;
+            toggleGrabState(isDragging);
+            window.removeEventListener('mousemove', mouseMove);
+            window.removeEventListener('touchmove', mouseMove);
+            window.removeEventListener('mouseup', mouseUp);
+            window.removeEventListener('touchend', mouseUp);
+            document.body.style[CSS_USERSELECT] = '';
+            _updateCenterPoint.call(self);
+            _triggerUpdate.call(self);
+            originalDistance = 0;
+        }
+
+        self.elements.overlay.addEventListener('mousedown', mouseDown);
+        self.elements.viewport.addEventListener('keydown', keyDown);
+        self.elements.overlay.addEventListener('touchstart', mouseDown);
+    }
+
+    function _updateOverlay() {
+        if (!this.elements) return; // since this is debounced, it can be fired after destroy
+        var self = this,
+            boundRect = self.elements.boundary.getBoundingClientRect(),
+            imgData = self.elements.preview.getBoundingClientRect();
+
+        css(self.elements.overlay, {
+            width: imgData.width + 'px',
+            height: imgData.height + 'px',
+            top: (imgData.top - boundRect.top) + 'px',
+            left: (imgData.left - boundRect.left) + 'px'
+        });
+    }
+    var _debouncedOverlay = debounce(_updateOverlay, 500);
+
+    function _triggerUpdate() {
+        var self = this,
+            data = self.get(),
+            ev;
+
+        if (!_isVisible.call(self)) {
+            return;
+        }
+
+        self.options.update.call(self, data);
+        if (self.$ && typeof Prototype === 'undefined') {
+            self.$(self.element).trigger('update.croppie', data);
+        }
+        else {
+            var ev;
+            if (window.CustomEvent) {
+                ev = new CustomEvent('update', { detail: data });
+            } else {
+                ev = document.createEvent('CustomEvent');
+                ev.initCustomEvent('update', true, true, data);
+            }
+
+            self.element.dispatchEvent(ev);
+        }
+    }
+
+    function _isVisible() {
+        return this.elements.preview.offsetHeight > 0 && this.elements.preview.offsetWidth > 0;
+    }
+
+    function _updatePropertiesFromImage() {
+        var self = this,
+            initialZoom = 1,
+            cssReset = {},
+            img = self.elements.preview,
+            imgData = null,
+            transformReset = new Transform(0, 0, initialZoom),
+            originReset = new TransformOrigin(),
+            isVisible = _isVisible.call(self);
+
+        if (!isVisible || self.data.bound) {// if the croppie isn't visible or it doesn't need binding
+            return;
+        }
+
+        self.data.bound = true;
+        cssReset[CSS_TRANSFORM] = transformReset.toString();
+        cssReset[CSS_TRANS_ORG] = originReset.toString();
+        cssReset['opacity'] = 1;
+        css(img, cssReset);
+
+        imgData = self.elements.preview.getBoundingClientRect();
+
+        self._originalImageWidth = imgData.width;
+        self._originalImageHeight = imgData.height;
+        self.data.orientation = getExifOrientation(self.elements.img);
+
+        if (self.options.enableZoom) {
+            _updateZoomLimits.call(self, true);
+        }
+        else {
+            self._currentZoom = initialZoom;
+        }
+
+        transformReset.scale = self._currentZoom;
+        cssReset[CSS_TRANSFORM] = transformReset.toString();
+        css(img, cssReset);
+
+        if (self.data.points.length) {
+            _bindPoints.call(self, self.data.points);
+        }
+        else {
+            _centerImage.call(self);
+        }
+
+        _updateCenterPoint.call(self);
+        _updateOverlay.call(self);
+    }
+
+    function _updateZoomLimits (initial) {
+        var self = this,
+            minZoom = 0,
+            maxZoom = self.options.maxZoom || 1.5,
+            initialZoom,
+            defaultInitialZoom,
+            zoomer = self.elements.zoomer,
+            scale = parseFloat(zoomer.value),
+            boundaryData = self.elements.boundary.getBoundingClientRect(),
+            imgData = naturalImageDimensions(self.elements.img, self.data.orientation),
+            vpData = self.elements.viewport.getBoundingClientRect(),
+            minW,
+            minH;
+        if (self.options.enforceBoundary) {
+            minW = vpData.width / imgData.width;
+            minH = vpData.height / imgData.height;
+            minZoom = Math.max(minW, minH);
+        }
+
+        if (minZoom >= maxZoom) {
+            maxZoom = minZoom + 1;
+        }
+
+        zoomer.min = fix(minZoom, 4);
+        zoomer.max = fix(maxZoom, 4);
+        
+        if (!initial && (scale < zoomer.min || scale > zoomer.max)) {
+            _setZoomerVal.call(self, scale < zoomer.min ? zoomer.min : zoomer.max);
+        }
+        else if (initial) {
+            defaultInitialZoom = Math.max((boundaryData.width / imgData.width), (boundaryData.height / imgData.height));
+            initialZoom = self.data.boundZoom !== null ? self.data.boundZoom : defaultInitialZoom;
+            _setZoomerVal.call(self, initialZoom);
+        }
+
+        dispatchChange(zoomer);
+    }
+
+    function _bindPoints(points) {
+        if (points.length !== 4) {
+            throw "Croppie - Invalid number of points supplied: " + points;
+        }
+        var self = this,
+            pointsWidth = points[2] - points[0],
+            // pointsHeight = points[3] - points[1],
+            vpData = self.elements.viewport.getBoundingClientRect(),
+            boundRect = self.elements.boundary.getBoundingClientRect(),
+            vpOffset = {
+                left: vpData.left - boundRect.left,
+                top: vpData.top - boundRect.top
+            },
+            scale = vpData.width / pointsWidth,
+            originTop = points[1],
+            originLeft = points[0],
+            transformTop = (-1 * points[1]) + vpOffset.top,
+            transformLeft = (-1 * points[0]) + vpOffset.left,
+            newCss = {};
+
+        newCss[CSS_TRANS_ORG] = originLeft + 'px ' + originTop + 'px';
+        newCss[CSS_TRANSFORM] = new Transform(transformLeft, transformTop, scale).toString();
+        css(self.elements.preview, newCss);
+
+        _setZoomerVal.call(self, scale);
+        self._currentZoom = scale;
+    }
+
+    function _centerImage() {
+        var self = this,
+            imgDim = self.elements.preview.getBoundingClientRect(),
+            vpDim = self.elements.viewport.getBoundingClientRect(),
+            boundDim = self.elements.boundary.getBoundingClientRect(),
+            vpLeft = vpDim.left - boundDim.left,
+            vpTop = vpDim.top - boundDim.top,
+            w = vpLeft - ((imgDim.width - vpDim.width) / 2),
+            h = vpTop - ((imgDim.height - vpDim.height) / 2),
+            transform = new Transform(w, h, self._currentZoom);
+
+        css(self.elements.preview, CSS_TRANSFORM, transform.toString());
+    }
+
+    function _transferImageToCanvas(customOrientation) {
+        var self = this,
+            canvas = self.elements.canvas,
+            img = self.elements.img,
+            ctx = canvas.getContext('2d'),
+            exif = _hasExif.call(self),
+            customOrientation = self.options.enableOrientation && customOrientation;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        if (exif && !customOrientation) {
+            var orientation = getExifOrientation(img);
+            drawCanvas(canvas, img, num(orientation || 0, 10));
+        }
+        else if (customOrientation) {
+            drawCanvas(canvas, img, customOrientation);
+        }
+    }
+
+    function _getCanvas(data) {
+        var self = this,
+            points = data.points,
+            left = num(points[0]),
+            top = num(points[1]),
+            right = num(points[2]),
+            bottom = num(points[3]),
+            width = right-left,
+            height = bottom-top,
+            circle = data.circle,
+            canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            startX = 0,
+            startY = 0,
+            canvasWidth = data.outputWidth || width,
+            canvasHeight = data.outputHeight || height,
+            customDimensions = (data.outputWidth && data.outputHeight),
+            outputWidthRatio = 1,
+            outputHeightRatio = 1;
+
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+
+        if (data.backgroundColor) {
+            ctx.fillStyle = data.backgroundColor;
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        }
+
+        if (self.options.enforceBoundary !== false) {
+            width = Math.min(width, self._originalImageWidth);
+            height = Math.min(height, self._originalImageHeight);
+        }
+    
+        // console.table({ left, right, top, bottom, canvasWidth, canvasHeight });
+        ctx.drawImage(this.elements.preview, left, top, width, height, startX, startY, canvasWidth, canvasHeight);
+        if (circle) {
+            ctx.fillStyle = '#fff';
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+        return canvas;
+    }
+
+    function _getHtmlResult(data) {
+        var points = data.points,
+            div = document.createElement('div'),
+            img = document.createElement('img'),
+            width = points[2] - points[0],
+            height = points[3] - points[1];
+
+        addClass(div, 'croppie-result');
+        div.appendChild(img);
+        css(img, {
+            left: (-1 * points[0]) + 'px',
+            top: (-1 * points[1]) + 'px'
+        });
+        img.src = data.url;
+        css(div, {
+            width: width + 'px',
+            height: height + 'px'
+        });
+
+        return div;
+    }
+
+    function _getBase64Result(data) {
+        return _getCanvas.call(this, data).toDataURL(data.format, data.quality);
+    }
+
+    function _getBlobResult(data) {
+        var self = this;
+        return new Promise(function (resolve, reject) {
+            _getCanvas.call(self, data).toBlob(function (blob) {
+                resolve(blob);
+            }, data.format, data.quality);
+        });
+    }
+
+    function _replaceImage(img) {
+        if (this.elements.img.parentNode) {
+            Array.prototype.forEach.call(this.elements.img.classList, function(c) { img.classList.add(c); });
+            this.elements.img.parentNode.replaceChild(img, this.elements.img);
+            this.elements.preview = img; // if the img is attached to the DOM, they're not using the canvas
+        }
+        this.elements.img = img;
+    }
+
+    function _bind(options, cb) {
+        var self = this,
+            url,
+            points = [],
+            zoom = null,
+            hasExif = _hasExif.call(self);
+
+        if (typeof (options) === 'string') {
+            url = options;
+            options = {};
+        }
+        else if (Array.isArray(options)) {
+            points = options.slice();
+        }
+        else if (typeof (options) === 'undefined' && self.data.url) { //refreshing
+            _updatePropertiesFromImage.call(self);
+            _triggerUpdate.call(self);
+            return null;
+        }
+        else {
+            url = options.url;
+            points = options.points || [];
+            zoom = typeof(options.zoom) === 'undefined' ? null : options.zoom;
+        }
+
+        self.data.bound = false;
+        self.data.url = url || self.data.url;
+        self.data.boundZoom = zoom;
+
+        return loadImage(url, hasExif).then(function (img) {
+            _replaceImage.call(self, img);
+            if (!points.length) {
+                var natDim = naturalImageDimensions(img);
+                var rect = self.elements.viewport.getBoundingClientRect();
+                var aspectRatio = rect.width / rect.height;
+                var imgAspectRatio = natDim.width / natDim.height;
+                var width, height;
+
+                if (imgAspectRatio > aspectRatio) {
+                    height = natDim.height;
+                    width = height * aspectRatio;
+                }
+                else {
+                    width = natDim.width;
+                    height = natDim.height / aspectRatio;
+                }
+
+                var x0 = (natDim.width - width) / 2;
+                var y0 = (natDim.height - height) / 2;
+                var x1 = x0 + width;
+                var y1 = y0 + height;
+                self.data.points = [x0, y0, x1, y1];
+            }
+            else if (self.options.relative) {
+                points = [
+                    points[0] * img.naturalWidth / 100,
+                    points[1] * img.naturalHeight / 100,
+                    points[2] * img.naturalWidth / 100,
+                    points[3] * img.naturalHeight / 100
+                ];
+            }
+
+            self.data.points = points.map(function (p) {
+                return parseFloat(p);
+            });
+            if (self.options.useCanvas) {
+                _transferImageToCanvas.call(self, options.orientation || 1);
+            }
+            _updatePropertiesFromImage.call(self);
+            _triggerUpdate.call(self);
+            cb && cb();
+        }).catch(function (err) {
+            console.error("Croppie:" + err);
+        });
+    }
+
+    function fix(v, decimalPoints) {
+        return parseFloat(v).toFixed(decimalPoints || 0);
+    }
+
+    function _get() {
+        var self = this,
+            imgData = self.elements.preview.getBoundingClientRect(),
+            vpData = self.elements.viewport.getBoundingClientRect(),
+            x1 = vpData.left - imgData.left,
+            y1 = vpData.top - imgData.top,
+            widthDiff = (vpData.width - self.elements.viewport.offsetWidth) / 2, //border
+            heightDiff = (vpData.height - self.elements.viewport.offsetHeight) / 2,
+            x2 = x1 + self.elements.viewport.offsetWidth + widthDiff,
+            y2 = y1 + self.elements.viewport.offsetHeight + heightDiff,
+            scale = self._currentZoom;
+
+        if (scale === Infinity || isNaN(scale)) {
+            scale = 1;
+        }
+
+        var max = self.options.enforceBoundary ? 0 : Number.NEGATIVE_INFINITY;
+        x1 = Math.max(max, x1 / scale);
+        y1 = Math.max(max, y1 / scale);
+        x2 = Math.max(max, x2 / scale);
+        y2 = Math.max(max, y2 / scale);
+
+        return {
+            points: [fix(x1), fix(y1), fix(x2), fix(y2)],
+            zoom: scale,
+            orientation: self.data.orientation
+        };
+    }
+
+    var RESULT_DEFAULTS = {
+            type: 'canvas',
+            format: 'png',
+            quality: 1
+        },
+        RESULT_FORMATS = ['jpeg', 'webp', 'png'];
+
+    function _result(options) {
+        var self = this,
+            data = _get.call(self),
+            opts = deepExtend(clone(RESULT_DEFAULTS), clone(options)),
+            resultType = (typeof (options) === 'string' ? options : (opts.type || 'base64')),
+            size = opts.size || 'viewport',
+            format = opts.format,
+            quality = opts.quality,
+            backgroundColor = opts.backgroundColor,
+            circle = typeof opts.circle === 'boolean' ? opts.circle : (self.options.viewport.type === 'circle'),
+            vpRect = self.elements.viewport.getBoundingClientRect(),
+            ratio = vpRect.width / vpRect.height,
+            prom;
+
+        if (size === 'viewport') {
+            data.outputWidth = vpRect.width;
+            data.outputHeight = vpRect.height;
+        } else if (typeof size === 'object') {
+            if (size.width && size.height) {
+                data.outputWidth = size.width;
+                data.outputHeight = size.height;
+            } else if (size.width) {
+                data.outputWidth = size.width;
+                data.outputHeight = size.width / ratio;
+            } else if (size.height) {
+                data.outputWidth = size.height * ratio;
+                data.outputHeight = size.height;
+            }
+        }
+
+        if (RESULT_FORMATS.indexOf(format) > -1) {
+            data.format = 'image/' + format;
+            data.quality = quality;
+        }
+
+        data.circle = circle;
+        data.url = self.data.url;
+        data.backgroundColor = backgroundColor;
+
+        prom = new Promise(function (resolve, reject) {
+            switch(resultType.toLowerCase())
+            {
+                case 'rawcanvas':
+                    resolve(_getCanvas.call(self, data));
+                    break;
+                case 'canvas':
+                case 'base64':
+                    resolve(_getBase64Result.call(self, data));
+                    break;
+                case 'blob':
+                    _getBlobResult.call(self, data).then(resolve);
+                    break;
+                default:
+                    resolve(_getHtmlResult.call(self, data));
+                    break;
+            }
+        });
+        return prom;
+    }
+
+    function _refresh() {
+        _updatePropertiesFromImage.call(this);
+    }
+
+    function _rotate(deg) {
+        if (!this.options.useCanvas || !this.options.enableOrientation) {
+            throw 'Croppie: Cannot rotate without enableOrientation && EXIF.js included';
+        }
+
+        var self = this,
+            canvas = self.elements.canvas,
+            ornt;
+
+        self.data.orientation = getExifOffset(self.data.orientation, deg);
+        drawCanvas(canvas, self.elements.img, self.data.orientation);
+        _updateZoomLimits.call(self);
+        _onZoom.call(self);
+        copy = null;
+    }
+
+    function _destroy() {
+        var self = this;
+        self.element.removeChild(self.elements.boundary);
+        removeClass(self.element, 'croppie-container');
+        if (self.options.enableZoom) {
+            self.element.removeChild(self.elements.zoomerWrap);
+        }
+        delete self.elements;
+    }
+
+    if (window.jQuery) {
+        var $ = window.jQuery;
+        $.fn.croppie = function (opts) {
+            var ot = typeof opts;
+
+            if (ot === 'string') {
+                var args = Array.prototype.slice.call(arguments, 1);
+                var singleInst = $(this).data('croppie');
+
+                if (opts === 'get') {
+                    return singleInst.get();
+                }
+                else if (opts === 'result') {
+                    return singleInst.result.apply(singleInst, args);
+                }
+                else if (opts === 'bind') {
+                    return singleInst.bind.apply(singleInst, args);
+                }
+
+                return this.each(function () {
+                    var i = $(this).data('croppie');
+                    if (!i) return;
+
+                    var method = i[opts];
+                    if ($.isFunction(method)) {
+                        method.apply(i, args);
+                        if (opts === 'destroy') {
+                            $(this).removeData('croppie');
+                        }
+                    }
+                    else {
+                        throw 'Croppie ' + opts + ' method not found';
+                    }
+                });
+            }
+            else {
+                return this.each(function () {
+                    var i = new Croppie(this, opts);
+                    i.$ = $;
+                    $(this).data('croppie', i);
+                });
+            }
+        };
+    }
+
+    function Croppie(element, opts) {
+        if (element.className.indexOf('croppie-container') > -1) {
+            throw new Error("Croppie: Can't initialize croppie more than once");
+        }
+        this.element = element;
+        this.options = deepExtend(clone(Croppie.defaults), opts);
+
+        if (this.element.tagName.toLowerCase() === 'img') {
+            var origImage = this.element;
+            addClass(origImage, 'cr-original-image');
+            setAttributes(origImage, {'aria-hidden' : 'true', 'alt' : '' });
+            var replacementDiv = document.createElement('div');
+            this.element.parentNode.appendChild(replacementDiv);
+            replacementDiv.appendChild(origImage);
+            this.element = replacementDiv;
+            this.options.url = this.options.url || origImage.src;
+        }
+
+        _create.call(this);
+        if (this.options.url) {
+            var bindOpts = {
+                url: this.options.url,
+                points: this.options.points
+            };
+            delete this.options['url'];
+            delete this.options['points'];
+            _bind.call(this, bindOpts);
+        }
+    }
+
+    Croppie.defaults = {
+        viewport: {
+            width: 100,
+            height: 100,
+            type: 'square'
+        },
+        boundary: { },
+        orientationControls: {
+            enabled: true,
+            leftClass: '',
+            rightClass: ''
+        },
+        resizeControls: {
+            width: true,
+            height: true
+        },
+        customClass: '',
+        showZoomer: true,
+        enableZoom: true,
+        enableResize: false,
+        mouseWheelZoom: true,
+        enableExif: false,
+        enforceBoundary: true,
+        enableOrientation: false,
+        enableKeyMovement: true,
+        update: function () { }
+    };
+
+    Croppie.globals = {
+        translate: 'translate3d'
+    };
+
+    deepExtend(Croppie.prototype, {
+        bind: function (options, cb) {
+            return _bind.call(this, options, cb);
+        },
+        get: function () {
+            var data = _get.call(this);
+            var points = data.points;
+            if (this.options.relative) {
+                points[0] /= this.elements.img.naturalWidth / 100;
+                points[1] /= this.elements.img.naturalHeight / 100;
+                points[2] /= this.elements.img.naturalWidth / 100;
+                points[3] /= this.elements.img.naturalHeight / 100;
+            }
+            return data;
+        },
+        result: function (type) {
+            return _result.call(this, type);
+        },
+        refresh: function () {
+            return _refresh.call(this);
+        },
+        setZoom: function (v) {
+            _setZoomerVal.call(this, v);
+            dispatchChange(this.elements.zoomer);
+        },
+        rotate: function (deg) {
+            _rotate.call(this, deg);
+        },
+        destroy: function () {
+            return _destroy.call(this);
+        }
+    });
+
+    exports.Croppie = window.Croppie = Croppie;
+}));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/timers-browserify/main.js").setImmediate))
 
 /***/ }),
 
@@ -15984,7 +17595,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.10';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -16248,7 +17859,7 @@ return jQuery;
   var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
-  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
   /** Used to assign default `context` object properties. */
   var contextProps = [
@@ -17194,20 +18805,6 @@ return jQuery;
       }
     }
     return result;
-  }
-
-  /**
-   * Gets the value at `key`, unless `key` is "__proto__".
-   *
-   * @private
-   * @param {Object} object The object to query.
-   * @param {string} key The key of the property to get.
-   * @returns {*} Returns the property value.
-   */
-  function safeGet(object, key) {
-    return key == '__proto__'
-      ? undefined
-      : object[key];
   }
 
   /**
@@ -19667,7 +21264,7 @@ return jQuery;
           if (isArguments(objValue)) {
             newValue = toPlainObject(objValue);
           }
-          else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
+          else if (!isObject(objValue) || isFunction(objValue)) {
             newValue = initCloneObject(srcValue);
           }
         }
@@ -22588,6 +24185,22 @@ return jQuery;
         array[length] = isIndex(index, arrLength) ? oldArray[index] : undefined;
       }
       return array;
+    }
+
+    /**
+     * Gets the value at `key`, unless `key` is "__proto__".
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @param {string} key The key of the property to get.
+     * @returns {*} Returns the property value.
+     */
+    function safeGet(object, key) {
+      if (key == '__proto__') {
+        return;
+      }
+
+      return object[key];
     }
 
     /**
@@ -33088,7 +34701,7 @@ return jQuery;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.3
+ * @version 1.14.4
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -33425,10 +35038,10 @@ function getBordersSize(styles, axis) {
 }
 
 function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
 }
 
-function getWindowSizes() {
+function getWindowSizes(document) {
   var body = document.body;
   var html = document.documentElement;
   var computedStyle = isIE(10) && getComputedStyle(html);
@@ -33545,7 +35158,7 @@ function getBoundingClientRect(element) {
   };
 
   // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
+  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
   var width = sizes.width || element.clientWidth || result.right - result.left;
   var height = sizes.height || element.clientHeight || result.bottom - result.top;
 
@@ -33580,7 +35193,7 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-  if (fixedPosition && parent.nodeName === 'HTML') {
+  if (fixedPosition && isHTML) {
     parentRect.top = Math.max(parentRect.top, 0);
     parentRect.left = Math.max(parentRect.left, 0);
   }
@@ -33718,7 +35331,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
 
     // In case of HTML, we need a different computation
     if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(),
+      var _getWindowSizes = getWindowSizes(popper.ownerDocument),
           height = _getWindowSizes.height,
           width = _getWindowSizes.width;
 
@@ -33733,10 +35346,12 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
   }
 
   // Add paddings
-  boundaries.left += padding;
-  boundaries.top += padding;
-  boundaries.right -= padding;
-  boundaries.bottom -= padding;
+  padding = padding || 0;
+  var isPaddingNumber = typeof padding === 'number';
+  boundaries.left += isPaddingNumber ? padding : padding.left || 0;
+  boundaries.top += isPaddingNumber ? padding : padding.top || 0;
+  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
+  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
 
   return boundaries;
 }
@@ -34061,7 +35676,7 @@ function getSupportedPropertyName(property) {
 }
 
 /**
- * Destroy the popper
+ * Destroys the popper.
  * @method
  * @memberof Popper
  */
@@ -34168,7 +35783,7 @@ function removeEventListeners(reference, state) {
 
 /**
  * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger onUpdate callback anymore,
+ * when they are triggered. It also won't trigger `onUpdate` callback anymore,
  * unless you call `update` method manually.
  * @method
  * @memberof Popper
@@ -34345,12 +35960,22 @@ function computeStyle(data, options) {
   var left = void 0,
       top = void 0;
   if (sideA === 'bottom') {
-    top = -offsetParentRect.height + offsets.bottom;
+    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+    // and not the bottom of the html element
+    if (offsetParent.nodeName === 'HTML') {
+      top = -offsetParent.clientHeight + offsets.bottom;
+    } else {
+      top = -offsetParentRect.height + offsets.bottom;
+    }
   } else {
     top = offsets.top;
   }
   if (sideB === 'right') {
-    left = -offsetParentRect.width + offsets.right;
+    if (offsetParent.nodeName === 'HTML') {
+      left = -offsetParent.clientWidth + offsets.right;
+    } else {
+      left = -offsetParentRect.width + offsets.right;
+    }
   } else {
     left = offsets.left;
   }
@@ -34459,7 +36084,7 @@ function arrow(data, options) {
 
   //
   // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjuction
+  // reference have enough pixels in conjunction
   //
 
   // top/left side
@@ -34529,7 +36154,7 @@ function getOppositeVariation(variation) {
  * - `top-end` (on top of reference, right aligned)
  * - `right-start` (on right of reference, top aligned)
  * - `bottom` (on bottom, centered)
- * - `auto-right` (on the side with more space available, alignment depends by placement)
+ * - `auto-end` (on the side with more space available, alignment depends by placement)
  *
  * @static
  * @type {Array}
@@ -35071,7 +36696,7 @@ var modifiers = {
    * The `offset` modifier can shift your popper on both its axis.
    *
    * It accepts the following units:
-   * - `px` or unitless, interpreted as pixels
+   * - `px` or unit-less, interpreted as pixels
    * - `%` or `%r`, percentage relative to the length of the reference element
    * - `%p`, percentage relative to the length of the popper element
    * - `vw`, CSS viewport width unit
@@ -35079,7 +36704,7 @@ var modifiers = {
    *
    * For length is intended the main axis relative to the placement of the popper.<br />
    * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the height.
+   * `width`. In case of `left` or `right`, it will be the `height`.
    *
    * You can provide a single value (as `Number` or `String`), or a pair of values
    * as `String` divided by a comma or one (or more) white spaces.<br />
@@ -35100,7 +36725,7 @@ var modifiers = {
    * ```
    * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
    * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
+   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
    *
    * @memberof modifiers
    * @inner
@@ -35121,7 +36746,7 @@ var modifiers = {
   /**
    * Modifier used to prevent the popper from being positioned outside the boundary.
    *
-   * An scenario exists where the reference itself is not within the boundaries.<br />
+   * A scenario exists where the reference itself is not within the boundaries.<br />
    * We can say it has "escaped the boundaries" — or just "escaped".<br />
    * In this case we need to decide whether the popper should either:
    *
@@ -35151,23 +36776,23 @@ var modifiers = {
     /**
      * @prop {number} padding=5
      * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper this makes sure the popper has always a little padding
+     * and the popper. This makes sure the popper always has a little padding
      * between the edges of its container
      */
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier, can be `scrollParent`, `window`,
+     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
      * `viewport` or any DOM element.
      */
     boundariesElement: 'scrollParent'
   },
 
   /**
-   * Modifier used to make sure the reference and its popper stay near eachothers
-   * without leaving any gap between the two. Expecially useful when the arrow is
-   * enabled and you want to assure it to point to its reference element.
-   * It cares only about the first axis, you can still have poppers with margin
+   * Modifier used to make sure the reference and its popper stay near each other
+   * without leaving any gap between the two. Especially useful when the arrow is
+   * enabled and you want to ensure that it points to its reference element.
+   * It cares only about the first axis. You can still have poppers with margin
    * between the popper and its reference element.
    * @memberof modifiers
    * @inner
@@ -35185,7 +36810,7 @@ var modifiers = {
    * This modifier is used to move the `arrowElement` of the popper to make
    * sure it is positioned between the reference element and its popper element.
    * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjuction are needed.
+   * pixels of conjunction are needed.
    *
    * It has no effect if no `arrowElement` is provided.
    * @memberof modifiers
@@ -35224,7 +36849,7 @@ var modifiers = {
      * @prop {String|Array} behavior='flip'
      * The behavior used to change the popper's placement. It can be one of
      * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations).
+     * placements (with optional variations)
      */
     behavior: 'flip',
     /**
@@ -35234,9 +36859,9 @@ var modifiers = {
     padding: 5,
     /**
      * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position,
-     * the popper will never be placed outside of the defined boundaries
-     * (except if keepTogether is enabled)
+     * The element which will define the boundaries of the popper position.
+     * The popper will never be placed outside of the defined boundaries
+     * (except if `keepTogether` is enabled)
      */
     boundariesElement: 'viewport'
   },
@@ -35300,8 +36925,8 @@ var modifiers = {
     fn: computeStyle,
     /**
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: true,
     /**
@@ -35328,7 +36953,7 @@ var modifiers = {
    * Note that if you disable this modifier, you must make sure the popper element
    * has its position set to `absolute` before Popper.js can do its work!
    *
-   * Just disable this modifier and define you own to achieve the desired effect.
+   * Just disable this modifier and define your own to achieve the desired effect.
    *
    * @memberof modifiers
    * @inner
@@ -35345,27 +36970,27 @@ var modifiers = {
     /**
      * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
      * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
+     * If true, it uses the CSS 3D transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties
      */
     gpuAcceleration: undefined
   }
 };
 
 /**
- * The `dataObject` is an object containing all the informations used by Popper.js
- * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+ * The `dataObject` is an object containing all the information used by Popper.js.
+ * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
  * @name dataObject
  * @property {Object} data.instance The Popper.js instance
  * @property {String} data.placement Placement applied to popper
  * @property {String} data.originalPlacement Placement originally defined on init
  * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
+ * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
  * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
  * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
+ * @property {Object} data.offsets The measurements of popper, reference and arrow elements
  * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
  * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
@@ -35373,9 +36998,9 @@ var modifiers = {
 
 /**
  * Default options provided to Popper.js constructor.<br />
- * These can be overriden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass as 3rd argument an object with the same
- * structure of this object, example:
+ * These can be overridden using the `options` argument of Popper.js.<br />
+ * To override an option, simply pass an object with the same
+ * structure of the `options` object, as the 3rd argument. For example:
  * ```
  * new Popper(ref, pop, {
  *   modifiers: {
@@ -35389,7 +37014,7 @@ var modifiers = {
  */
 var Defaults = {
   /**
-   * Popper's placement
+   * Popper's placement.
    * @prop {Popper.placements} placement='bottom'
    */
   placement: 'bottom',
@@ -35401,7 +37026,7 @@ var Defaults = {
   positionFixed: false,
 
   /**
-   * Whether events (resize, scroll) are initially enabled
+   * Whether events (resize, scroll) are initially enabled.
    * @prop {Boolean} eventsEnabled=true
    */
   eventsEnabled: true,
@@ -35415,17 +37040,17 @@ var Defaults = {
 
   /**
    * Callback called when the popper is created.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onCreate}
    */
   onCreate: function onCreate() {},
 
   /**
-   * Callback called when the popper is updated, this callback is not called
+   * Callback called when the popper is updated. This callback is not called
    * on the initialization/creation of the popper, but only on subsequent
    * updates.<br />
-   * By default, is set to no-op.<br />
+   * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onUpdate}
    */
@@ -35433,7 +37058,7 @@ var Defaults = {
 
   /**
    * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js
+   * They provide most of the functionalities of Popper.js.
    * @prop {modifiers}
    */
   modifiers: modifiers
@@ -35453,10 +37078,10 @@ var Defaults = {
 // Methods
 var Popper = function () {
   /**
-   * Create a new Popper.js instance
+   * Creates a new Popper.js instance.
    * @class Popper
    * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper.
+   * @param {HTMLElement} popper - The HTML element used as the popper
    * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
@@ -35552,7 +37177,7 @@ var Popper = function () {
     }
 
     /**
-     * Schedule an update, it will run on the next UI update available
+     * Schedules an update. It will run on the next UI update available.
      * @method scheduleUpdate
      * @memberof Popper
      */
@@ -35589,7 +37214,7 @@ var Popper = function () {
  * new Popper(referenceObject, popperNode);
  * ```
  *
- * NB: This feature isn't supported in Internet Explorer 10
+ * NB: This feature isn't supported in Internet Explorer 10.
  * @name referenceObject
  * @property {Function} data.getBoundingClientRect
  * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
@@ -35802,6 +37427,271 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/setimmediate/setImmediate.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js"), __webpack_require__("./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/timers-browserify/main.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__("./node_modules/setimmediate/setImmediate.js");
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /***/ (function(module, exports) {
 
@@ -35871,6 +37761,8 @@ module.exports = function(module) {
 
 __webpack_require__("./resources/app/js/bootstrap.js");
 
+__webpack_require__("./node_modules/croppie/croppie.js");
+
 // window.Vue = require('vue');
 
 /**
@@ -35911,6 +37803,7 @@ $(document).on('click', '.btn_remove', function () {
   var button_id = $(this).attr("id");
   console.log(button_id);
   $('#row' + button_id + '').remove();
+  i--;
 });
 
 $.ajaxSetup({

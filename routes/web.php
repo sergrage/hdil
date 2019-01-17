@@ -15,9 +15,13 @@ Auth::routes();
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 
 // Раполнение профайла после регистрации
-Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
-Route::put('/fillprofile/{user}', 'Cabinet\FillprofileController@update')->name('fillprofile.update');
-Route::get('/fillprofile/{user}', 'Cabinet\FillprofileController@edit')->name('fillprofile.edit');
+// Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
+// Route::put('/fillprofile/{user}', 'Cabinet\FillprofileController@update')->name('fillprofile.update');
+// Route::get('/fillprofile/{user}', 'Cabinet\FillprofileController@edit')->name('fillprofile.edit');
+
+Route::resource('/fillprofile', 'Cabinet\FillprofileController');
+
+
 
 Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 
@@ -30,6 +34,10 @@ Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.
 // Route::resource('users', 'LTE\UsersController');
 
 
+Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
+
+
+// Страница Админки
 Route::group(
 	[
         'prefix' => 'administrator',
