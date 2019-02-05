@@ -26,7 +26,7 @@
 		                </div>
 		                <!-- Avatar file input -->
 		                <div class="form-group col-md-12">
-						    <label for="upload_image">Choose your avatar</label>
+						    <label for="upload_image" class="custom-file-upload">Choose your avatar</label>
 						    <input type="file" class="form-control-file" id="upload_image" name="avatar">
 						</div>
 						<div id="uploaded_image">
@@ -44,7 +44,7 @@
 	                    <div class="table-responsive">  
 	                		<table class="table table-bordered" id="dynamic_field">  
 	                    		<tr>  
-	                        		<td><input type="text" name="skill[]" placeholder="Enter your Skill" class="form-control skills_list"/></td>
+	                        		<td><input type="text" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list"/></td>
 	                       			<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
 	                    		</tr>  
 	                		</table>  
@@ -69,33 +69,33 @@
                         <div class="form-group">
                         	<div class="input-group mb-2">
 	                        	<div class="input-group-prepend">
-						          <div class="input-group-text"><i class="fab fa-facebook fa-2x" style="color:#3b5998"></i></div>
+						          <div class="input-group-text"><i class="fab fa-facebook fa-lg" style="color:#3b5998"></i></div>
 						        </div>
-                            	<input name="facebook" type="text" class="form-control" id="text" placeholder="Add your facebook page">
+                            	<input name="facebook" type="text" class="form-control" id="text" placeholder="Add your facebook page" style="height:inherit">
                         	</div>
                         </div>
                         <div class="form-group">
                         	<div class="input-group mb-2">
 	                        	<div class="input-group-prepend">
-						          <div class="input-group-text"><i class="fab  fa-twitter fa-2x" style="color:#1da1f2"></i></div>
+						          <div class="input-group-text"><i class="fab  fa-twitter fa-lg" style="color:#1da1f2"></i></div>
 						        </div>
-                            <input name="twitter" type="text" class="form-control" id="text" placeholder="Add your twitter page">
+                            <input name="twitter" type="text" class="form-control" id="text" placeholder="Add your twitter page" style="height:inherit">
                         </div>
                         </div>
                         <div class="form-group">
                         	<div class="input-group mb-2">
 	                        	<div class="input-group-prepend">
-						          <div class="input-group-text"><i class="fab  fa-linkedin fa-2x" style="color:#007bb5"></i></div>
+						          <div class="input-group-text"><i class="fab  fa-linkedin fa-lg" style="color:#007bb5"></i></div>
 						        </div>
-                            <input name="linkedin" type="text" class="form-control" id="text" placeholder="Add your linkedin page">
+                            <input name="linkedin" type="text" class="form-control" id="text" placeholder="Add your linkedin page" style="height:inherit">
                         </div>
                         </div>
                         <div class="form-group">
                         	<div class="input-group mb-2">
 	                        	<div class="input-group-prepend">
-						          <div class="input-group-text"><i class="fab  fa-instagram fa-2x" style="color:#c32aa3"></i></div>
+						          <div class="input-group-text"><i class="fab  fa-instagram ffa-lg" style="color:#c32aa3"></i></div>
 						        </div>
-                            <input name="instagram" type="text" class="form-control" id="text" placeholder="Add your instagram page">
+                            <input name="instagram" type="text" class="form-control" id="text" placeholder="Add your instagram page" style="height:inherit">
                         </div>
                         </div>
                     </div>

@@ -34,14 +34,30 @@ class FillprofileController extends Controller
 
     public function store(FillProfileRequest $request, User $user)
     {
-    	dd($request);
+    // юзера пришлось выбирать так, т.к. просто $user был пустой
+        $user = Auth::user();
 
+    // тут создекм массив индексов СКИЛОВ и добавляем скилы в таблицу БД
+        $skills_id = [];
+        foreach($request->input('skills') as $key => $value){
+            $skills = Skill::create([
+                'skill' => $value,
+            ]);
+            $skills_id[] = $skills->id;    
+        }
+    // апдейтим юзера
     	$user->update([
     		'firstname' => $request['firstname'],
-    		'lastname' => $request['lastname'],
+            'lastname' => $request['lastname'],
+    		'bio' => $request['bio'],
+            'facebook' => $request['facebook']?$request['facebook']:'',
+            'twitter' => $request['twitter']?$request['twitter']:'',
+            'instagram' => $request['instagram']?$request['instagram']:'',
+            'linkedin' => $request['linkedin']?$request['linkedin']:'',
     		'policy' => 1,
-    		'image' => 'hello'
     	]);
+    // отношение многие-к-многим, заполняем таблицу skill_user
+        $user->skills()->attach($skills_id);
 
     	return redirect()->route('cabinet', $user);
 

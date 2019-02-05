@@ -37795,7 +37795,7 @@ var i = 1;
 
 $('#add').click(function () {
   i++;
-  $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added"><td><input type="text" name="skill[]" placeholder="Enter your Skill" class="form-control skills_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+  $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added"><td><input type="text" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
 });
 
 $(document).on('click', '.btn_remove', function () {

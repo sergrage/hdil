@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Validator;
 
 class FillProfileRequest extends FormRequest
 {
@@ -18,11 +19,10 @@ class FillProfileRequest extends FormRequest
             'firstname'  => 'nullable|string|alpha|max:255|min:2',
             'lastname' => 'nullable|string|alpha|max:255|min:2',
             'bio' => 'min:50|nullable',
-            'facebook' => 'url|regex:/http(?:s):\/\/(?:www\.)facebook\.com\/.+/i|nullable',
-            'twitter' => 'url|regex:/http(?:s):\/\/(?:www\.)twitter\.com\/.+/i|nullable',
-            'instagram' => 'url|regex:/http(?:s):\/\/(?:www\.)instagram\.com\/.+/i|nullable',
-            'linkedin' => 'url|regex:/http(?:s):\/\/(?:www\.)linkedin\.com\/.+/i|nullable',
-            'avatar' => 'image|nullable',
+            'facebook' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
+            'twitter' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?twitter.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
+            'instagram' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?instagram.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
+            'linkedin' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?linkedin.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'policy' => 'required',
          ];
     }

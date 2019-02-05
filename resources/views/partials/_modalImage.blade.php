@@ -41,12 +41,14 @@ $(document).ready(function(){
 		var reader = new FileReader();
 		reader.onload = function(event){
 			var contents = event.target.result;
+			// console.log(contents);
 			$image_crop.croppie('bind', {
 				url: contents
 			}).then(function(){
 				console.log('jQuery bind complete');
 			});
 		}
+		console.log(this.files[0]);
 		reader.readAsDataURL(this.files[0]);
 		$('#uploadimageModal').modal('show');
 	});
@@ -73,6 +75,10 @@ $(document).ready(function(){
 		        {
 		            $('#uploadimageModal').modal('hide');
 		            $('#uploaded_image').html(data);
+		        },
+		        error: function(){
+		        	$('#uploadimageModal').modal('hide');
+		        	alert('Dont do that');
 		        }
 		    });
 	    })

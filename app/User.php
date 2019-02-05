@@ -9,6 +9,8 @@ use Kalnoy\Nestedset\NodeTrait;
 
 use Illuminate\Support\Carbon;
 
+use App\Skill;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -57,7 +59,7 @@ class User extends Authenticatable
 
     public function skills()
     {
-        return $this->belongsToMany(App\Skill::class);
+        return $this->belongsToMany(Skill::class);
     }
 
     public function isWait(): bool
