@@ -83,6 +83,22 @@ $(document).ready(function(){
 		    });
 	    })
 	});
+
+
+	$('.skills_list').keyup(function(){
+		var query = $(this).val();
+		if(query){
+			$.ajax({
+				url:"/skillsAutocomplete",
+				method:"POST",
+				data:{query:query},
+				success: function(data){
+					$('.skillsList').fadeIn();
+					$('.skillsList').html(data);
+				}
+			});
+		}
+	});
 });
 
 </script>

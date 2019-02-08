@@ -20,13 +20,14 @@ class FillprofileController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
     	$user = Auth::user();
 
     	// if($user->policy = 1) {
     	// 	return redirect()->route('home');
     	// }
+        
 
     	return view('cabinet.fillProfile', compact('user'));
     }
@@ -36,28 +37,42 @@ class FillprofileController extends Controller
     {
     // юзера пришлось выбирать так, т.к. просто $user был пустой
         $user = Auth::user();
+        // если был введен хоть один skill
+        if($request->input('skills')[0]) {
+            // тут создаем массив индексов СКИЛОВ и добавляем скилы в таблицу БД
+            $skills_id = [];
+            foreach($request->input('skills') as $key => $value){
+                
+                // подготовка value
+                $value = trim(mb_strtolower($value));
 
-    // тут создекм массив индексов СКИЛОВ и добавляем скилы в таблицу БД
-        $skills_id = [];
-        foreach($request->input('skills') as $key => $value){
-            $skills = Skill::create([
-                'skill' => $value,
-            ]);
-            $skills_id[] = $skills->id;    
+                // проверяем, есть ли такой skill в БД
+                $oldSkill = Skill::where('skill', $value)->first(); 
+
+                if(!$oldSkill){
+                    $newSkill = Skill::create([
+                        'skill' => $value,
+                    ]);
+                    $skills_id[] = $newSkill->id;  
+                } else {
+                    $skills_id[] = $oldSkill->id;
+                }
+            }
         }
+
     // апдейтим юзера
     	$user->update([
-    		'firstname' => $request['firstname'],
-            'lastname' => $request['lastname'],
-    		'bio' => $request['bio'],
-            'facebook' => $request['facebook']?$request['facebook']:'',
-            'twitter' => $request['twitter']?$request['twitter']:'',
-            'instagram' => $request['instagram']?$request['instagram']:'',
-            'linkedin' => $request['linkedin']?$request['linkedin']:'',
+    		'firstname' => $request['firstname']??'',
+            'lastname' => $request['lastname']??'',
+    		'bio' => $request['bio']??'',
+            'facebook' => $request['facebook']??'',
+            'twitter' => $request['twitter']??'',
+            'instagram' => $request['instagram']??'',
+            'linkedin' => $request['linkedin']??'',
     		'policy' => 1,
     	]);
     // отношение многие-к-многим, заполняем таблицу skill_user
-        $user->skills()->attach($skills_id);
+        $user->skills()->attach(array_unique($skills_id));
 
     	return redirect()->route('cabinet', $user);
 

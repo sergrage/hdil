@@ -45,6 +45,7 @@
 	                		<table class="table table-bordered" id="dynamic_field">  
 	                    		<tr>  
 	                        		<td><input type="text" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list"/></td>
+                                    <div class="skillsList"></div>
 	                       			<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
 	                    		</tr>  
 	                		</table>  

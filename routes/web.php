@@ -35,6 +35,7 @@ Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.
 
 
 Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
+Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
 
 
 // Страница Админки

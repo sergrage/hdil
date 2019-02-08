@@ -65,7 +65,7 @@ class LoginController extends Controller
         	}
 
             if(!$user->policy){
-                return redirect()->route('fillprofile');
+                return redirect()->route('fillprofile.index');
             }
 
         	return redirect()->intended(route('home'));

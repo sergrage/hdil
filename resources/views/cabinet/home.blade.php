@@ -18,16 +18,23 @@
 		                    <img src="{{$avatar}}" name="aboutme" width="140" height="140" border="0" class="img-thumbnail"></a>
 		                    <h3 class="media-heading">{{$user->firstname}} {{$user->lastname}}</h3>
 		                    <span><strong>Skills: </strong></span>
-		                        <span class="badge badge-warning">HTML5/CSS</span>
-		                        <span class="badge badge-info">Adobe CS 5.5</span>
-		                        <span class="badge badge-info">Microsoft Office</span>
-		                        <span class="badge badge-success">Windows XP, Vista, 7</span>
+		                    @if($user->skills->isNotEmpty())
+		                    @foreach($user->skills as $skill)
+		                        <span class="badge {{$bootstrapColors[array_rand($bootstrapColors, 1)]}}">{{ $skill->skill }}</span>
+		                    @endforeach
+		                    @else
+							<a href="{{route('fillprofile.edit', $user->id)}}" class="btn btn-info btn-sm">
+								<i class="far fa-edit"></i> Edit profile and add your skills</a>
+		                    @endif
 		                    </center>
 		                    <hr>
 		                    @if($user->bio)
 		                    <p class="text-left"><strong>Bio: </strong><br>
 		                        {{ $user->bio }}</p>
 		                    <br>
+		                    @else
+		                    <a href="{{route('fillprofile.edit', $user->id)}}" class="btn btn-info btn-sm">
+								<i class="far fa-edit"></i> Edit profile and add your bio</a>
 		                    @endif
 		                </div>
 		               
@@ -38,7 +45,9 @@
 							<i class="fab fa-github-square"></i>
 							<i class="fab fa-github-square"></i>
 							@else
-		                		<p class="badge badge-light">Edit profile and add your social pages</p>
+<!-- 		                		<p class="badge badge-light">Edit profile and add your social pages</p> -->
+							<a href="{{route('fillprofile.edit', $user->id)}}" class="btn btn-info btn-sm">
+								<i class="far fa-edit"></i> Edit profile and add your social pages</a>
 		                	@endif
 		                </div>
 		            </div>
