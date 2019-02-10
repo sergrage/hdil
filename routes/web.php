@@ -34,8 +34,8 @@ Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.
 // Route::resource('users', 'LTE\UsersController');
 
 
-Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
-Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
+Route::post('avatarUpload', 'Cabinet\AvatarUploadController@avatarUpload');
+Route::post('skillsAutocomplete', 'Cabinet\SkillsAutocompleteController@skillsAutocomplete');
 
 
 // Страница Админки

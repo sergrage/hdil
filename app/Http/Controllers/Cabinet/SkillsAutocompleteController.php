@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Cabinet;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Skill;
@@ -11,16 +11,20 @@ class SkillsAutocompleteController extends Controller
     public function skillsAutocomplete(Request $request)
     {
     	$output = '';
-    	// $query = "SELECT * FROM skill WHERE skill LIKE '%".$request->query."%'";
     	$result = Skill::where('skill', 'LIKE', '%'.$request->get('query').'%')->get();
-        dd($result);
-    	// $rawQuery2 = "WHERE skill LIKE '%".$request->query."%'";
 
-    	// $result = DB::table('skill')
-     //            ->selectRaw($rawQuery2)
-     //            ->get();
-     //    $output = '<ul class="list-unstyles">';
-     //    dd($result);
+        $output = '<ul class="list-group">';
+
+        if($result->isNotEmpty()){
+
+           $result->each(function ($item, $key) use (&$output) {
+              $output .= '<li class="list-group-item">'. ' ' .$item->skill.'</li>';
+
+           });
+           
+        }
+        $output .= '</ul>';
+        echo $output;
 
     }
 }
