@@ -44,7 +44,7 @@
 	                    <div class="table-responsive">  
 	                		<table class="table table-bordered" id="dynamic_field">  
 	                    		<tr>  
-	                        		<td><input type="text" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list"/></td>
+	                        		<td><input id="addSkill" type="text" autocomplete="off" placeholder="Enter your Skill" class="form-control"/></td>
                                     
 	                       			<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
 	                    		</tr>  

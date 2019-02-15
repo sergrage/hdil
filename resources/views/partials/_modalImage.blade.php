@@ -84,9 +84,13 @@ $(document).ready(function(){
 	    })
 	});
 
+//-----------------------------------------------
+//    Skill's autocomplete
+//----------------------------------------------- 
 
-	$('.skills_list').keyup(function(){
+	$('#addSkill').keyup(function(){
 		var query = $(this).val();
+
 		if(query){
 			$.ajax({
 				url:"/skillsAutocomplete",
@@ -97,7 +101,17 @@ $(document).ready(function(){
 					$('.skillsList').html(data);
 				}
 			});
+		} else {
+			$('.skillsList').fadeOut();
 		}
+	});
+
+	$(document).on('click', '#add', function(){
+		$('.skillsList').fadeOut();
+	});
+	$(document).on('click', 'li', function(){
+		$('#addSkill').val($(this).text());
+		$('.skillsList').fadeOut();
 	});
 });
 

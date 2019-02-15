@@ -24,6 +24,9 @@ class FillProfileRequest extends FormRequest
             'instagram' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?instagram.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'linkedin' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?linkedin.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'policy' => 'required',
+            "skills" => "array",
+            "skills.*" => "string|max:20|min:3",
          ];
     }
 }
+

@@ -37790,26 +37790,57 @@ __webpack_require__("./node_modules/croppie/croppie.js");
 // автоматически добавляет поле формы skill в profile
 
 
-var postURL = "<?php echo url('addmore'); ?>";
-var i = 1;
+// var postURL = "<?php echo url('addmore'); ?>";
+// var i=1;  
 
-$('#add').click(function () {
-  i++;
-  $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added"><td><input type="text" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
-});
 
-$(document).on('click', '.btn_remove', function () {
+// $('#add').click(function(){  
+//      i++;  
+//      $('#dynamic_field')
+//      .append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" autocomplete="off" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+// });  
 
-  var button_id = $(this).attr("id");
-  console.log(button_id);
-  $('#row' + button_id + '').remove();
-  i--;
-});
+
+// $(document).on('click', '.btn_remove', function(){  
+
+//      var button_id = $(this).attr("id");
+//      console.log(button_id);   
+//      $('#row'+button_id+'').remove();
+//      i--;  
+// });  
+
 
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
+});
+
+var bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info', 'badge-light', 'badge-dark'];
+
+var skillList = [];
+
+$('#add').click(function () {
+  var item = bootstrapColors[Math.floor(Math.random() * bootstrapColors.length)];
+  var skill = $('#addSkill').val();
+
+  skillList.push(skill);
+
+  if (skill) {
+    $('#dynamic_field').append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
+    $('#addSkill').val('');
+  }
+});
+
+$(document).on('click', '.badge', function () {
+
+  var index = skillList.indexOf($(this).text().trim());
+
+  if (index > -1) {
+    skillList.splice(index, 1);
+  }
+
+  $(this).remove();
 });
 
 // $('#submit').click(function(){            

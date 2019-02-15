@@ -19,13 +19,10 @@ class SkillsAutocompleteController extends Controller
 
            $result->each(function ($item, $key) use (&$output) {
               $output .= '<li class="list-group-item">'. ' ' .$item->skill.'</li>';
-
            });
-           
         }
         $output .= '</ul>';
         echo $output;
-
     }
 }
 

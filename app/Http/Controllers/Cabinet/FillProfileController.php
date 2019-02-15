@@ -46,6 +46,7 @@ class FillprofileController extends Controller
                 // подготовка value
                 $value = trim(mb_strtolower($value));
 
+                // !!! провалидировать value/
                 // проверяем, есть ли такой skill в БД
                 $oldSkill = Skill::where('skill', $value)->first(); 
 
