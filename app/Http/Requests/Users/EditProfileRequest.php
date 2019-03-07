@@ -3,11 +3,9 @@
 namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Validator;
 
-class FillProfileRequest extends FormRequest
+class EditProfileRequest extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -23,7 +21,6 @@ class FillProfileRequest extends FormRequest
             'twitter' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?twitter.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'instagram' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?instagram.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'linkedin' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?linkedin.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
-            'policy' => 'required',
             "skills" => "array",
             "skills.*" => "string|max:20|min:3",
         ];

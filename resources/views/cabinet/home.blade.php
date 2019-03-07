@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
     	<div class="row">
-    		
 			<div class="col-md-4">
 		        <div class="modal-dialog">
 		            <div class="modal-content">
@@ -37,7 +36,6 @@
 								<i class="far fa-edit"></i> Edit profile and add your bio</a>
 		                    @endif
 		                </div>
-		               
 		                <div class="modal-footer">
 		                	@if($user->facebook)
 							<i class="fab fa-facebook"></i>
@@ -45,92 +43,79 @@
 							<i class="fab fa-github-square"></i>
 							<i class="fab fa-github-square"></i>
 							@else
-<!-- 		                		<p class="badge badge-light">Edit profile and add your social pages</p> -->
-							<a href="{{route('fillprofile.edit', $user->id)}}" class="btn btn-info btn-sm">
-								<i class="far fa-edit"></i> Edit profile and add your social pages</a>
+							<a href="{{route('fillprofile.edit', $user->id)}}" class="btn btn-info btn-sm"><i class="far fa-edit"></i> Edit profile and add your social pages</a>
 		                	@endif
 		                </div>
 		            </div>
 		        </div>
 		    </div>
 			<div class="col-md-8">
-
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="card" style="margin: 1.75rem auto;">
-								<div class="card-header">
-									<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
-								  	<i class="far fa-edit"></i>
-								  	<i class="far fa-trash-alt"></i>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="card" style="margin: 1.75rem auto;">
+							<div class="card-header">
+								<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
+							  	<i class="far fa-edit"></i>
+							  	<i class="far fa-trash-alt"></i>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Primary card title</h5>
+								<p class="card-text">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</p>
+							</div>
+					     	<div class="card-footer">
+						    	<small>Last updated 3 mins ago</small>
+						    	<div class="pull-right">
+							    	<i class="far fa-thumbs-up">5</i>
+							    	<i class="far fa-eye">112</i>
+							    	<i class="far fa-comment">3</i>
+							    </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="card" style="margin: 1.75rem auto;">
+							<div class="card-header bg-info text-white">
+								<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
+							  	<i class="far fa-edit"></i>
+							  	<i class="far fa-trash-alt"></i>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Primary card title</h5>
+								<p class="card-text">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</p>
 								</div>
-<!-- 							  <img class="card-img-top" src="https://habrastorage.org/webt/ks/ta/wd/kstawdh9qq_e7ocb6wk-izoxqmg.png" name="aboutme" class="img-fluid" alt="Card image cap"> -->
-				<div class="card-body">
-					<h5 class="card-title">Primary card title</h5>
-					<p class="card-text">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</p>
+						     	<div class="card-footer">
+							    	<small>Last updated 3 mins ago</small>
+							    	<div class="pull-right">
+							    	<i class="far fa-thumbs-up">5</i>
+							    	<i class="far fa-eye">112</i>
+							    	<i class="far fa-comment">3</i>
+							    </div>
+							</div>
+						</div>
 					</div>
-			     	<div class="card-footer">
-				    	<small>Last updated 3 mins ago</small>
-				    	<div class="pull-right">
-				    	<i class="far fa-thumbs-up">5</i>
-				    	<i class="far fa-eye">112</i>
-				    	<i class="far fa-comment">3</i>
-				    </div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="card" style="margin: 1.75rem auto;">
-				<div class="card-header bg-info text-white">
-					<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
-				  	<i class="far fa-edit"></i>
-				  	<i class="far fa-trash-alt"></i>
-				</div>
-				<div class="card-body">
-					<h5 class="card-title">Primary card title</h5>
-					<p class="card-text">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</p>
+					<div class="col-sm-6">
+						<div class="card" style="margin: 1.75rem auto;">
+							<div class="card-header bg-warning text-white">
+								<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
+							  	<i class="far fa-edit"></i>
+							  	<i class="far fa-trash-alt"></i>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Primary card title</h5>
+								<p class="card-text">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</p>
+								</div>
+						     	<div class="card-footer">
+							    	<small>Last updated 3 mins ago</small>
+							    	<div class="pull-right">
+							    	<i class="far fa-thumbs-up">5</i>
+							    	<i class="far fa-eye">112</i>
+							    	<i class="far fa-comment">3</i>
+							    </div>
+							</div>
+						</div>
 					</div>
-			     	<div class="card-footer">
-				    	<small>Last updated 3 mins ago</small>
-				    	<div class="pull-right">
-				    	<i class="far fa-thumbs-up">5</i>
-				    	<i class="far fa-eye">112</i>
-				    	<i class="far fa-comment">3</i>
-				    </div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="card" style="margin: 1.75rem auto;">
-				<div class="card-header bg-warning text-white">
-					<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
-				  	<i class="far fa-edit"></i>
-				  	<i class="far fa-trash-alt"></i>
-				</div>
-				<div class="card-body">
-					<h5 class="card-title">Primary card title</h5>
-					<p class="card-text">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</p>
-					</div>
-			     	<div class="card-footer">
-				    	<small>Last updated 3 mins ago</small>
-				    	<div class="pull-right">
-				    	<i class="far fa-thumbs-up">5</i>
-				    	<i class="far fa-eye">112</i>
-				    	<i class="far fa-comment">3</i>
-				    </div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-				<div class="card-blocks">
-		            <div class="card-item panel">
-		                <div class="card-head panel-heading">Card Ten <span class="pull-right"></span></div>
-		                <div class="card-body panel-body">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text. It's a convenient to Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore. </div>
-		                <div class="card-foot panel-footer"><a href="#" class="btn btn-link">Read more</a></div>
-		            </div>
 				</div>
 			</div>
     	</div>
     </div>
-
 @endsection

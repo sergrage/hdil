@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Cabinet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+
 use App\Skill;
-use Validator;
 use App\User;
 
 use App\Http\Requests\Users\FillProfileRequest;
+use App\Http\Requests\Users\EditProfileRequest;
 
 
 class FillprofileController extends Controller
@@ -20,7 +21,7 @@ class FillprofileController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
     	$user = Auth::user();
 
@@ -37,28 +38,9 @@ class FillprofileController extends Controller
     {
     // юзера пришлось выбирать так, т.к. просто $user был пустой
         $user = Auth::user();
-        // если был введен хоть один skill
+    // если был введен хоть один skill
         if($request->input('skills')[0]) {
-            // тут создаем массив индексов СКИЛОВ и добавляем скилы в таблицу БД
-            $skills_id = [];
-            foreach($request->input('skills') as $key => $value){
-                
-                // подготовка value
-                $value = trim(mb_strtolower($value));
-
-                // !!! провалидировать value/
-                // проверяем, есть ли такой skill в БД
-                $oldSkill = Skill::where('skill', $value)->first(); 
-
-                if(!$oldSkill){
-                    $newSkill = Skill::create([
-                        'skill' => $value,
-                    ]);
-                    $skills_id[] = $newSkill->id;  
-                } else {
-                    $skills_id[] = $oldSkill->id;
-                }
-            }
+            $skills_id = $user->getUserSkillsId($request);
         }
 
     // апдейтим юзера
@@ -82,13 +64,37 @@ class FillprofileController extends Controller
     public function edit()
     {
     	$user = Auth::user();
-    	return view('cabinet.editprofile', compact('user'));
+        $skillsList = $user->skills;
+        // если у user есть skills, то получаем array из его id
+        // $user->skills - это коллекция
+        // if($user->skills->isNotEmpty()){
+        //     $skillsListId = $user->skills->pluck('id')->toArray();
+        // }
+    	return view('cabinet.editprofile', compact('user', 'skillsList'));
     }
 
 
-    public function update(User $user)
+    public function update(EditProfileRequest $request, User $user)
     {
-    	# code...
+        $user = Auth::user();
+        // $skills_id = $user->skills->pluck('id')->toArray();
+        if($request->input('skills')[0]) {
+            $skills_id = $user->getUserSkillsId($request);
+        }
+
+        $user->skills()->sync(array_unique($skills_id));
+
+    	$user->update([
+            'firstname' => $request['firstname']??'',
+            'lastname' => $request['lastname']??'',
+            'bio' => $request['bio']??'',
+            'facebook' => $request['facebook']??'',
+            'twitter' => $request['twitter']??'',
+            'instagram' => $request['instagram']??'',
+            'linkedin' => $request['linkedin']??'',
+        ]);
+
+        return redirect()->route('cabinet', $user);
     }
 
     public function destroy()

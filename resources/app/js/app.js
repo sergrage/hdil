@@ -35,8 +35,6 @@ require('croppie');
 
 //--------------------------------------------------------
 // автоматически добавляет поле формы skill в profile
-
-
     
   // var postURL = "<?php echo url('addmore'); ?>";
   // var i=1;  
@@ -58,11 +56,11 @@ require('croppie');
   // });  
 
 
-  $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-  });
+$.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 var bootstrapColors = [
     'badge-primary',
@@ -75,13 +73,15 @@ var bootstrapColors = [
     'badge-dark',
 ];
 
-var skillList = [];
+// var skillList = [];
 
 $('#add').click(function(){
   var item = bootstrapColors[Math.floor(Math.random()*bootstrapColors.length)];  
   var skill = $('#addSkill').val();
 
-  skillList.push(skill);
+  // skillList.push(skill);
+
+  // console.log(skillList);
 
   if(skill) {
       $('#dynamic_field')
@@ -92,47 +92,39 @@ $('#add').click(function(){
 
 $(document).on('click', '.badge', function(){
 
-  var index = skillList.indexOf($(this).text().trim());
+  // var index = skillList.indexOf($(this).text().trim());
 
-  if(index > -1) {
-    skillList.splice(index, 1);
-  }
-
+  // if(index > -1) {
+  //   skillList.splice(index, 1);
+  // }
+  // console.log(skillList);
   $(this).remove();
 
 });  
 
+// $(function() {
+//     var Accordion = function(el, multiple) {
+//     this.el = el || {};
+//     this.multiple = multiple || false;
 
-  // $('#submit').click(function(){            
-  //      $.ajax({  
-  //           url:postURL,  
-  //           method:"POST",  
-  //           data:$('#add_skill').serialize(),
-  //           type:'json',
-  //           success:function(data)  
-  //           {
-  //               if(data.error){
-  //                   printErrorMsg(data.error);
-  //               }else{
-  //                   i=1;
-  //                   $('.dynamic-added').remove();
-  //                   $('#add_name')[0].reset();
-  //                   $(".print-success-msg").find("ul").html('');
-  //                   $(".print-success-msg").css('display','block');
-  //                   $(".print-error-msg").css('display','none');
-  //                   $(".print-success-msg").find("ul").append('<li>Record Inserted Successfully.</li>');
-  //               }
-  //           }  
-  //      });  
-  // });  
+//     // Variables privadas
+//     var links = this.el.find('.link');
+//     // Evento
+//     links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+//   }
 
+//   Accordion.prototype.dropdown = function(e) {
+//     var $el = e.data.el;
+//       $this = $(this),
+//       $next = $this.next();
 
-  // function printErrorMsg (msg) {
-  //    $(".print-error-msg").find("ul").html('');
-  //    $(".print-error-msg").css('display','block');
-  //    $(".print-success-msg").css('display','none');
-  //    $.each( msg, function( key, value ) {
-  //       $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-  //    });
-  // }
-// }); 
+//     $next.slideToggle();
+//     $this.parent().toggleClass('open');
+
+//     if (!e.data.multiple) {
+//       $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+//     };
+//   } 
+
+//   var accordion = new Accordion($('#accordion'), false);
+// });

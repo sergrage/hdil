@@ -26,9 +26,12 @@
 		                </div>
 		                <!-- Avatar file input -->
 		                <div class="form-group col-md-12">
-						    <label for="exampleFormControlFile1">Choose your avatar</label>
-						    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar">
-						</div>
+                            <label for="upload_image" class="custom-file-upload">Choose your avatar</label>
+                            <input type="file" class="form-control-file" id="upload_image" name="avatar">
+                        </div>
+                        <div id="uploaded_image">
+                            
+                        </div>
 					</div>
 				</div>
             </div>
@@ -37,15 +40,25 @@
             <div class="col-md-6" style="padding=0.5em;">
                 <div class="card">
                     <div class="card-body">
-                    	<h2 class="card-title">Skills</h2>
-	                    <div class="table-responsive">  
-	                		<table class="table table-bordered" id="dynamic_field">  
-	                    		<tr>  
-	                        		<td><input type="text" name="skill[]" placeholder="Enter your Skill" class="form-control skills_list"/></td>
-	                       			<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
-	                    		</tr>  
-	                		</table>  
-	            		</div>
+                        <h2 class="card-title">Skills</h2>
+                        <div class="table-responsive">  
+                            <table class="table table-bordered">  
+                                <tr>  
+                                    <td><input id="addSkill" type="text" autocomplete="off" placeholder="Enter your Skill" class="form-control"/></td>
+                                    <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
+                                </tr>
+                            </table>
+                            <div id="dynamic_field">
+                                @foreach($skillsList as $skill)
+                                    <span class="badge {{$skill->randomBootstrapBadgeColor()}}" id="">{{$skill->skill}}<i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="{{$skill->skill}}"></span>    
+                                @endforeach 
+                            </div>
+
+                            <div class="skillsList">
+                                
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,8 +116,14 @@
         </div>
 
         <div style="margin-top: 1em;">
-            <button type="submit" class="btn btn-info btn-lg btn-block">Sign up !</button>
+            <button type="submit" class="btn btn-info btn-lg btn-block">Edit</button>
         </div>
     </form>
 </div>
+@endsection
+
+@section('modal')
+
+    @include('partials._modalImage')
+    
 @endsection

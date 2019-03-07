@@ -100,6 +100,31 @@ class User extends Authenticatable
         return '/admin/img/user2-160x160.jpg';
     }
 
+    public function getUserSkillsId($request)
+    {
+        // тут создаем массив индексов СКИЛОВ и добавляем скилы в таблицу БД
+        $skills_id = [];
+        foreach($request->input('skills') as $key => $value){
+            
+            // подготовка value
+            $value = trim(mb_strtolower($value));
+
+            // проверяем, есть ли такой skill в БД
+            $oldSkill = Skill::where('skill', $value)->first(); 
+
+            if(!$oldSkill){
+                $newSkill = Skill::create([
+                    'skill' => $value,
+                ]);
+                $skills_id[] = $newSkill->id;  
+            } else {
+                $skills_id[] = $oldSkill->id;
+            }
+        }
+
+        return $skills_id;
+    }
+
     public function carbonTest()
     {
 

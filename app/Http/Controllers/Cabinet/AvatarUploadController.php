@@ -35,7 +35,7 @@ class AvatarUploadController extends Controller
 
 		// echo filesize($imagePath); - размер файла
 
-		echo '<img src="' . $imagePath .'" class="img-thumbnail" />';
+		echo '<img src="/' . $imagePath .'" class="img-thumbnail" />';
 
 		// путь к аватару сохранятся в БД
 		$user = Auth::user();
