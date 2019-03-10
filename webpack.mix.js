@@ -45,3 +45,5 @@ mix.copy('resources/admin/dist/img', 'public/admin/img');
 mix.sass('resources/app/sass/app.scss', 'public/app/css/app.css').version();
 mix.js('resources/app/js/app.js', 'public/app/js/app.js').version();
 mix.copy('resources/app/img', 'public/app/img');
+
+mix.copy('resources/app/fonts', 'public/app/fonts');

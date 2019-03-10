@@ -1,10 +1,6 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
-
-// Variables
-@import "modules/variables";
-@import "modules/btn";
+// @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -13,14 +9,23 @@
 @import '~croppie/croppie.css';
 
 
+// Variables
+@import "modules/variables";
+// Mixins for Bootstrap 4
+@import "./base/_mixins";
+// Fonts
+@import "./base/_global";
+@import "./base/_fonts";
+
+
+@import "modules/btn";
+
+
 
 
 @import "modules/header";
 @import "modules/hero";
-
-
 @import "modules/cards";
-
 @import "modules/fillprofile";
 // @import "modules/user";
 

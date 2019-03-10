@@ -17,7 +17,12 @@
 		transform: translateX(-50%);
 
 		h1 {
-			font-size: 3rem;
+			font-size: 2rem;
+		
+			@include atSmall-576 {
+    			font-size: 3rem;
+	    	}
+
 		}
 	}
 

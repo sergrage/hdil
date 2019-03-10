@@ -5593,7 +5593,6 @@ module.exports = {
  * Foliotek
  * Version: 2.6.2
  *************************/
- console.log('hihihih');
 (function (root, factory) {
     if (true) {
         // AMD. Register as an anonymous module.
@@ -37810,9 +37809,9 @@ __webpack_require__("./node_modules/croppie/croppie.js");
 
 
 $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
 });
 
 var bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info', 'badge-light', 'badge-dark'];
@@ -37820,28 +37819,28 @@ var bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'bad
 // var skillList = [];
 
 $('#add').click(function () {
-    var item = bootstrapColors[Math.floor(Math.random() * bootstrapColors.length)];
-    var skill = $('#addSkill').val();
+  var item = bootstrapColors[Math.floor(Math.random() * bootstrapColors.length)];
+  var skill = $('#addSkill').val();
 
-    // skillList.push(skill);
+  // skillList.push(skill);
 
-    // console.log(skillList);
+  // console.log(skillList);
 
-    if (skill) {
-        $('#dynamic_field').append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
-        $('#addSkill').val('');
-    }
+  if (skill) {
+    $('#dynamic_field').append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
+    $('#addSkill').val('');
+  }
 });
 
 $(document).on('click', '.badge', function () {
 
-    // var index = skillList.indexOf($(this).text().trim());
+  // var index = skillList.indexOf($(this).text().trim());
 
-    // if(index > -1) {
-    //   skillList.splice(index, 1);
-    // }
-    // console.log(skillList);
-    $(this).remove();
+  // if(index > -1) {
+  //   skillList.splice(index, 1);
+  // }
+  // console.log(skillList);
+  $(this).remove();
 });
 
 // $(function() {

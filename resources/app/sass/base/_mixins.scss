@@ -1,0 +1,40 @@
+/* Mixins for adaptive design. Bootstrap 4*/
+
+@mixin atSmall-320 {
+  @media (min-width: 320px) {
+    @mixin-content;
+  }
+}
+
+@mixin atSmall-576 {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+
+@mixin atMedium-768 {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin atMedium-992 {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin atLarge-1200 {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin clearfix {
+		&::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+
+}
