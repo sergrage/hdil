@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 
@@ -20,81 +20,85 @@
     <link href="{{ mix('/app/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
-            <nav class="navbar navbar-expand-md header">
-            <div class="container">
-                <a class="navbar-brand header__brand" href="{{ url('/') }}">
-                    How Did I Learn
-                </a>
-                <img src="/app/img/logo.png" alt="Logo" class="pr-lg-5">
-
-                <ul class="navbar-nav ml-lg-5">
-                  <li class="nav-item active">
-                    <a class="nav-link header__link" href="#">Categories</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link header__link" href="#">Features</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link header__link" href="#">About</a>
-                  </li>
-                </ul>
-
-                <form class="form-inline header__form">
-                    <div class="input-group">
-                      <input type="text" class="form-control header__form" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1">
-                      <div class="input-group-prepend header__find">
-                        <span class="input-group-text header__find__icon" id="basic-addon1"><i class="fa fa-search"></i></span>
-                      </div>
-                    </div>
-                </form>
-
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link header__link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link header__link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle header__link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @can('admin-panel')
-                                        <a class="dropdown-item" href="{{ route('admin.admin') }}">Admin</a>
-                                    @endcan
-                                    <a class="dropdown-item" href="{{ route('cabinet') }}">Cabinet</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <header class="container-fluid header">
+    <div class="d-flex justify-content-around align-items-center">
+      <div class="d-flex" style="margin: auto auto auto 0;">
+        <a class="logo_link" href="{{ url('/') }}">How did I Learn</a>
+        <img class="logo" src="/app/img/logo.png">
+      </div>
+      @guest
+      <div class="main_menu">
+        <ul class="nav nav-guest">
+            <li class="nav-item m-1"><a class="nav-link" href="#">Categories</a></li>
+            <li class="nav-item m-1"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item m-1"><a class="nav-link" href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="mobile_menu mobile_menu_guest">
+        <form class="form-inline header__form header__form_guest">
+            <div class="input-group">
+              <input type="text" class="form-control header__form_input" placeholder="Search...">
+              <div class="input-group-prepend">
+                <span class="input-group-text header__find_icon">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+          </div>
+        </form>
+        <ul class="nav nav-guest">
+            <li class="nav-item m-1"><a class="nav-link border-white" href="{{ route('login') }}">login <i class="fas fa-sign-in-alt float-right float-xl-none"></i></a></li>
+            <li class="nav-item m-1"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+            <li class="nav-item m-1 mt-4 none-1200"><a class="nav-link" href="#">Categories</a></li>
+            <li class="nav-item m-1 none-1200"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item m-1 none-1200"><a class="nav-link" href="#">About</a></li>
+        </ul>
+      </div>
+      @endguest
+      @auth
+      <div class="mobile_menu">
+        <form class="form-inline header__form">
+            <div class="input-group">
+              <input type="text" class="form-control header__form_input" placeholder="Search...">
+              <div class="input-group-prepend">
+                <span class="input-group-text header__find_icon">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+          </div>
+        </form>
+        <ul class="nav nav-auth">
+            <li class="nav-item m-1"><a class="nav-link" href="{{ route('cabinet') }}">Cabinet <i class="far fa-user float-right"></i></a></li>
+            @can('admin-panel')
+            <li class="nav-item m-1"><a class="nav-link admin-bg" href="{{ route('admin.admin') }}">Admin <i class="fas fa-unlock-alt float-right"></i></a></li>
+            @endcan
+            <li class="nav-item m-1"><a class="nav-link logout-bg" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }} <i class="fas fa-sign-out-alt float-right"></i>
+            </a>
+            </li>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <li class="nav-item m-1 mt-4"><a class="nav-link" href="#">Categories</a></li>
+            <li class="nav-item m-1"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item m-1"><a class="nav-link" href="#">About</a></li>
+        </ul>
+      </div>
+      @endauth
+      @guest
+      <div class="header__menu-icon header__menu-icon_guest">
+          <div class="header__menu-icon__middle"></div>
+      </div>
+      @endguest
+      @auth
+      <div class="header__menu-icon">
+        <div class="header__online"></div>
+          <div class="header__menu-icon__middle"></div>
+      </div>
+      @endauth
     </div>
-
+  </header>
 
 
     @yield('content')
@@ -126,7 +130,12 @@
 
 
         <!-- REQUIRED SCRIPTS -->
-    <script src="{{ mix('/app/js/app.js') }}"></script>
+
+<footer class="container-fluid footer">
+    <h3>Hello</h3>
+
+</footer>
+<script src="{{ mix('/app/js/app.js') }}"></script>
 </body>
 </html>
 

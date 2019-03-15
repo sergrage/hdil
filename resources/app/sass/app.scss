@@ -1,4 +1,7 @@
 
+* {
+	font-family: 'Roboto', sans-serif;
+}
 // Fonts
 // @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
@@ -16,8 +19,6 @@
 // Fonts
 @import "./base/_global";
 @import "./base/_fonts";
-
-
 @import "modules/btn";
 
 
@@ -27,5 +28,6 @@
 @import "modules/hero";
 @import "modules/cards";
 @import "modules/fillprofile";
+@import "modules/footer";
 // @import "modules/user";
 

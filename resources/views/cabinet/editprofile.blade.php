@@ -11,7 +11,7 @@
     	@method('PUT')
         @csrf
         <!-- Sign up card -->
-        <div class="card person-card">
+        <div class="card person-card mb-4">
             <div class="card-body">
                 <h2 id="who_message" class="card-title">Who are you ?</h2>
 				<div class="row">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="row pt-4">
-            <div class="col-md-6" style="padding=0.5em;">
+            <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Skills</h2>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4">
                 <div class="card"> 
                     <div class="card-body">
                         <h2 class="card-title">Bio</h2>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 mt-4">
+            <div class="col-md-12 mb-4">
                 <div class="card"> 
                     <div class="card-body">
                         <h2 class="card-title">Social</h2>

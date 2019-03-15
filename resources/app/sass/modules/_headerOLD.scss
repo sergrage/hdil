@@ -1,0 +1,55 @@
+.header {
+  background-color: $mainGreen;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border-bottom: 5px solid #3abeb1;
+  height: 70px;
+
+  &__toggle_icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+	
+  &__brand {
+	color: #ffffff;
+  	font-size: 1.125rem;
+  	font-family: 'Open Sans', sans-serif;
+  	font-weight: 300;
+
+  	&:hover {
+  		color: #ffffff;
+  	}
+  }
+
+  &__link {
+		color: #000;
+		font-size: 1rem;
+  		font-family: 'Open Sans', sans-serif;
+  		font-weight: 300;
+  		&:hover {
+  			color: #fff;
+  		}
+      @include atMedium-992 {
+        color: #fff;
+      }
+	}
+
+	&__form {
+		border-radius: 10px;
+		height: 30px;
+		// width: 200px;
+    // margin-left: 30px;
+	}
+
+	&__find {
+		
+    	width: 30px;
+    	height: 30px;
+    	border-radius: 48px;
+
+    	&__icon {
+    		border-top-right-radius: 10px !important;
+    		border-bottom-right-radius: 10px !important;
+    	}
+	}
+}
+
+

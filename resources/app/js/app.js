@@ -1,28 +1,31 @@
 // $(document).ready(function(){  
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+
+require('@ckeditor/ckeditor5-build-classic');
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic/build/ckeditor';
+
+ClassicEditor
+.create( document.querySelector( '#editor' ) )
+.then( editor => {
+    console.log( editor );
+})
+.catch( error => {
+    console.error( error );
+});
 
 require('./bootstrap');
 
 require('croppie');
 
 
-// window.Vue = require('vue');
+import MobileMenu from './modules/MobileMenu';
+var mobileMenuGuest = new MobileMenu();
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import DeleteInputPlaseholder from './modules/DeleteInputPlaseholder';
+var headerSearch = new DeleteInputPlaseholder($(".header__form_input"));
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });
+
+
 
 //--------------------------------------------------------
 // вернуть/развернцть карточку в cabinet(личном кабинете)

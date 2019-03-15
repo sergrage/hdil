@@ -2,7 +2,7 @@
 
 @mixin atSmall-320 {
   @media (min-width: 320px) {
-    @mixin-content;
+    @content;
   }
 }
 

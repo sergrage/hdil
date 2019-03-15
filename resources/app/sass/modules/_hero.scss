@@ -1,6 +1,7 @@
 .hero {
 	font-family: 'Open Sans', sans-serif;
 	position: relative;
+	z-index: 1;
 
 	&__image {
 		width: 100%;
@@ -12,16 +13,45 @@
 		text-align: center;
 		position: absolute;
 		left:50%;
-		top:40%;
+		top:25%;
 		z-index: 200;
 		transform: translateX(-50%);
 
+		@include atSmall-576 {
+		  top:40%;
+		}
+
 		h1 {
-			font-size: 2rem;
+			font-size: 1rem;
 		
+	    	@include atSmall-320 {
+			  font-size: 1.5rem;
+			}
+
 			@include atSmall-576 {
-    			font-size: 3rem;
-	    	}
+			  font-size: 2.2rem;
+			}
+
+			@include atMedium-768 {
+			  font-size: 3rem;
+			}
+		}
+
+		h3 {
+			font-size: 1rem;
+		
+	    	@include atSmall-320 {
+			  font-size: 1rem;
+			}
+
+			@include atSmall-576 {
+			  font-size: 1.5rem;
+			}
+
+			@include atMedium-768 {
+			  font-size: 1.75rem;
+			}
+
 
 		}
 	}
@@ -30,8 +60,12 @@
 		background-color: $mainGreen; 
 		color: #ffffff;
 		padding: 0.5rem 1rem;
-		margin-top: 35px;
+		margin-top: 15px;
 		border-radius: 10px;
+
+		@include atSmall-576 {
+		  margin-top: 35px;
+		}
 
 		&:hover {
 			background-color: #0f6767;
