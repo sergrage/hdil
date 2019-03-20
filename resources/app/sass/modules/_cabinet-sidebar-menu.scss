@@ -1,0 +1,14 @@
+.cabinet-sidebar {
+	&__avatar-wrapper {
+		background-color: #ffffff;
+	    padding: 30px;
+	    margin-top: 20px;
+	    display: inline-block;
+	}
+
+	&__link {
+		color: #333333;
+		border-bottom: 1px solid #f8f9fa;
+		margin-left: 40px;
+	}
+}

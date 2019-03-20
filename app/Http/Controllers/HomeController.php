@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,7 @@ class HomeController extends Controller
     public function index(User $user)
 
     {
-        
+        $user = Auth::user();
     	// $users = DB::table('users')->
     	// 		//where('status', '=', 'wait')->
     	// 		where($user->carbonTest(), '=', 'true')->
@@ -33,8 +34,8 @@ class HomeController extends Controller
 		// if ($count > 0) {
 		//   $this->info("Удалено {$count} записей.");
 		// }
-
-        return view('home', compact('users'));
+        
+        return view('home', compact('user'));
     }
 
 }

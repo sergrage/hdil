@@ -37766,30 +37766,38 @@ module.exports = function(module) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_build_classic_build_ckeditor__ = __webpack_require__("./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_build_classic_build_ckeditor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_build_classic_build_ckeditor__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_MobileMenu__ = __webpack_require__("./resources/app/js/modules/MobileMenu.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_DeleteInputPlaseholder__ = __webpack_require__("./resources/app/js/modules/DeleteInputPlaseholder.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_MobileMenu__ = __webpack_require__("./resources/app/js/modules/MobileMenu.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_DeleteInputPlaseholder__ = __webpack_require__("./resources/app/js/modules/DeleteInputPlaseholder.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_CabinetFormSize__ = __webpack_require__("./resources/app/js/modules/CabinetFormSize.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ckeditor_ckeditor5_build_classic_build_ckeditor__ = __webpack_require__("./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ckeditor_ckeditor5_build_classic_build_ckeditor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__ckeditor_ckeditor5_build_classic_build_ckeditor__);
 // $(document).ready(function(){  
 
+__webpack_require__("./resources/app/js/bootstrap.js");
+__webpack_require__("./node_modules/croppie/croppie.js");
 __webpack_require__("./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
 
+//--------------------------------------------------------
+// Classes
+//--------------------------------------------------------
 
-__WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_build_classic_build_ckeditor___default.a.create(document.querySelector('#editor')).then(function (editor) {
-    console.log(editor);
+
+var mobileMenuGuest = new __WEBPACK_IMPORTED_MODULE_0__modules_MobileMenu__["a" /* default */]();
+
+
+var headerSearch = new __WEBPACK_IMPORTED_MODULE_1__modules_DeleteInputPlaseholder__["a" /* default */]($(".header__form_input"));
+
+
+var cabinetMenuToggle = new __WEBPACK_IMPORTED_MODULE_2__modules_CabinetFormSize__["a" /* default */]();
+
+
+
+__WEBPACK_IMPORTED_MODULE_3__ckeditor_ckeditor5_build_classic_build_ckeditor___default.a.create(document.querySelector('#editor'), {
+    placeholder: 'Type the content here!' }).then(function (editor) {
+    // console.log( editor );
 }).catch(function (error) {
     console.error(error);
 });
-
-__webpack_require__("./resources/app/js/bootstrap.js");
-
-__webpack_require__("./node_modules/croppie/croppie.js");
-
-
-var mobileMenuGuest = new __WEBPACK_IMPORTED_MODULE_1__modules_MobileMenu__["a" /* default */]();
-
-
-var headerSearch = new __WEBPACK_IMPORTED_MODULE_2__modules_DeleteInputPlaseholder__["a" /* default */]($(".header__form_input"));
 
 //--------------------------------------------------------
 // вернуть/развернцть карточку в cabinet(личном кабинете)
@@ -37885,6 +37893,17 @@ $(document).on('click', '.badge', function () {
 //   var accordion = new Accordion($('#accordion'), false);
 // });
 
+
+// Check browser support
+// if (typeof(Storage) != "undefined") {
+//     // Store
+//     localStorage.setItem("toggleState", value);
+//     // Retrieve
+//     localStorage.getItem("toggleState");
+// } else {
+//     "Sorry, your browser does not support Web Storage...";
+// }
+
 /***/ }),
 
 /***/ "./resources/app/js/bootstrap.js":
@@ -37946,6 +37965,81 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/app/js/modules/CabinetFormSize.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var CabinetFormSize = function () {
+  function CabinetFormSize() {
+    _classCallCheck(this, CabinetFormSize);
+
+    this.cabinetBTN = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinetBTN");
+    this.init();
+    this.events();
+  }
+
+  _createClass(CabinetFormSize, [{
+    key: "events",
+    value: function events() {
+      // обрабатывает клик для перехода к полному меню и обратно
+      this.cabinetBTN.click(this.toggleMenufull);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      // Check browser support
+      if (typeof Storage != "undefined") {
+        if (localStorage.getItem("HDILCabinetMenu") === null) {
+          localStorage.setItem("HDILCabinetMenu", 'half');
+        }
+
+        if (localStorage.getItem("HDILCabinetMenu") == 'full') {
+          __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-news").toggleClass("d-none");
+          __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".fullBTN").toggleClass("disabled");
+          __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".halfBTN").toggleClass("disabled");
+          __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-content__form-wrapper").toggleClass("col-md-6 col-md-12");
+        }
+      } else {
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".halfBTN").addClass("disabled");
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".fullBTN").addClass("disabled");
+      }
+    }
+  }, {
+    key: "toggleMenufull",
+    value: function toggleMenufull() {
+
+      if (!__WEBPACK_IMPORTED_MODULE_0_jquery___default()(this).hasClass("disabled")) {
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-news").toggleClass("d-none");
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".fullBTN").toggleClass("disabled");
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".halfBTN").toggleClass("disabled");
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-content__form-wrapper").toggleClass("col-md-6 col-md-12");
+      }
+
+      if (localStorage.getItem("HDILCabinetMenu") == 'half') {
+        localStorage.setItem("HDILCabinetMenu", 'full');
+      } else {
+        localStorage.setItem("HDILCabinetMenu", 'half');
+      }
+    }
+  }]);
+
+  return CabinetFormSize;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (CabinetFormSize);
+
+// $("input").attr("disabled", true);
 
 /***/ }),
 

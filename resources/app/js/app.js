@@ -1,21 +1,12 @@
 // $(document).ready(function(){  
 
-require('@ckeditor/ckeditor5-build-classic');
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic/build/ckeditor';
-
-ClassicEditor
-.create( document.querySelector( '#editor' ) )
-.then( editor => {
-    console.log( editor );
-})
-.catch( error => {
-    console.error( error );
-});
-
 require('./bootstrap');
-
 require('croppie');
+require('@ckeditor/ckeditor5-build-classic');
 
+//--------------------------------------------------------
+// Classes
+//--------------------------------------------------------
 
 import MobileMenu from './modules/MobileMenu';
 var mobileMenuGuest = new MobileMenu();
@@ -23,6 +14,21 @@ var mobileMenuGuest = new MobileMenu();
 import DeleteInputPlaseholder from './modules/DeleteInputPlaseholder';
 var headerSearch = new DeleteInputPlaseholder($(".header__form_input"));
 
+import CabinetFormSize from './modules/CabinetFormSize';
+var cabinetMenuToggle = new CabinetFormSize();
+
+
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic/build/ckeditor';
+
+ClassicEditor
+.create( document.querySelector( '#editor' ), {
+  placeholder: 'Type the content here!' })
+.then( editor => {
+    // console.log( editor );
+})
+.catch( error => {
+    console.error( error );
+});
 
 
 
@@ -131,3 +137,14 @@ $(document).on('click', '.badge', function(){
 
 //   var accordion = new Accordion($('#accordion'), false);
 // });
+
+
+// Check browser support
+// if (typeof(Storage) != "undefined") {
+//     // Store
+//     localStorage.setItem("toggleState", value);
+//     // Retrieve
+//     localStorage.getItem("toggleState");
+// } else {
+//     "Sorry, your browser does not support Web Storage...";
+// }

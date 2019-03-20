@@ -1,7 +1,11 @@
 
 * {
 	font-family: 'Roboto', sans-serif;
+
 }
+
+a { color: #6c757d;}
+
 // Fonts
 // @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
@@ -26,6 +30,12 @@
 
 @import "modules/header";
 @import "modules/hero";
+
+@import "modules/cabinet-sidebar-menu";
+@import "modules/cabinet-content";
+
+
+
 @import "modules/cards";
 @import "modules/fillprofile";
 @import "modules/footer";
