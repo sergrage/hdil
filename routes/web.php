@@ -3,6 +3,23 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Mail;
+ 
+// Route::get('/123', function () {
+ 
+//     $data = [
+//         'title' => 'Test email',
+//         'content' => 'content'
+//     ];
+ 
+//     Mail::send('emails.test', $data, function($message) 
+//     {
+//         $message->to('elenergetica87@gmail.com', 'sergey')->subject('hello how are you?');
+//     });
+// });
+
+
+
 // Route::get('/', 'HomeController@index')->name('home')->middleware('can:banned');
 Route::get('/', 'HomeController@index')->name('home');
 

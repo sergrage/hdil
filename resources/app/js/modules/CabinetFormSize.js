@@ -23,7 +23,7 @@ class CabinetFormSize {
 	    		$(".cabinet-news").toggleClass("d-none");
 	    		$(".fullBTN").toggleClass("disabled");
 	    		$(".halfBTN").toggleClass("disabled");
-	    		$(".cabinet-content__form-wrapper").toggleClass("col-md-6 col-md-12");
+	    		$(".cabinet-content__form-wrapper").toggleClass("col-lg-6 col-lg-12");
 	    	}
 		} else {
     		$(".halfBTN").addClass("disabled");
@@ -37,7 +37,7 @@ class CabinetFormSize {
     		$(".cabinet-news").toggleClass("d-none");
     		$(".fullBTN").toggleClass("disabled");
     		$(".halfBTN").toggleClass("disabled");
-    		$(".cabinet-content__form-wrapper").toggleClass("col-md-6 col-md-12");
+    		$(".cabinet-content__form-wrapper").toggleClass("col-lg-6 col-lg-12");
     	}
 
     	if(localStorage.getItem("HDILCabinetMenu") == 'half') {

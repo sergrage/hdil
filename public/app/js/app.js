@@ -37904,6 +37904,11 @@ $(document).on('click', '.badge', function () {
 //     "Sorry, your browser does not support Web Storage...";
 // }
 
+
+$('#dropdownMenuButton').on('click', function (event) {
+    $('.dropdown-menu').toggleClass('show cabinet-content__challenge-open');
+});
+
 /***/ }),
 
 /***/ "./resources/app/js/bootstrap.js":
@@ -38008,7 +38013,7 @@ var CabinetFormSize = function () {
           __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-news").toggleClass("d-none");
           __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".fullBTN").toggleClass("disabled");
           __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".halfBTN").toggleClass("disabled");
-          __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-content__form-wrapper").toggleClass("col-md-6 col-md-12");
+          __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-content__form-wrapper").toggleClass("col-lg-6 col-lg-12");
         }
       } else {
         __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".halfBTN").addClass("disabled");
@@ -38023,7 +38028,7 @@ var CabinetFormSize = function () {
         __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-news").toggleClass("d-none");
         __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".fullBTN").toggleClass("disabled");
         __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".halfBTN").toggleClass("disabled");
-        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-content__form-wrapper").toggleClass("col-md-6 col-md-12");
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".cabinet-content__form-wrapper").toggleClass("col-lg-6 col-lg-12");
       }
 
       if (localStorage.getItem("HDILCabinetMenu") == 'half') {

@@ -13,7 +13,7 @@
         <!-- Sign up card -->
         <div class="card person-card">
             <div class="card-body">
-                <h2 id="who_message" class="card-title">Who are you ?</h2>
+                <h2 id="who_message" class="card-title">Who are you ? <span style="color:red">*</span></h2>
 				<div class="row">
 					<div class="col-md-12">
 		                <div class="row">
@@ -113,7 +113,7 @@
 				</div>
 			</div>
 		</div>
-        <div style="margin-top: 1em;">
+        <div style="margin-top: 1em;" class="mb-4">
             <button type="submit" class="btn btn-info btn-lg btn-block">Sign up !</button>
         </div>
     </form>

@@ -11183,6 +11183,22 @@ textarea {
   border-radius: 4px;
 }
 
+.cabinet-content__challenge-open {
+  position: absolute;
+  -webkit-transform: translate3d(997px, 55px, 0px);
+          transform: translate3d(997px, 55px, 0px);
+  top: 0px;
+  left: 0px;
+  will-change: transform;
+}
+
+.cabinet-content__challenge-input-wrapper {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  width: 220px;
+}
+
 .card-item {
   display: inline-block;
   width: 100%;

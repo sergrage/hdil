@@ -14,8 +14,8 @@ class EditProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname'  => 'nullable|string|alpha|max:255|min:2',
-            'lastname' => 'nullable|string|alpha|max:255|min:2',
+            'firstname'  => 'required|string|alpha|max:255|min:2',
+            'lastname' => 'required|string|alpha|max:255|min:2',
             'bio' => 'min:50|nullable',
             'facebook' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'twitter' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?twitter.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],

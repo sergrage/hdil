@@ -3,25 +3,30 @@
 		<h1 class="h2">{{$user->firstname}} {{$user->lastname}}</h1><span class="badge badge-info" style="margin: auto auto auto 0; opacity: 0.5;">online</span>
 		<div class="btn-toolbar mb-2 mb-md-0">
 		  <div class="btn-group mr-2 d-none d-lg-inline-flex">
-		    <button class="btn btn-sm btn-outline-secondary fullBTN cabinetBTN">Full</button>
-		    <button class="btn btn-sm btn-outline-secondary halfBTN cabinetBTN disabled">Half</button>
+		      <button class="btn btn-sm btn-outline-secondary fullBTN cabinetBTN">Full</button>
+		      <button class="btn btn-sm btn-outline-secondary halfBTN cabinetBTN disabled">Half</button>
 		  </div>
-		  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
 		    <i class="fas fa-hands-helping"></i> to challenge
 		  </button>
 		    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    	<form action="" method="get" accept-charset="utf-8">
-		    		    <div class="input-group mb-2 mr-sm-2">
-    <div class="input-group-prepend">
-      <div class="input-group-text">@</div>
-    </div>
-    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-  </div>
+		    		<div class="input-group mb-2 mr-sm-2 cabinet-content__challenge-input-wrapper">
+					    <div class="input-group-prepend">
+					      <div class="input-group-text"><i class="far fa-check-square"></i></div>
+					    </div>
+					    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+					</div>
+					<div class="form-group col-md-4">
+				      <label for="inputState">State</label>
+				      <select id="inputState" class="form-control">
+				        <option selected>Choose...</option>
+				        <option>Say your frend</option>
+				        <option>Say to community</option>
+				      </select>
+				    </div>
+					<button type="submit" class="btn btn-primary my-1">Submit</button>
 		    	</form>
-
-			    <a class="dropdown-item" href="#">Action</a>
-			    <a class="dropdown-item" href="#">Another action</a>
-			    <a class="dropdown-item" href="#">Something else here</a>
 			</div>
 		</div>
 	</div>

@@ -148,3 +148,8 @@ $(document).on('click', '.badge', function(){
 // } else {
 //     "Sorry, your browser does not support Web Storage...";
 // }
+
+
+$('#dropdownMenuButton').on('click', function (event) {
+    $('.dropdown-menu').toggleClass('show cabinet-content__challenge-open');
+});
