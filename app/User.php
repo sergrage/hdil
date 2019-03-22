@@ -10,6 +10,7 @@ use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Support\Carbon;
 
 use App\Skill;
+use App\Challenge;
 
 class User extends Authenticatable
 {
@@ -60,6 +61,11 @@ class User extends Authenticatable
     public function skills()
     {
         return $this->belongsToMany(Skill::class);
+    }
+
+    public function challenge()
+    {
+        return $this->hasMany(Challenge::class);
     }
 
     public function isWait(): bool

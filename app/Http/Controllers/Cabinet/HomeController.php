@@ -35,7 +35,6 @@ class HomeController extends Controller
     	$user = Auth::user();
 
     	$avatar = $user->image ? '/' . $user->image:$avatar;
-
         return view('cabinet.home', compact('user', 'avatar', 'bootstrapColors'));
     }
 }

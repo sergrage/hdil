@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
  
 // Route::get('/123', function () {
  
@@ -38,7 +38,7 @@ Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 
 Route::resource('/fillprofile', 'Cabinet\FillprofileController');
 
-
+Route::post('challenge', 'Cabinet\ChallengeController@store')->name('challenge');;
 
 Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 

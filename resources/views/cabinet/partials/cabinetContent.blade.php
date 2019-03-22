@@ -6,26 +6,33 @@
 		      <button class="btn btn-sm btn-outline-secondary fullBTN cabinetBTN">Full</button>
 		      <button class="btn btn-sm btn-outline-secondary halfBTN cabinetBTN disabled">Half</button>
 		  </div>
-		  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+		  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButtonChallenge" aria-haspopup="true" aria-expanded="false">
 		    <i class="fas fa-hands-helping"></i> to challenge
 		  </button>
-		    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    	<form action="" method="get" accept-charset="utf-8">
+		    <div class="dropdown-menu" id="dropdown-menu-challenge" aria-labelledby="dropdownMenuButtonChallenge">
+		    	<form action="{{route('challenge')}}" method="post" accept-charset="utf-8">
+		    		@csrf
 		    		<div class="input-group mb-2 mr-sm-2 cabinet-content__challenge-input-wrapper">
 					    <div class="input-group-prepend">
 					      <div class="input-group-text"><i class="far fa-check-square"></i></div>
 					    </div>
-					    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+					    <input type="text" name="skill" class="form-control" placeholder="Skill">
 					</div>
-					<div class="form-group col-md-4">
-				      <label for="inputState">State</label>
-				      <select id="inputState" class="form-control">
-				        <option selected>Choose...</option>
-				        <option>Say your frend</option>
-				        <option>Say to community</option>
-				      </select>
-				    </div>
-					<button type="submit" class="btn btn-primary my-1">Submit</button>
+					<div class="input-group mb-2 mr-sm-2 cabinet-content__challenge-input-wrapper cabinet-content__challenge-email" style="display: none">
+					    <div class="input-group-prepend">
+					      <div class="input-group-text">@</div>
+					    </div>
+					    <input type="email" id="challengeEmailInput" name="email" class="form-control" placeholder="Email" disabled>
+					</div>
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" name="whereToSend" id="communityRadios" value="toCommunity" checked>
+					  <label class="form-check-label" for="communityRadios">Challenge to community</label>
+					</div>
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" name="whereToSend" id="friendRadios" value="toFriend">
+					  <label class="form-check-label" for="friendRadios">Challenge to friend</label>
+					</div>
+					<button type="submit" class="btn btn-info my-1">Send challenge</button>
 		    	</form>
 			</div>
 		</div>

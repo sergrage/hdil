@@ -150,6 +150,16 @@ $(document).on('click', '.badge', function(){
 // }
 
 
-$('#dropdownMenuButton').on('click', function (event) {
-    $('.dropdown-menu').toggleClass('show cabinet-content__challenge-open');
+$('#dropdownMenuButtonChallenge').on('click', function (event) {
+    $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
+});
+
+
+$('#friendRadios').on('change', function() {
+  $('.cabinet-content__challenge-email').slideDown("slow");
+   $('#challengeEmailInput').prop("disabled", false);
+});
+$('#communityRadios').on('change', function() {
+   $('.cabinet-content__challenge-email').slideUp("slow");
+   $('#challengeEmailInput').prop("disabled", true);
 });

@@ -65,7 +65,7 @@ class FillprofileController extends Controller
     {
         $avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';
     	$user = Auth::user();
-        $avatar = $user->image ? $user->image:$avatar;
+        $avatar = $user->image ? '/' . $user->image:$avatar;
         $skillsList = $user->skills;
         // если у user есть skills, то получаем array из его id
         // $user->skills - это коллекция

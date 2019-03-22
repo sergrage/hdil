@@ -11,6 +11,7 @@ class CreateChallengeTable extends Migration
     {
         Schema::create('challenge', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->string('name');
             $table->string('email')->nullable($value = true);
             $table->boolean('open');

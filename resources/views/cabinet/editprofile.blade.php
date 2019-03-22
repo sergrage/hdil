@@ -119,7 +119,7 @@
                 </div>
 
                 <div style="margin-top: 1em;">
-                    <button type="submit" class="btn btn-info btn-lg btn-block">Edit</button>
+                    <button type="submit" class="btn btn-info btn-lg btn-block mb-4">Edit</button>
                 </div>
             </form>
         </div>

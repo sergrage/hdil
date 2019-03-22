@@ -9,20 +9,23 @@
 
 		&-open {
 		position: absolute;
-	    transform: translate3d(997px, 55px, 0px);
-	    top: 0px;
-	    left: 0px;
-	    will-change: transform;
+	    top: 52px;
+	    right: 22px;
+	    left: auto;
+        width: 250px;
+	    background-color: #ffffff;
+	    z-index: 9;
+	    border: 1px solid #6c757d;
+	    padding: 0.5rem;
+	    border-radius: 5px;
 		}
 
+
 		&-input-wrapper {
-			margin-left: 1rem;
-		    margin-right: 1rem;
+			margin-left: 0.5rem;
+		    margin-right: 0.5rem;
 		    margin-top: 1rem;
 		    width: 220px;
 		}
 	}
 }
-
-
-
