@@ -2,7 +2,7 @@
 
 require('./bootstrap');
 require('croppie');
-require('@ckeditor/ckeditor5-build-classic');
+
 
 //--------------------------------------------------------
 // Classes
@@ -18,17 +18,15 @@ import CabinetFormSize from './modules/CabinetFormSize';
 var cabinetMenuToggle = new CabinetFormSize();
 
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic/build/ckeditor';
-
-ClassicEditor
-.create( document.querySelector( '#editor' ), {
-  placeholder: 'Type the content here!' })
-.then( editor => {
-    // console.log( editor );
-})
-.catch( error => {
-    console.error( error );
-});
+// ClassicEditor
+// .create( document.querySelector( '#editor' ), {
+//   placeholder: 'Type the content here!' })
+// .then( editor => {
+//     // console.log( editor );
+// })
+// .catch( error => {
+//     console.error( error );
+// });
 
 
 
@@ -163,3 +161,4 @@ $('#communityRadios').on('change', function() {
    $('.cabinet-content__challenge-email').slideUp("slow");
    $('#challengeEmailInput').prop("disabled", true);
 });
+

@@ -63,7 +63,7 @@ $(document).ready(function(){
 	      size: 'viewport'
 	    }).then(function(response){
 		    $.ajax({
-		        url: "/avatarUpload",
+		        url: "/cabinet/avatarUpload",
 		        type: "POST",
 		        data:{
 		        	"image": response,
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
 		if(query){
 			$.ajax({
-				url:"/skillsAutocomplete",
+				url:"/cabinet/skillsAutocomplete",
 				method:"POST",
 				data:{query:query},
 				success: function(data){

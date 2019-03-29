@@ -28,19 +28,13 @@ Auth::routes();
 
 
 
-// Личный кабинет
-Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+
 
 // Раполнение профайла после регистрации
 // Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
 // Route::put('/fillprofile/{user}', 'Cabinet\FillprofileController@update')->name('fillprofile.update');
 // Route::get('/fillprofile/{user}', 'Cabinet\FillprofileController@edit')->name('fillprofile.edit');
 
-Route::resource('/fillprofile', 'Cabinet\FillprofileController');
-
-Route::post('challenge', 'Cabinet\ChallengeController@store')->name('challenge');;
-
-Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 
 
 // Проверка email
@@ -51,8 +45,48 @@ Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.
 // Route::resource('users', 'LTE\UsersController');
 
 
-Route::post('avatarUpload', 'Cabinet\AvatarUploadController@avatarUpload');
-Route::post('skillsAutocomplete', 'Cabinet\SkillsAutocompleteController@skillsAutocomplete');
+// Страница Админки
+// Route::group(
+//     [
+//         'prefix' => 'cabinet',
+//         'as' => 'cabinet.',
+//         'namespace' => 'Cabinet',
+//         'middleware' => ['auth'],
+//     ],
+//     function () {
+//         Route::get('/', 'HomeController@index')->name('home');
+//         Route::resource('fillprofile', 'FillprofileController');
+//         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
+//         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
+// });
+
+Route::group(
+    [
+        'prefix' => 'cabinet',
+        'as' => 'cabinet.',
+        'namespace' => 'Cabinet',
+        'middleware' => ['auth'],
+    ],
+    function () {
+        Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('user', 'UserController');
+        Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
+        Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
+});
+
+
+
+
+// Личный кабинет
+// Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+
+Route::post('challenge', 'Cabinet\ChallengeController@store')->name('challenge');
+// Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
+// Route::post('avatarUpload', 'Cabinet\AvatarUploadController@avatarUpload');
+// Route::post('skillsAutocomplete', 'Cabinet\SkillsAutocompleteController@skillsAutocomplete');
+
+
+
 
 
 // Страница Админки

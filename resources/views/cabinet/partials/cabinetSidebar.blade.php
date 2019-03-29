@@ -7,11 +7,11 @@
 		</center>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link cabinet-sidebar__link" href="{{route('cabinet')}}">
+            <a class="nav-link cabinet-sidebar__link" href="{{route('cabinet.home')}}">
               <i class="fas fa-home"></i> Home page </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link cabinet-sidebar__link" href="{{route('fillprofile.edit', $user->id)}}">
+            <a class="nav-link cabinet-sidebar__link" href="{{ route('cabinet.user.edit', $user) }}">
               <i class="far fa-edit"></i> Edit profile </a>
           </li>
           <li class="nav-item">

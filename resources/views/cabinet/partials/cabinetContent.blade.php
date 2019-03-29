@@ -10,50 +10,16 @@
 		    <i class="fas fa-hands-helping"></i> to challenge
 		  </button>
 		    <div class="dropdown-menu" id="dropdown-menu-challenge" aria-labelledby="dropdownMenuButtonChallenge">
-		    	<form action="{{route('challenge')}}" method="post" accept-charset="utf-8">
-		    		@csrf
-		    		<div class="input-group mb-2 mr-sm-2 cabinet-content__challenge-input-wrapper">
-					    <div class="input-group-prepend">
-					      <div class="input-group-text"><i class="far fa-check-square"></i></div>
-					    </div>
-					    <input type="text" name="skill" class="form-control" placeholder="Skill">
-					</div>
-					<div class="input-group mb-2 mr-sm-2 cabinet-content__challenge-input-wrapper cabinet-content__challenge-email" style="display: none">
-					    <div class="input-group-prepend">
-					      <div class="input-group-text">@</div>
-					    </div>
-					    <input type="email" id="challengeEmailInput" name="email" class="form-control" placeholder="Email" disabled>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="radio" name="whereToSend" id="communityRadios" value="toCommunity" checked>
-					  <label class="form-check-label" for="communityRadios">Challenge to community</label>
-					</div>
-					<div class="form-check">
-					  <input class="form-check-input" type="radio" name="whereToSend" id="friendRadios" value="toFriend">
-					  <label class="form-check-label" for="friendRadios">Challenge to friend</label>
-					</div>
-					<button type="submit" class="btn btn-info my-1">Send challenge</button>
-		    	</form>
+				@include('cabinet.partials.forms.challengeForm')
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<!-- Форма для создания карточек -->
 		<div class="col-lg-6 cabinet-content__form-wrapper pb-4 pb-lg-0">
-			<form action="" method="get" accept-charset="utf-8" class="cabinet-content__form">
-				<div class="form-group">
-					<label for="cardName">Card Name</label>
-					<input type="" name="" id="cardName" class="form-control" placeholder="Enter">
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-				</div>
-				<div class="form-group">
-					<label for="editor">Card Body</label>
-					<textarea name="content" id="editor"></textarea>
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
+				@include('cabinet.partials.forms.cardsForm')
 		</div>
+		<!-- Новости / Мануал -->
 		<div class="col-lg-6 cabinet-news">
 			<div class="jumbotron">
 			  <h3>Hello, world!</h3>
@@ -65,7 +31,7 @@
 			  </p>
 			</div>
 		</div>
-		<!-- Новости / Мануал -->
+		<!-- Cards List -->
 		<div class="col-sm-6">
 			<div class="card" style="margin: 1.75rem auto;">
 				<div class="card-header">

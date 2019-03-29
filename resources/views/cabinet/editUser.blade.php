@@ -10,7 +10,7 @@
             <h1> Edit Profile </h1>
             <hr>
             <!-- Sign up form -->
-            <form action="{{ route('fillprofile.update', $user->id) }}" method="POST" accept-charset="utf-8">
+            <form action="{{ route('cabinet.user.update', $user->id) }}" method="POST" accept-charset="utf-8">
                 @method('PUT')
                 @csrf
                 <!-- Sign up card -->
@@ -124,8 +124,6 @@
             </form>
         </div>
     </div>
-
-
 </div>
 @endsection
 

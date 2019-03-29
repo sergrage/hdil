@@ -25,7 +25,7 @@ class FillProfileRequest extends FormRequest
             'linkedin' => ['regex:/((?:(?:http|https):\/\/)?(?:www.)?linkedin.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*))/', 'nullable'],
             'policy' => 'required',
             "skills" => "array",
-            "skills.*" => "string|max:20|min:3",
+            "skills.*" => "string|max:20|min:2",
         ];
     }
 }

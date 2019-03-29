@@ -9,19 +9,19 @@ class CreateChallengeTable extends Migration
 
     public function up()
     {
-        Schema::create('challenge', function (Blueprint $table) {
+        Schema::create('challenges', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('name');
-            $table->string('email')->nullable($value = true);
-            $table->boolean('open');
-            $table->rememberToken();
+            $table->string('skill');
+            $table->string('email')->nullable();
+            $table->string('status');
+            $table->string('verify_token')->nullable()->unique();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('challenge');
+        Schema::dropIfExists('challenges');
     }
 }

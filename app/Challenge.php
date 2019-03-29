@@ -7,11 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Challenge extends Model
 {
     protected $fillable = [
-        'name', 'status', 'user_id', 'email',
-    ];
-
-    protected $hidden = [
-      'remember_token',
+        'skill', 'status', 'user_id', 'email', 'verify_token',
     ];
 
 	public function user()
@@ -23,12 +19,12 @@ class Challenge extends Model
 // Заявка на Challenge открыта
     public function isOpen() : bool
     {
-    	return $this->status === true;
+    	return $this->status === 'open';
     }
 // Заявка на Challenge закрыта
     public function isClose() : bool
     {
-    	return $this->status === false;
+    	return $this->status === 'close';
     }
 
 

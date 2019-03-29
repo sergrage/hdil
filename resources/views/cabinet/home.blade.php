@@ -8,4 +8,12 @@
 			@include('cabinet.partials.cabinetContent')
     	</div>
     </div>
+
+@endsection
+
+
+@section('ClassicEditor')
+
+<script src="{{ mix('/app/js/ClassicEditor.js') }}"></script>
+    
 @endsection

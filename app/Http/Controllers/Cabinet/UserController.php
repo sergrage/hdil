@@ -13,13 +13,8 @@ use App\Http\Requests\Users\FillProfileRequest;
 use App\Http\Requests\Users\EditProfileRequest;
 
 
-class FillprofileController extends Controller
+class UserController extends Controller
 {
-
-	public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index()
     {
@@ -28,16 +23,17 @@ class FillprofileController extends Controller
     	// if($user->policy = 1) {
     	// 	return redirect()->route('home');
     	// }
-        
+        // сделать поверку гейтом ил миддлвером
 
-    	return view('cabinet.fillProfile', compact('user'));
+    	return view('cabinet.home', compact('user'));
     }
 
 
-    public function store(FillProfileRequest $request, User $user)
+    public function store(UserRequest $request, User $user)
     {
     // юзера пришлось выбирать так, т.к. просто $user был пустой
-        $user = Auth::user();
+    // $user = Auth::user();
+
     // если был введен хоть один skill
         if($request->input('skills')[0]) {
             $skills_id = $user->getUserSkillsId($request);
@@ -57,28 +53,26 @@ class FillprofileController extends Controller
     // отношение многие-к-многим, заполняем таблицу skill_user
         $user->skills()->attach(array_unique($skills_id));
 
-    	return redirect()->route('cabinet', $user);
+    	return redirect()->route('cabinet.home', $user);
 
     }
 
-    public function edit()
+    public function edit(User $user)
     {
+        // тут надо будет поменят фотку.
         $avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';
-    	$user = Auth::user();
         $avatar = $user->image ? '/' . $user->image:$avatar;
         $skillsList = $user->skills;
-        // если у user есть skills, то получаем array из его id
-        // $user->skills - это коллекция
-        // if($user->skills->isNotEmpty()){
-        //     $skillsListId = $user->skills->pluck('id')->toArray();
-        // }
-    	return view('cabinet.editprofile', compact('user','avatar' ,'skillsList'));
+        // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
+        if($user->skills->isNotEmpty()){
+            $skillsListId = $user->skills->pluck('id')->toArray();
+        }
+    	return view('cabinet.editUser', compact('user','avatar' ,'skillsList'));
     }
 
 
     public function update(EditProfileRequest $request, User $user)
     {
-        $user = Auth::user();
         // $skills_id = $user->skills->pluck('id')->toArray();
         if($request->input('skills')[0]) {
             $skills_id = $user->getUserSkillsId($request);
@@ -96,7 +90,7 @@ class FillprofileController extends Controller
             'linkedin' => $request['linkedin']??'',
         ]);
 
-        return redirect()->route('cabinet', $user);
+        return redirect()->route('cabinet.home', $user);
     }
 
     public function destroy()
