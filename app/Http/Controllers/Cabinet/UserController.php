@@ -25,14 +25,14 @@ class UserController extends Controller
     	// }
         // сделать поверку гейтом ил миддлвером
 
-    	return view('cabinet.home', compact('user'));
+    	return view('cabinet.fillprofile', compact('user'));
     }
 
 
-    public function store(UserRequest $request, User $user)
+    public function store(FillProfileRequest $request)
     {
     // юзера пришлось выбирать так, т.к. просто $user был пустой
-    // $user = Auth::user();
+    $user = Auth::user();
 
     // если был введен хоть один skill
         if($request->input('skills')[0]) {
