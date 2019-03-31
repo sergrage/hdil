@@ -70,6 +70,7 @@ Route::group(
     function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('user', 'UserController');
+        Route::resource('message', 'MessageController');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
 });

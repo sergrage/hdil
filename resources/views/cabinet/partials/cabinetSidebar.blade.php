@@ -15,7 +15,7 @@
               <i class="far fa-edit"></i> Edit profile </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link cabinet-sidebar__link" href="#"><i class="far fa-comment"></i> Message</a>
+            <a class="nav-link cabinet-sidebar__link" href="{{ route('cabinet.message.index') }}"><i class="far fa-comment"></i> Message</a>
 	     </li>
           <li class="nav-item">
             <a class="nav-link cabinet-sidebar__link" href="#">
