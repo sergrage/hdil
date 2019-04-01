@@ -70,7 +70,7 @@
             <li class="nav-item m-1"><a class="nav-link" href="{{ route('cabinet.home') }}">Cabinet <i class="far fa-user float-right"></i></a></li>
             <li class="nav-item pl-4"><a class="nav-link header__cabinet-link" href="{{ route('cabinet.home') }}"><i class="fas fa-home"></i> Home page </a></li>
             <li class="nav-item pl-4"><a class="nav-link header__cabinet-link" href="{{ route('cabinet.user.edit', $user) }}"> <i class="far fa-edit"></i> Edit profile </a></li>
-            <li class="nav-item pl-4"><a class="nav-link header__cabinet-link border-white-none" href="{{ route('cabinet.home') }}"><i class="far fa-comment"></i> Message</a></li>
+            <li class="nav-item pl-4"><a class="nav-link header__cabinet-link border-white-none" href="{{ route('messages.index') }}"><i class="far fa-comment"></i> Message</a></li>
             @can('admin-panel')
             <li class="nav-item m-1"><a class="nav-link admin-bg" href="{{ route('admin.admin') }}">Admin <i class="fas fa-unlock-alt float-right"></i></a></li>
             @endcan

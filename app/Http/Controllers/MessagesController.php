@@ -59,8 +59,9 @@ class MessagesController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
         $users = User::where('id', '!=', Auth::id())->get();
-        return view('messenger.create', compact('users'));
+        return view('messenger.create', compact('users', 'user'));
     }
     /**
      * Stores a new message thread.

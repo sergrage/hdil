@@ -2,7 +2,7 @@
 	<div class="sidebar-sticky">
 		<center>
 			<div class="cabinet-sidebar__avatar-wrapper">
-				<img src="{{$avatar}}" width="140" height="140">
+				<img src="{{$user->getAvatar()}}" width="140" height="140">
 			</div>
 		</center>
         <ul class="nav flex-column">

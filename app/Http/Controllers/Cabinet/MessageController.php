@@ -15,14 +15,11 @@ class MessageController extends Controller
     {
         $user = Auth::user();
 
-        // тут надо будет поменят фотку.
-        $avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';
-        $avatar = $user->image ? '/' . $user->image:$avatar;
         $skillsList = $user->skills;
         // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
 
 
-        return view('cabinet.message', compact('user', 'avatar'));
+        return view('cabinet.message', compact('user'));
     }
 
 

@@ -100,12 +100,12 @@ class User extends Authenticatable
         return $this->role === self::ROLE_USER;
     }
 
-    public function getImage()
+    public function getAvatar()
     {
-        if($this->image){
-            return '/admin/img/user2-160x160.jpg';
-        }
-        return '/admin/img/user2-160x160.jpg';
+        $avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';
+        $avatar = $this->image ? '/' . $this->image:$avatar;
+
+        return $avatar;
     }
 
     public function getUserSkillsId($request)

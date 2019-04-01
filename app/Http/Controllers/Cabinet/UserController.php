@@ -59,15 +59,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        // тут надо будет поменят фотку.
-        $avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';
-        $avatar = $user->image ? '/' . $user->image:$avatar;
+       
         $skillsList = $user->skills;
         // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
         if($user->skills->isNotEmpty()){
             $skillsListId = $user->skills->pluck('id')->toArray();
         }
-    	return view('cabinet.editUser', compact('user','avatar' ,'skillsList'));
+    	return view('cabinet.editUser', compact('user','skillsList'));
     }
 
 

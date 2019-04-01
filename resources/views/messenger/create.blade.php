@@ -29,7 +29,7 @@
     
             <!-- Submit Form Input -->
             <div class="form-group">
-                <button type="submit" class="btn btn-primary form-control">Submit</button>
+                <button type="submit" class="btn btn-info form-control">Submit</button>
             </div>
         </div>
     </form>

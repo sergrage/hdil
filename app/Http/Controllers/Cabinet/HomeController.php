@@ -17,7 +17,6 @@ class HomeController extends Controller
     public function index()
 
     {
-    	$avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';
 
         $bootstrapColors = [
             'badge-primary',
@@ -30,11 +29,7 @@ class HomeController extends Controller
             'badge-dark',
         ];
 
-
-
     	$user = Auth::user();
-
-    	$avatar = $user->image ? '/' . $user->image:$avatar;
-        return view('cabinet.home', compact('user', 'avatar', 'bootstrapColors'));
+        return view('cabinet.home', compact('user', 'bootstrapColors'));
     }
 }
