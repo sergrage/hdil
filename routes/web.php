@@ -70,12 +70,20 @@ Route::group(
     function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('user', 'UserController');
-        Route::resource('message', 'MessageController');
+        // Route::resource('message', 'MessageController');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
 });
 
+Route::resource('messages', 'MessagesController');
 
+// Route::group(['prefix' => 'messages'], function () {
+//     Route::get('/', ['as' => 'messages', 'uses' => 'Messages\MessagesController@index']);
+//     Route::get('create', ['as' => 'messages.create', 'uses' => 'Messages\MessagesController@create']);
+//     Route::post('/', ['as' => 'messages.store', 'uses' => 'Messages\MessagesController@store']);
+//     Route::get('{id}', ['as' => 'messages.show', 'uses' => 'Messages\MessagesController@show']);
+//     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'Messages\MessagesController@update']);
+// });
 
 
 // Личный кабинет

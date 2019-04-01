@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Kalnoy\Nestedset\NodeTrait;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 use Illuminate\Support\Carbon;
 
@@ -16,6 +17,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use Sluggable;
+    use Messagable;
 
     public const STATUS_WAIT = 'wait';
     public const STATUS_ACTIVE = 'active';

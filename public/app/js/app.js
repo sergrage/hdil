@@ -5593,6 +5593,7 @@ module.exports = {
  * Foliotek
  * Version: 2.6.2
  *************************/
+ console.log('hihihih');
 (function (root, factory) {
     if (true) {
         // AMD. Register as an anonymous module.
@@ -37818,9 +37819,9 @@ var cabinetMenuToggle = new __WEBPACK_IMPORTED_MODULE_2__modules_CabinetFormSize
 
 
 $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
 
 var bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info', 'badge-light', 'badge-dark'];
@@ -37828,28 +37829,28 @@ var bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'bad
 // var skillList = [];
 
 $('#add').click(function () {
-  var item = bootstrapColors[Math.floor(Math.random() * bootstrapColors.length)];
-  var skill = $('#addSkill').val();
+    var item = bootstrapColors[Math.floor(Math.random() * bootstrapColors.length)];
+    var skill = $('#addSkill').val();
 
-  // skillList.push(skill);
+    // skillList.push(skill);
 
-  // console.log(skillList);
+    // console.log(skillList);
 
-  if (skill) {
-    $('#dynamic_field').append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
-    $('#addSkill').val('');
-  }
+    if (skill) {
+        $('#dynamic_field').append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
+        $('#addSkill').val('');
+    }
 });
 
 $(document).on('click', '.badge', function () {
 
-  // var index = skillList.indexOf($(this).text().trim());
+    // var index = skillList.indexOf($(this).text().trim());
 
-  // if(index > -1) {
-  //   skillList.splice(index, 1);
-  // }
-  // console.log(skillList);
-  $(this).remove();
+    // if(index > -1) {
+    //   skillList.splice(index, 1);
+    // }
+    // console.log(skillList);
+    $(this).remove();
 });
 
 // $(function() {
@@ -37892,16 +37893,16 @@ $(document).on('click', '.badge', function () {
 
 
 $('#dropdownMenuButtonChallenge').on('click', function (event) {
-  $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
+    $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
 });
 
 $('#friendRadios').on('change', function () {
-  $('.cabinet-content__challenge-email').slideDown("slow");
-  $('#challengeEmailInput').prop("disabled", false);
+    $('.cabinet-content__challenge-email').slideDown("slow");
+    $('#challengeEmailInput').prop("disabled", false);
 });
 $('#communityRadios').on('change', function () {
-  $('.cabinet-content__challenge-email').slideUp("slow");
-  $('#challengeEmailInput').prop("disabled", true);
+    $('.cabinet-content__challenge-email').slideUp("slow");
+    $('#challengeEmailInput').prop("disabled", true);
 });
 
 /***/ }),

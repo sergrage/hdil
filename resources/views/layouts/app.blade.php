@@ -134,10 +134,39 @@
 
         <!-- REQUIRED SCRIPTS -->
 
-<footer class="container-fluid footer">
-    <h3>Hello</h3>
+<footer class="footer-distributed">
 
-</footer>
+      <div class="footer-right">
+
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+
+      </div>
+
+      <div class="footer-left">
+
+        <p class="footer-links">
+          <a href="#">Home</a>
+          ·
+          <a href="#">Blog</a>
+          ·
+          <a href="#">Pricing</a>
+          ·
+          <a href="#">About</a>
+          ·
+          <a href="#">Faq</a>
+          ·
+          <a href="#">Contact</a>
+        </p>
+
+        <p>How did I Learn &copy; 2019</p>
+      </div>
+
+    </footer>
+
+
 <script src="{{ mix('/app/js/app.js') }}"></script>
 </body>
 </html>

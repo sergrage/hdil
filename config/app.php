@@ -153,6 +153,7 @@ return [
          * Package Service Providers...
          */
         yasmuru\LaravelTinify\LaravelTinifyServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
         /*
          * Application Service Providers...
          */
