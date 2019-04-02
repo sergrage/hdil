@@ -12,12 +12,12 @@
       </p>
     </center>
 
-    <a href="{{route('cabinet.home')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-home"></i> Home Page</a>
-    <a href="{{ route('cabinet.user.edit', $user) }}" class="list-group-item list-group-item-action bg-light"><i class="far fa-edit"></i> Edit profile </a>
-    <a href="{{ route('messages.index') }}" class="list-group-item list-group-item-action bg-light"><i class="far fa-comment"></i> Message</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+    <a href="{{route('cabinet.home')}}" class="list-group-item list-group-item-action bg-light border-right-0"><i class="fas fa-home"></i> Home Page</a>
+    <a href="{{ route('cabinet.user.edit', $user) }}" class="list-group-item list-group-item-action bg-light border-right-0"><i class="far fa-edit"></i> Edit profile </a>
+    <a href="{{ route('messages.index') }}" class="list-group-item list-group-item-action bg-light border-right-0"><i class="far fa-comment"></i> Message</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light border-right-0">Events</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light border-right-0">Profile</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light border-right-0">Status</a>
   </div>
 </div>
 <!-- /#sidebar-wrapper -->

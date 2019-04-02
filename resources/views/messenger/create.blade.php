@@ -4,7 +4,7 @@
     <h1>Create a new message</h1>
     <form action="{{ route('messages.store') }}" method="post">
         {{ csrf_field() }}
-        <div class="col-md-6">
+        <div class="col-12">
             <!-- Subject Form Input -->
             <div class="form-group">
                 <label class="control-label">Subject</label>
@@ -21,8 +21,8 @@
             @if($users->count() > 0)
                 <div class="checkbox">
                     @foreach($users as $user)
-                        <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]"
-                                                                value="{{ $user->id }}">{!!$user->name!!}</label>
+                        <label title="{{ $user->name }}">
+                            <input type="checkbox" name="recipients[]" value="{{ $user->id }}">{!!$user->name!!}</label>
                     @endforeach
                 </div>
             @endif
