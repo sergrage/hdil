@@ -41,6 +41,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public $bootstrapColors = [
+            'badge-primary',
+            'badge-secondary',
+            'badge-success',
+            'badge-danger',
+            'badge-warning',
+            'badge-info',
+            'badge-light',
+            'badge-dark',
+        ];
+
     public function sluggable()
     {
         return [

@@ -124,7 +124,7 @@
 @endsection
 
 
-@section('modal')
+@section('modalImage')
 
     @include('partials._modalImage')
     

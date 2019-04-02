@@ -17,19 +17,7 @@ class HomeController extends Controller
     public function index()
 
     {
-
-        $bootstrapColors = [
-            'badge-primary',
-            'badge-secondary',
-            'badge-success',
-            'badge-danger',
-            'badge-warning',
-            'badge-info',
-            'badge-light',
-            'badge-dark',
-        ];
-
     	$user = Auth::user();
-        return view('cabinet.home', compact('user', 'bootstrapColors'));
+        return view('cabinet.home', compact('user'));
     }
 }

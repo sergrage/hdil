@@ -251,14 +251,6 @@ background: #ccc;
 .cr-rotate-r i:before {
 	content: '\21BB';
 }
-* {
-  font-family: 'Roboto', sans-serif;
-}
-
-a {
-  color: #6c757d;
-}
-
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -10730,7 +10722,6 @@ a.text-dark:focus {
 /* Mixins for adaptive design. Bootstrap 4*/
 
 body {
-  font-family: 'Open Sans', sans-serif;
   color: #000000;
   font-weight: 400;
   display: -webkit-box;
@@ -10741,11 +10732,20 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 input,
 textarea {
   font-size: 13px;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  color: #6c757d;
 }
 
 /* open-sans-regular */
@@ -11164,17 +11164,43 @@ textarea {
   color: #ffffff;
 }
 
-.cabinet-sidebar__avatar-wrapper {
-  background-color: #ffffff;
-  padding: 30px;
-  margin-top: 20px;
-  display: inline-block;
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
 }
 
-.cabinet-sidebar__link {
-  color: #333333;
-  border-bottom: 1px solid #f8f9fa;
-  margin-left: 40px;
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 0;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
 }
 
 .cabinet-content__form {
@@ -11185,8 +11211,8 @@ textarea {
 
 .cabinet-content__challenge-open {
   position: absolute;
-  top: 52px;
-  right: 22px;
+  top: 110px;
+  right: 14px;
   left: auto;
   width: 250px;
   background-color: #ffffff;

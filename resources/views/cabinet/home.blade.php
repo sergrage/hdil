@@ -2,15 +2,16 @@
 
 @section('content')
     <div class="container-fluid">
-    		
-		<div class="row">
-			@include('cabinet.partials.cabinetSidebar')
-			@include('cabinet.partials.cabinetContent')
-    	</div>
+    	<div class="d-flex" id="wrapper">
+			<div class="row">
+				@include('cabinet.partials.cabinetSidebar')
+				<div id="page-content-wrapper">
+					@include('cabinet.partials.cabinetContent')
+				</div>
+	    	</div>
+	    </div>
     </div>
-
 @endsection
-
 
 @section('ClassicEditor')
 

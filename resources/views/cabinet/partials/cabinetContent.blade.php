@@ -1,7 +1,10 @@
-<div class="col-xl-10 col-lg-9 col-md-8 ml-sm-auto pt-3 px-4 cabinet-content">
-	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		<h1 class="h2">{{$user->firstname}} {{$user->lastname}}</h1><span class="badge badge-info" style="margin: auto auto auto 0; opacity: 0.5;">online</span>
-		<div class="btn-toolbar mb-2 mb-md-0">
+<div class="container-fluid" style="margin-left: 15px;">
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-3 border-bottom">
+		<button class="btn btn-sm btn-outline-secondary" type="button" id="menu-toggle">
+		    <i class="fas fa-arrow-left"></i> toggle menu
+		</button>
+		
+		<div class="btn-toolbar">
 		  <div class="btn-group mr-2 d-none d-lg-inline-flex">
 		      <button class="btn btn-sm btn-outline-secondary fullBTN cabinetBTN">Full</button>
 		      <button class="btn btn-sm btn-outline-secondary halfBTN cabinetBTN disabled">Half</button>
