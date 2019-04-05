@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Cabinet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Carbon;
 use App\Skill;
 use App\User;
+
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\Users\FillProfileRequest;
 use App\Http\Requests\Users\EditProfileRequest;
@@ -57,9 +59,16 @@ class UserController extends Controller
 
     }
 
+    public function show(User $user)
+    {
+        return view('cabinet.showUser', compact('user'));
+    }
+
     public function edit(User $user)
     {
-       
+       if($user->id !== Auth::user()->id){
+        abort(403);
+       }
         $skillsList = $user->skills;
         // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
         if($user->skills->isNotEmpty()){
@@ -95,6 +104,14 @@ class UserController extends Controller
     {
     	# code...
     	// TODO
+    }
+
+    public function carbonTest()
+    {
+        dd(Carbon::now());
+        $users =  DB::table('users')
+        ->where('created_at' - Carbon::now(), '>', 24);
+        dd($users);
     }
 
 

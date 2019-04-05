@@ -73,6 +73,7 @@ Route::group(
         // Route::resource('message', 'MessageController');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
+        Route::post('carbonTest', 'UserController@carbonTest')->name('carbonTest');
 });
 
 Route::resource('messages', 'MessagesController');

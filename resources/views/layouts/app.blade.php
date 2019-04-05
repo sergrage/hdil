@@ -163,8 +163,7 @@
 
         <p>How did I Learn &copy; 2019</p>
       </div>
-
-    </footer>
+</footer>
 
 
 <script src="{{ mix('/app/js/app.js') }}"></script>

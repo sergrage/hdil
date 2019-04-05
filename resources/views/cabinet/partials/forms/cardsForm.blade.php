@@ -1,4 +1,5 @@
 <form action="" method="get" accept-charset="utf-8" class="cabinet-content__form">
+	@csrf
 	<div class="form-group">
 		<label for="cardName">Card Name</label>
 		<input type="" name="" id="cardName" class="form-control" placeholder="Enter">
