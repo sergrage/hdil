@@ -26,5 +26,9 @@ class AuthServiceProvider extends ServiceProvider
             return !$user->isBanned();
         });
 
+        Gate::define('policy', function (User $user){
+            return $user->policyAgree();
+        });
+
     }
 }

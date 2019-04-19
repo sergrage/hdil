@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\User;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
 
     public function index()

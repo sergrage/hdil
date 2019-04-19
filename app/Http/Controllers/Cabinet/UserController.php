@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use App\Skill;
+
 use App\User;
 
 use Illuminate\Support\Facades\DB;
@@ -17,23 +18,21 @@ use App\Http\Requests\Users\EditProfileRequest;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('can:policy')->only('edit');
+    }
 
     public function index()
     {
     	$user = Auth::user();
-
-    	// if($user->policy = 1) {
-    	// 	return redirect()->route('home');
-    	// }
-        // сделать поверку гейтом ил миддлвером
-
     	return view('cabinet.fillprofile', compact('user'));
     }
 
 
     public function store(FillProfileRequest $request)
     {
-    // юзера пришлось выбирать так, т.к. просто $user был пустой
+
     $user = Auth::user();
 
     // если был введен хоть один skill

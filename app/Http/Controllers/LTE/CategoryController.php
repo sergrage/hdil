@@ -49,7 +49,6 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $parents = Category::defaultOrder()->withDepth()->get();
-
         return view('admin.categories.edit', compact('category', 'parents'));
     }
 

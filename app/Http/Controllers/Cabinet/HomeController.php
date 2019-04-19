@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cabinet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -12,12 +13,16 @@ class HomeController extends Controller
 	public function __construct()
     {
         $this->middleware('auth');
+        // $this->middleware('can:policy');
     }
 
     public function index()
 
     {
     	$user = Auth::user();
-        return view('cabinet.home', compact('user'));
+    	$parents = Category::defaultOrder()->withDepth()->get();
+
+    	$category = Category::all();
+        return view('cabinet.home', compact('user', 'category' ,'parents'));
     }
 }

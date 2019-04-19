@@ -110,17 +110,17 @@ Route::group(
     function () {
 		Route::get('/', 'HomeController@index')->name('admin');
 		
-        Route::resource('/users', 'UsersController');
+        Route::resource('/users', 'UserController');
 
-		Route::post('/users/{user}/unBan', 'UsersController@unBan')->name('users.unBan');
-        Route::post('/users/{user}/ban', 'UsersController@ban')->name('users.ban');
-        Route::post('/users/{user}/verify', 'UsersController@verify')->name('users.verify');
-		Route::post('/users/clear', 'UsersController@clearUsers')->name('users.clear');
+		Route::post('/users/{user}/unBan', 'UserController@unBan')->name('users.unBan');
+        Route::post('/users/{user}/ban', 'UserController@ban')->name('users.ban');
+        Route::post('/users/{user}/verify', 'UserController@verify')->name('users.verify');
+		Route::post('/users/clear', 'UserController@clearUsers')->name('users.clear');
 
         Route::resource('/categories', 'CategoryController');
 
         Route::post('/categories/{category}/up', 'CategoryController@up')->name('category.up');
         Route::post('/categories/{category}/down', 'CategoryController@down')->name('category.down');
 
-        Route::resource('/cards', 'CardsController');
+        Route::resource('/cards', 'CardController');
 });

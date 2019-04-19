@@ -11,8 +11,6 @@
         <div class="container-fluid" style="margin-left: 15px;">
             @include('cabinet.partials.cabinetBtn')
             <h1> Edit Profile </h1>
-            <h1> {{Auth::user()->id}} </h1>
-            <h1> {{$user->id}} </h1>
             <hr>
             <!-- Sign up form -->
             <form action="{{ route('cabinet.user.update', $user->id) }}" method="POST" accept-charset="utf-8">
@@ -26,10 +24,16 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <input id="firstname" name="firstname" type="text" class="form-control" placeholder="First name" value="{{ $user->firstname }}">
+                                        <input id="firstname" name="firstname" type="text" class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="First name" value="{{ $user->firstname }}">
+                                        @if ($errors->has('firstname'))
+                                            <span class="invalid-feedback"><strong>{{ $errors->first('firstname') }}</strong></span>
+                                        @endif
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input id="lastname" name="lastname" type="text" class="form-control" placeholder="Last name" value="{{ $user->lastname }}">
+                                        <input id="lastname" name="lastname" type="text" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="Last name" value="{{ $user->lastname }}">
+                                        @if ($errors->has('lastname'))
+                                            <span class="invalid-feedback"><strong>{{ $errors->first('lastname') }}</strong></span>
+                                        @endif
                                     </div>
                                 </div>
                                 <!-- Avatar file input -->

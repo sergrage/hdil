@@ -111,6 +111,11 @@ class User extends Authenticatable
         return $this->role === self::ROLE_USER;
     }
 
+    public function policyAgree(): bool
+    {
+        return  $this->policy === 1;
+    }
+
     public function getAvatar()
     {
         $avatar = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R';

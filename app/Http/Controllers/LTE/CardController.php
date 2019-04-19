@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Card;
 use App\Http\Controllers\Controller;
 
-class CardsController extends Controller
+class CardController extends Controller
 {
 
     public function index()

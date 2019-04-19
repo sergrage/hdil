@@ -8,11 +8,6 @@
 	      <button class="btn btn-sm btn-outline-secondary fullBTN cabinetBTN">Full</button>
 	      <button class="btn btn-sm btn-outline-secondary halfBTN cabinetBTN disabled">Half</button>
 	  </div>
-	  <form action="{{route('cabinet.carbonTest')}}" method="POST" accept-charset="utf-8">
-	  	@csrf
-	  	<button type="submit" class="btn btn-info my-1">
-	  	CARBON TEST</button>
-	  </form>
 	  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButtonChallenge" aria-haspopup="true" aria-expanded="false">
 	    <i class="fas fa-hands-helping"></i> to challenge
 	  </button>
