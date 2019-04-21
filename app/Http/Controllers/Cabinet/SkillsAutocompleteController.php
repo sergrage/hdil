@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Cabinet;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Skill;
+use App\Models\Skill;
 
 class SkillsAutocompleteController extends Controller
 {

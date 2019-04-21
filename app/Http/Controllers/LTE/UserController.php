@@ -9,7 +9,7 @@ use App\Http\Requests\Users\UpdateRequest;
 use App\Http\Requests\Users\CreateRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\User;
+use App\Models\User;
 
 class UserController extends Controller
 {

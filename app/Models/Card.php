@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 
 
 class Card extends Model

@@ -9,8 +9,8 @@ use App\Mail\ChallengeMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
-use App\Challenge;
-use App\User;
+use App\Models\Challenge;
+use App\Models\User;
 
 class ChallengeController extends Controller
 {

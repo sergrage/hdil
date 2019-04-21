@@ -9,7 +9,7 @@ php artisan db:seed --class=UsersTableSeeder
 */
 
 
-$factory->define(App\Category::class, function (Faker $faker) {
+$factory->define(App\Models\Category::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->name,
         'slug' => $faker->unique()->slug(2), // это надо отключить или можно сделать ссылку из имени str_slug($name)

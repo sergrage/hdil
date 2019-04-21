@@ -6,15 +6,14 @@
             
     <div class="d-flex" id="wrapper">
         <div class="row">
-        @include('cabinet.partials.cabinetSidebar')
+        @include('partials.sidebar')
         <div id="page-content-wrapper">
         <div class="container-fluid" style="margin-left: 15px;">
-            @include('cabinet.partials.cabinetBtn')
+            @include('partials.cabinetBtn')
             <h1> Edit Profile </h1>
             <hr>
             <!-- Sign up form -->
-            <form action="{{ route('cabinet.user.update', $user->id) }}" method="POST" accept-charset="utf-8">
-                @method('PUT')
+            <form action="{{ route('fillprofile.update', $user->id) }}" method="POST" accept-charset="utf-8">
                 @csrf
                 <!-- Sign up card -->
                 <div class="card person-card mb-4">

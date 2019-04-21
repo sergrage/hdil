@@ -1,5 +1,5 @@
 <div class="container-fluid" style="margin-left: 15px;">
-	@include('cabinet.partials.cabinetBtn')
+	@include('partials.cabinetBtn')
 	<div class="row">
 		<!-- Форма для создания карточек -->
 		<div class="col-lg-6 cabinet-content__form-wrapper pb-4 pb-lg-0">

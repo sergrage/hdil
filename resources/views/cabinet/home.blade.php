@@ -4,7 +4,7 @@
     <div class="container-fluid">
     	<div class="d-flex" id="wrapper">
 			<div class="row">
-				@include('cabinet.partials.cabinetSidebar')
+				@include('partials.sidebar')
 				<div id="page-content-wrapper">
 					@include('cabinet.partials.cabinetContent')
 				</div>

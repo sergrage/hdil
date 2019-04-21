@@ -13,7 +13,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 
-use App\User;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -64,8 +64,8 @@ class LoginController extends Controller
         		return back()->with('error', 'You are banned. Sorry.');
         	}
 
-            if(!$user->policy){
-                return redirect()->route('cabinet.user.index');
+            if(!$user->policyAgree()){
+                return redirect()->route('fillprofile');
             }
 
         	return redirect()->intended(route('home'));

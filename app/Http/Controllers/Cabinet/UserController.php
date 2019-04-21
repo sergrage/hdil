@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
-use App\Skill;
+use App\Models\Skill;
 
-use App\User;
+use App\Models\User;
 
 use Illuminate\Support\Facades\DB;
 
@@ -25,36 +25,12 @@ class UserController extends Controller
 
     public function index()
     {
-    	$user = Auth::user();
-    	return view('cabinet.fillprofile', compact('user'));
+
     }
 
 
-    public function store(FillProfileRequest $request)
+    public function store()
     {
-
-    $user = Auth::user();
-
-    // если был введен хоть один skill
-        if($request->input('skills')[0]) {
-            $skills_id = $user->getUserSkillsId($request);
-        }
-
-    // апдейтим юзера
-    	$user->update([
-    		'firstname' => $request['firstname']??'',
-            'lastname' => $request['lastname']??'',
-    		'bio' => $request['bio']??'',
-            'facebook' => $request['facebook']??'',
-            'twitter' => $request['twitter']??'',
-            'instagram' => $request['instagram']??'',
-            'linkedin' => $request['linkedin']??'',
-    		'policy' => 1,
-    	]);
-    // отношение многие-к-многим, заполняем таблицу skill_user
-        $user->skills()->attach(array_unique($skills_id));
-
-    	return redirect()->route('cabinet.home', $user);
 
     }
 
@@ -63,41 +39,41 @@ class UserController extends Controller
         return view('cabinet.showUser', compact('user'));
     }
 
-    public function edit(User $user)
-    {
-       if($user->id !== Auth::user()->id){
-        abort(403);
-       }
-        $skillsList = $user->skills;
-        // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
-        if($user->skills->isNotEmpty()){
-            $skillsListId = $user->skills->pluck('id')->toArray();
-        }
-    	return view('cabinet.editUser', compact('user','skillsList'));
-    }
+    // public function edit(User $user)
+    // {
+    //    if($user->id !== Auth::user()->id){
+    //     abort(403);
+    //    }
+    //     $skillsList = $user->skills;
+    //     // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
+    //     if($user->skills->isNotEmpty()){
+    //         $skillsListId = $user->skills->pluck('id')->toArray();
+    //     }
+    // 	return view('cabinet.editUser', compact('user','skillsList'));
+    // }
 
 
-    public function update(EditProfileRequest $request, User $user)
-    {
-        // $skills_id = $user->skills->pluck('id')->toArray();
-        if($request->input('skills')[0]) {
-            $skills_id = $user->getUserSkillsId($request);
-        }
+    // public function update(EditProfileRequest $request, User $user)
+    // {
+    //     // $skills_id = $user->skills->pluck('id')->toArray();
+    //     if($request->input('skills')[0]) {
+    //         $skills_id = $user->getUserSkillsId($request);
+    //     }
 
-        $user->skills()->sync(array_unique($skills_id));
+    //     $user->skills()->sync(array_unique($skills_id));
 
-    	$user->update([
-            'firstname' => $request['firstname']??'',
-            'lastname' => $request['lastname']??'',
-            'bio' => $request['bio']??'',
-            'facebook' => $request['facebook']??'',
-            'twitter' => $request['twitter']??'',
-            'instagram' => $request['instagram']??'',
-            'linkedin' => $request['linkedin']??'',
-        ]);
+    // 	$user->update([
+    //         'firstname' => $request['firstname']??'',
+    //         'lastname' => $request['lastname']??'',
+    //         'bio' => $request['bio']??'',
+    //         'facebook' => $request['facebook']??'',
+    //         'twitter' => $request['twitter']??'',
+    //         'instagram' => $request['instagram']??'',
+    //         'linkedin' => $request['linkedin']??'',
+    //     ]);
 
-        return redirect()->route('cabinet.home', $user);
-    }
+    //     return redirect()->route('cabinet.home', $user);
+    // }
 
     public function destroy()
     {

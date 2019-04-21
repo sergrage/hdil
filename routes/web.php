@@ -19,46 +19,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-
-// Route::get('/', 'HomeController@index')->name('home')->middleware('can:banned');
 Route::get('/', 'HomeController@index')->name('home');
-
 
 Auth::routes();
 
-
-
-
-
-// Раполнение профайла после регистрации
-// Route::get('/fillprofile', 'Cabinet\FillprofileController@index')->name('fillprofile');
-// Route::put('/fillprofile/{user}', 'Cabinet\FillprofileController@update')->name('fillprofile.update');
-// Route::get('/fillprofile/{user}', 'Cabinet\FillprofileController@edit')->name('fillprofile.edit');
-
-
+// Заполнение профайла после регистрации
+Route::get('/fillprofile', 'FillProfile\FillprofileController@index')->name('fillprofile');
+Route::post('/fillprofile', 'FillProfile\FillprofileController@store')->name('fillprofile.store');
+Route::get('/fillprofile/edit', 'FillProfile\FillprofileController@edit')->name('fillprofile.edit');
+Route::post('/fillprofile/update/{id}', 'FillProfile\FillprofileController@update')->name('fillprofile.update');
 
 // Проверка email
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
-
-// Страница Админки
-// Route::get('/administrator', 'LTE\HomeController@index')->name('lte');
-// Route::resource('users', 'LTE\UsersController');
-
-
-// Страница Админки
-// Route::group(
-//     [
-//         'prefix' => 'cabinet',
-//         'as' => 'cabinet.',
-//         'namespace' => 'Cabinet',
-//         'middleware' => ['auth'],
-//     ],
-//     function () {
-//         Route::get('/', 'HomeController@index')->name('home');
-//         Route::resource('fillprofile', 'FillprofileController');
-//         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
-//         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
-// });
 
 Route::group(
     [
@@ -68,9 +40,7 @@ Route::group(
         'middleware' => ['auth'],
     ],
     function () {
-        Route::get('/', 'HomeController@index')->name('home');
-        Route::resource('user', 'UserController');
-        // Route::resource('message', 'MessageController');
+        Route::get('/', 'CabinetController@index')->name('home');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
         Route::post('carbonTest', 'UserController@carbonTest')->name('carbonTest');
@@ -86,18 +56,10 @@ Route::resource('messages', 'MessagesController');
 //     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'Messages\MessagesController@update']);
 // });
 
-
-// Личный кабинет
-// Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
-
 Route::post('challenge', 'Cabinet\ChallengeController@store')->name('challenge');
 // Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 // Route::post('avatarUpload', 'Cabinet\AvatarUploadController@avatarUpload');
 // Route::post('skillsAutocomplete', 'Cabinet\SkillsAutocompleteController@skillsAutocomplete');
-
-
-
-
 
 // Страница Админки
 Route::group(

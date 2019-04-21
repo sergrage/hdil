@@ -7,7 +7,7 @@
 <h1> Fill Profile </h1>
 <hr>
     <!-- Sign up form -->
-    <form action="{{ route('cabinet.user.store', $user->id) }}" method="POST" accept-charset="utf-8">
+    <form action="{{ route('fillprofile.store', $user->id) }}" method="POST" accept-charset="utf-8">
  
         @csrf
         <!-- Sign up card -->

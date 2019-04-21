@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,8 +10,8 @@ use Cmgmyr\Messenger\Traits\Messagable;
 
 use Illuminate\Support\Carbon;
 
-use App\Skill;
-use App\Challenge;
+use App\Models\kill;
+use App\Models\Challenge;
 
 class User extends Authenticatable
 {

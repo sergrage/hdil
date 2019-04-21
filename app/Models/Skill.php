@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Support\Arr;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 
 class Skill extends Model
 {

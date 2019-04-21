@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\LTE;
 
 use Illuminate\Http\Request;
-use App\Card;
+use App\Models\Card;
 use App\Http\Controllers\Controller;
 
 class CardController extends Controller

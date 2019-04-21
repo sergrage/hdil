@@ -5,10 +5,10 @@
 <div class="container-fluid">
 	<div class="d-flex" id="wrapper">
 		<div class="row">
-			@include('cabinet.partials.cabinetSidebar')
+			@include('partials.sidebar')
 			<div id="page-content-wrapper">
 				<div class="container-fluid" style="margin-left: 15px;">
-					@include('cabinet.partials.cabinetBtn')
+					@include('partials.cabinetBtn')
 					
 <!-- <form action="{{ route('messages.store') }}" method="post">
     {{ csrf_field() }}
