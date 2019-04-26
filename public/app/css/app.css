@@ -2560,7 +2560,7 @@ pre code {
   opacity: 1;
 }
 
-.form-control:-ms-input-placeholder {
+.form-control::-moz-placeholder {
   color: #6c757d;
   opacity: 1;
 }
@@ -5767,8 +5767,10 @@ input[type="button"].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
+       -moz-column-count: 3;
             column-count: 3;
     -webkit-column-gap: 1.25rem;
+       -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -12345,6 +12347,7 @@ a {
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
+  min-width: 160px;
   -webkit-transition: margin .25s ease-out;
   transition: margin .25s ease-out;
 }
@@ -12427,8 +12430,10 @@ a {
 
 .card-blocks {
   -webkit-columns: 2;
+     -moz-columns: 2;
           columns: 2;
   -webkit-column-gap: 30px;
+     -moz-column-gap: 30px;
           column-gap: 30px;
   margin: 1.75rem auto;
 }
@@ -12561,6 +12566,21 @@ input[type="file"] {
   .footer-distributed .footer-left p.footer-links {
     line-height: 1.8;
   }
+}
+
+.thread__link:hover {
+  text-decoration: none;
+  color: #6c757d;
+}
+
+.thread__wrapper-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.thread__wrapper-info:hover {
+  background-color: #bde4eb;
 }
 
 .message__avatar {

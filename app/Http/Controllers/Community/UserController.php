@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cabinet;
+namespace App\Http\Controllers\Community;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,7 +25,9 @@ class UserController extends Controller
 
     public function index()
     {
-
+        $user = Auth::user();
+        $users = User::orderBy('id', 'desc')->with('skills')->get();
+        return view('community.community', compact('users', 'user'));
     }
 
 
@@ -40,39 +42,12 @@ class UserController extends Controller
     }
 
     // public function edit(User $user)
-    // {
-    //    if($user->id !== Auth::user()->id){
-    //     abort(403);
-    //    }
-    //     $skillsList = $user->skills;
-    //     // если у user есть skills, то получаем array из его id   $user->skills - это коллекция
-    //     if($user->skills->isNotEmpty()){
-    //         $skillsListId = $user->skills->pluck('id')->toArray();
-    //     }
-    // 	return view('cabinet.editUser', compact('user','skillsList'));
+    //{
     // }
 
 
     // public function update(EditProfileRequest $request, User $user)
     // {
-    //     // $skills_id = $user->skills->pluck('id')->toArray();
-    //     if($request->input('skills')[0]) {
-    //         $skills_id = $user->getUserSkillsId($request);
-    //     }
-
-    //     $user->skills()->sync(array_unique($skills_id));
-
-    // 	$user->update([
-    //         'firstname' => $request['firstname']??'',
-    //         'lastname' => $request['lastname']??'',
-    //         'bio' => $request['bio']??'',
-    //         'facebook' => $request['facebook']??'',
-    //         'twitter' => $request['twitter']??'',
-    //         'instagram' => $request['instagram']??'',
-    //         'linkedin' => $request['linkedin']??'',
-    //     ]);
-
-    //     return redirect()->route('cabinet.home', $user);
     // }
 
     public function destroy()

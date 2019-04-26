@@ -9,7 +9,7 @@ use App\Http\Requests\Users\EditProfileRequest;
 
 class ProfileService
 {
-    public function fillUser(User $user, EditProfileRequest $request)
+    public function fillUser(User $user, FillProfileRequest $request)
     {
         // если был введен хоть один skill
         if($request->input('skills')[0]) {

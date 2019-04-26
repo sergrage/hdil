@@ -10,7 +10,7 @@ use Cmgmyr\Messenger\Traits\Messagable;
 
 use Illuminate\Support\Carbon;
 
-use App\Models\kill;
+use App\Models\Skill;
 use App\Models\Challenge;
 
 class User extends Authenticatable

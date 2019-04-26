@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class MessagesController extends Controller
 {
@@ -23,7 +24,7 @@ class MessagesController extends Controller
     {
         // All threads, ignore deleted/archived participants
         $user = Auth::user();
-        $threads = Thread::getAllLatest()->get();
+        $threads = Thread::forUser(Auth::id())->get();
 
         $users = User::where('id', '!=', Auth::id())->get();
 
@@ -48,13 +49,24 @@ class MessagesController extends Controller
             return redirect()->route('messages.index');
         }
         $user = Auth::user();
+        // защита от просмотра чужих сообщений 
+        $participants = DB::table('participants')->where('thread_id', $id)->get();
+
+        foreach ($participants as $perticiant) {
+            $participantsId[] = $perticiant->user_id;
+        }
+
+        if(!in_array(Auth::id(), $participantsId)){
+            abort(403);
+        }
+        $messagePath = Route::getFacadeRoot()->current()->uri();;
         // show current user in list if not a current participant
         // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
         // don't show the current user in list
         $userId = Auth::id();
         $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
-        return view('messenger.show', compact('thread', 'users', 'user'));
+        return view('messenger.show', compact('thread', 'users', 'user', 'messagePath'));
     }
     /**
      * Creates a new message thread.
@@ -104,12 +116,17 @@ class MessagesController extends Controller
      */
     public function update($id)
     {
+
+       
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
             return redirect()->route('messages.index');
         }
+
+        $participants = DB::table('participants')->where('thread_id', $id)->where('user_id', '!=' , Auth::id())->first();
+
         $thread->activateAllParticipants();
         // Message
         Message::create([
@@ -125,9 +142,8 @@ class MessagesController extends Controller
         $participant->last_read = new Carbon;
         $participant->save();
         // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant(Input::get('recipients'));
-        }
+        $thread->addParticipant($participants->user_id);
+
         return redirect()->route('messages.show', $id);
     }
 }

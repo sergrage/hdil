@@ -7,7 +7,12 @@
 
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
-	  placeholder: 'Type the content here!' })
+	    placeholder: 'Type the content here!',
+	    ckfinder: {
+	            uploadUrl: 'http://localhost:8080/cabinet/image'
+	        }
+	})
+		
 	.then( editor => {
 	    // console.log( editor );
 	})

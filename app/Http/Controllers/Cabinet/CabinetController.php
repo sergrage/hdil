@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cabinet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 
 class CabinetController extends Controller
@@ -18,10 +19,17 @@ class CabinetController extends Controller
     public function index()
     {
     	$user = Auth::user();
-
     	$parents = Category::defaultOrder()->withDepth()->get();
     	$category = Category::all();
-        return view('cabinet.home', compact('user', 'category' ,'parents'));
+
+        $currentPath= Route::getFacadeRoot()->current()->uri();
+
+        return view('cabinet.home', compact('user', 'category' ,'parents', 'currentPath'));
+    }
+
+    public function image()
+    {
+        dd(123);
     }
    
 }

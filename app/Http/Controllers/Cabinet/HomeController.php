@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 
+
+
 class HomeController extends Controller
 {
 

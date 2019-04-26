@@ -29,6 +29,10 @@ Route::post('/fillprofile', 'FillProfile\FillprofileController@store')->name('fi
 Route::get('/fillprofile/edit', 'FillProfile\FillprofileController@edit')->name('fillprofile.edit');
 Route::post('/fillprofile/update/{id}', 'FillProfile\FillprofileController@update')->name('fillprofile.update');
 
+// Community
+Route::get('/community', 'Community\UserController@index')->name('community');
+
+
 // Проверка email
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
@@ -41,9 +45,10 @@ Route::group(
     ],
     function () {
         Route::get('/', 'CabinetController@index')->name('home');
+        Route::get('/image', 'CabinetController@image')->name('image');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');
-        Route::post('carbonTest', 'UserController@carbonTest')->name('carbonTest');
+        // Route::post('carbonTest', 'UserController@carbonTest')->name('carbonTest');
 });
 
 Route::resource('messages', 'MessagesController');

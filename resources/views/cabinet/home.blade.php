@@ -6,7 +6,9 @@
 			<div class="row">
 				@include('partials.sidebar')
 				<div id="page-content-wrapper">
+
 					@include('cabinet.partials.cabinetContent')
+
 				</div>
 	    	</div>
 	    </div>
