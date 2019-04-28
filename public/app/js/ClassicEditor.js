@@ -7,15 +7,18 @@
 
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
+		toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList',
+		'numberedList', 'blockQuote', '|','mediaembed', '|', 'inserttable', '|','undo', 'redo' ],
 	    placeholder: 'Type the content here!',
-	    ckfinder: {
-	            uploadUrl: 'http://localhost:8080/cabinet/image'
-	        }
 	})
 		
 	.then( editor => {
-	    // console.log( editor );
+	    console.log( Array.from( editor.ui.componentFactory.names ) );
+	    console.log( editor );
 	})
 	.catch( error => {
 	    console.error( error );
 	});
+
+
+		
