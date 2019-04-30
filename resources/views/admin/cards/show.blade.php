@@ -2,7 +2,7 @@
 
 @section('content')
   
-  @include('admin.includes._cardsNav')
+@include('admin.includes._cardsNav')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -28,7 +28,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">How did I Learn {{ $card->getCategoryName() }}</h5>
-          <p class="card-text">{{ $card->content }}</p>
+          <p class="card-text">{!! $card->content !!}</p>
           <a href="#" class="btn btn-primary">Read Comments</a>
         </div>
       </div>

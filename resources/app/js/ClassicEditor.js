@@ -8,13 +8,12 @@
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
 		toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList',
-		'numberedList', 'blockQuote', '|','mediaembed', '|', 'inserttable', '|','undo', 'redo' ],
+		'numberedList', 'blockQuote', 'mediaembed', 'inserttable', '|','undo', 'redo' ],
 	    placeholder: 'Type the content here!',
 	})
 		
 	.then( editor => {
-	    console.log( Array.from( editor.ui.componentFactory.names ) );
-	    console.log( editor );
+	    // console.log( editor );
 	})
 	.catch( error => {
 	    console.error( error );

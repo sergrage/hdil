@@ -1,5 +1,6 @@
-<form action="{{route('cabinet.store')}}" method="post" accept-charset="utf-8" class="cabinet-content__form">
+<form action="{{route('cabinet.update')}}" method="post" accept-charset="utf-8" class="cabinet-content__form">
 	@csrf
+    @mathod('PUT')
 	<div class="form-group">
 		<label for="cardName">Card Name</label>
 		<input name="name" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Enter card name" value="{{ old('name') }}">

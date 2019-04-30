@@ -18,19 +18,6 @@ import CabinetFormSize from './modules/CabinetFormSize';
 var cabinetMenuToggle = new CabinetFormSize();
 
 
-// ClassicEditor
-// .create( document.querySelector( '#editor' ), {
-//   placeholder: 'Type the content here!' })
-// .then( editor => {
-//     // console.log( editor );
-// })
-// .catch( error => {
-//     console.error( error );
-// });
-
-
-
-
 //--------------------------------------------------------
 // вернуть/развернцть карточку в cabinet(личном кабинете)
 
@@ -109,54 +96,18 @@ $(document).on('click', '.badge', function(){
 
 });  
 
-// $(function() {
-//     var Accordion = function(el, multiple) {
-//     this.el = el || {};
-//     this.multiple = multiple || false;
 
-//     // Variables privadas
-//     var links = this.el.find('.link');
-//     // Evento
-//     links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
-//   }
-
-//   Accordion.prototype.dropdown = function(e) {
-//     var $el = e.data.el;
-//       $this = $(this),
-//       $next = $this.next();
-
-//     $next.slideToggle();
-//     $this.parent().toggleClass('open');
-
-//     if (!e.data.multiple) {
-//       $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-//     };
-//   } 
-
-//   var accordion = new Accordion($('#accordion'), false);
-// });
-
-
-// Check browser support
-// if (typeof(Storage) != "undefined") {
-//     // Store
-//     localStorage.setItem("toggleState", value);
-//     // Retrieve
-//     localStorage.getItem("toggleState");
-// } else {
-//     "Sorry, your browser does not support Web Storage...";
-// }
 
 
 $('#dropdownMenuButtonChallenge').on('click', function (event) {
     $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
 });
 
-
 $('#friendRadios').on('change', function() {
   $('.cabinet-content__challenge-email').slideDown("slow");
    $('#challengeEmailInput').prop("disabled", false);
 });
+
 $('#communityRadios').on('change', function() {
    $('.cabinet-content__challenge-email').slideUp("slow");
    $('#challengeEmailInput').prop("disabled", true);

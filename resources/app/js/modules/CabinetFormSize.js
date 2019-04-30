@@ -51,3 +51,14 @@ class CabinetFormSize {
 export default CabinetFormSize;
 
 // $("input").attr("disabled", true);
+
+
+// Check browser support
+// if (typeof(Storage) != "undefined") {
+//     // Store
+//     localStorage.setItem("toggleState", value);
+//     // Retrieve
+//     localStorage.getItem("toggleState");
+// } else {
+//     "Sorry, your browser does not support Web Storage...";
+// }

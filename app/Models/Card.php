@@ -15,14 +15,14 @@ class Card extends Model
 
     protected $table = 'cards';
 
-    protected $fillable = ['content', 'slug', 'category_id', 'user_id'];
+    protected $fillable = ['name', 'content', 'likesNumber', 'commentsNumber', 'views', 'category_id', 'user_id'];
 
 
     public function sluggable()
     {
         return [
             'slug' => [
-                'source' => 'category_id' .'_' .  'id'
+                'source' => 'name',
             ]
         ];
     }

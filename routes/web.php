@@ -45,6 +45,10 @@ Route::group(
     ],
     function () {
         Route::get('/', 'CabinetController@index')->name('home');
+        Route::post('/', 'CabinetController@store')->name('store');
+        Route::get('/card/edit/{card}', 'CardController@edit')->name('card.edit');
+        Route::put('/card/update/{card}', 'CardController@update')->name('card.update');
+        Route::delete('/card/destroy/{card}', 'CardController@destroy')->name('card.destroy');
         Route::get('/image', 'CabinetController@image')->name('image');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
         Route::post('avatarUpload', 'AvatarUploadController@avatarUpload');

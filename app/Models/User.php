@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 
 use App\Models\Skill;
 use App\Models\Challenge;
+use App\Models\Card;
 
 class User extends Authenticatable
 {
@@ -63,12 +64,12 @@ class User extends Authenticatable
 
     public function cards()
         {
-            return $this->hasMany(App\Card::class);
+            return $this->hasMany(Card::class);
         }
 
     public function comments()
         {
-            return $this->hasMany(App\Comment::class);
+            return $this->hasMany(Comment::class);
         }
 
     public function skills()

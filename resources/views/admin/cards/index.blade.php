@@ -45,12 +45,12 @@
                     <td> {{ $card->commentsNumber }} </td>
                     <td> {{ $card->views }} </td>
                     <td> 
+                      <a href="{{ route('admin.cards.show', $card)}}" class="btn btn-primary btn-sm m-1 p-1">Show</a>
                       <form class="d-inline" method="POST" action="" class="mr-1">
                           @csrf
                           @method('DELETE')
                           <button class="btn btn-danger btn-sm m-1 p-1">Delete</button>
                       </form>
-                      <a href="{{ route('admin.cards.show', $card)}}" class="btn btn-primary btn-sm m-1 p-1">Show</a>
                     </td>
                   </tr>
                 @endforeach

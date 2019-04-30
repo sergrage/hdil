@@ -18,6 +18,33 @@
 			</div>
 		</div>
 		<!-- Cards List -->
+		@foreach($cards as $card)
+		<div class="col-sm-6">
+			<div class="card" style="margin: 1.75rem auto;">
+				<div class="card-header">
+					<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
+				  	<i class="far fa-edit"></i>
+				  	<form class="d-inline" method="POST" action="{{ route('cabinet.card.destroy', $card) }}" class="mr-1">
+	                    @csrf
+	                    @method('DELETE')
+	                    <button class="btn p-1"><i class="far fa-trash-alt"></i></button>
+	                </form>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">{{ $card->name }}</h5>
+					<p class="card-text">{!! $card->content !!}</p>
+				</div>
+		     	<div class="card-footer">
+			    	<small>Last updated 3 mins ago</small>
+			    	<div class="pull-right">
+				    	<i class="far fa-thumbs-up p-1">{{ $card->likesNumber}}</i>
+				    	<i class="far fa-eye p-1">{{ $card->views }}</i>
+				    	<i class="far fa-comment p-1">{{ $card->commentsNumber }}</i>
+				    </div>
+				</div>
+			</div>
+		</div>
+		@endforeach
 		<div class="col-sm-6">
 			<div class="card" style="margin: 1.75rem auto;">
 				<div class="card-header">
