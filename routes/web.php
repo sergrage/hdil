@@ -47,7 +47,9 @@ Route::group(
         Route::get('/', 'CabinetController@index')->name('home');
         Route::post('/', 'CabinetController@store')->name('store');
         Route::get('/card/edit/{card}', 'CardController@edit')->name('card.edit');
+        Route::get('/card/show/{card}', 'CardController@show')->name('card.show');
         Route::put('/card/update/{card}', 'CardController@update')->name('card.update');
+        Route::put('/card/addLike/{card}', 'CardController@addLike')->name('card.addLike');
         Route::delete('/card/destroy/{card}', 'CardController@destroy')->name('card.destroy');
         Route::get('/image', 'CabinetController@image')->name('image');
         Route::post('skillsAutocomplete', 'SkillsAutocompleteController@skillsAutocomplete');
@@ -66,6 +68,8 @@ Route::resource('messages', 'MessagesController');
 // });
 
 Route::post('challenge', 'Cabinet\ChallengeController@store')->name('challenge');
+
+Route::post('ajaxRequest', 'Cabinet\CardController@ajaxRequest')->name('ajaxRequest');
 // Route::post('addmoreskills', 'Cabinet\FillprofileController@addMoreSkillsPost');
 // Route::post('avatarUpload', 'Cabinet\AvatarUploadController@avatarUpload');
 // Route::post('skillsAutocomplete', 'Cabinet\SkillsAutocompleteController@skillsAutocomplete');

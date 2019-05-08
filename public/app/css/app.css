@@ -12480,6 +12480,14 @@ a {
           transform: rotate(-180deg);
 }
 
+.card__edit {
+  color: #212529;
+}
+
+.card__edit:hover {
+  color: #212529 !important;
+}
+
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;

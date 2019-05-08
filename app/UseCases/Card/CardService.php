@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Card;
 use App\Http\Requests\Cabinet\CreateCardRequest;
+use App\Http\Requests\Card\EditCardRequest;
 
 class CardService extends Model
 {
@@ -24,5 +25,14 @@ class CardService extends Model
         ]);
 
         $card->save();
+    }
+
+    public function editCard(Card $card, EditCardRequest $request)
+    {
+        $card->update([
+            'name' => $request['name'],
+            'content' => $request['content'],
+            'category_id' => $request['category_id'],
+        ]);
     }
 }

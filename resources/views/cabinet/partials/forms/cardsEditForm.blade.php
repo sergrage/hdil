@@ -1,9 +1,9 @@
-<form action="{{route('cabinet.update')}}" method="post" accept-charset="utf-8" class="cabinet-content__form">
+<form action="{{route('cabinet.card.update', $card)}}" method="post" accept-charset="utf-8" class="cabinet-content__form">
 	@csrf
-    @mathod('PUT')
+    @method('PUT')
 	<div class="form-group">
 		<label for="cardName">Card Name</label>
-		<input name="name" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Enter card name" value="{{ old('name') }}">
+		<input name="name" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Enter card name" value="{{ $card->name }}">
         @if ($errors->has('name'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('name') }}</strong>
@@ -28,7 +28,7 @@
     </div>
 	<div class="form-group">
 		<label for="editor">Card Body</label>
-		<textarea name="content" id="editor" class="form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}">{{ old('content') }}</textarea>
+		<textarea name="content" id="editor" class="form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}">{{ $card->content }}</textarea>
         @if ($errors->has('content'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('content') }}</strong>

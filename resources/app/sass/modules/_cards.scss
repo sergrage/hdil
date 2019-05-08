@@ -23,3 +23,12 @@
 .card-head span::before{content:"\e113";float: right; font-family: 'Glyphicons Halflings'; transition:all 0.4s;}
 
 .collapsed .card-head span::before  {transform:rotate(-180deg);}
+
+.card {
+	&__edit {
+		color: #212529;
+		&:hover {
+			color: #212529 !important;
+		}
+	}
+}

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Cabinet;
+namespace App\Http\Requests\Card;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCardRequest extends FormRequest
+class EditCardRequest extends FormRequest
 {
     public function authorize()
     {

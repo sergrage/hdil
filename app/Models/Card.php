@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Overtrue\LaravelFollow\Traits\CanBeLiked;
 use App\Models\Category;
 use App\Models\User;
 
@@ -11,6 +12,7 @@ use App\Models\User;
 class Card extends Model
 {
      use Sluggable;
+     use CanBeLiked;
     
 
     protected $table = 'cards';

@@ -3,7 +3,7 @@
 	<div class="row">
 		<!-- Форма для создания карточек -->
 		<div class="col-lg-6 cabinet-content__form-wrapper pb-4 pb-lg-0">
-				@include('cabinet.partials.forms.cardsForm')
+		@include('cabinet.partials.forms.cardsForm')
 		</div>
 		<!-- Новости / Мануал -->
 		<div class="col-lg-6 cabinet-news">
@@ -20,14 +20,20 @@
 		<!-- Cards List -->
 		@foreach($cards as $card)
 		<div class="col-sm-6">
-			<div class="card" style="margin: 1.75rem auto;">
+			<div class="card" data-id="{{ $card->id }}" style="margin: 1.75rem auto;">
 				<div class="card-header">
 					<h4>How did i learn <i class="pull-right fas fa-arrow-circle-down"></i></h4>
-				  	<i class="far fa-edit"></i>
+					<h5><a href="#">
+					@foreach($card->category->ancestors as $ancestor)
+						{{ $ancestor->name }}  /
+					@endforeach
+					{{$card->category->name}}
+					</a></h5>
+				  	<a href="{{route('cabinet.card.edit', $card)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Card" class="card__edit"><i class="far fa-edit"></i></a>
 				  	<form class="d-inline" method="POST" action="{{ route('cabinet.card.destroy', $card) }}" class="mr-1">
 	                    @csrf
 	                    @method('DELETE')
-	                    <button class="btn p-1"><i class="far fa-trash-alt"></i></button>
+	                    <button class="btn p-1" data-toggle="tooltip" data-placement="bottom" title="Delete Card"><i class="far fa-trash-alt"></i></button>
 	                </form>
 				</div>
 				<div class="card-body">
@@ -37,10 +43,13 @@
 		     	<div class="card-footer">
 			    	<small>Last updated 3 mins ago</small>
 			    	<div class="pull-right">
-				    	<i class="far fa-thumbs-up p-1">{{ $card->likesNumber}}</i>
+				    	<span class="btn {{ auth()->user()->hasLiked($card) ? 'like-post' : '' }}">
+                            <i id="like{{$card->id}}" class="far fa-thumbs-up "></i> <span id="like{{$card->id}}-bs3">{{ $card->likers()->get()->count() }}</span>
+                        </span>
 				    	<i class="far fa-eye p-1">{{ $card->views }}</i>
 				    	<i class="far fa-comment p-1">{{ $card->commentsNumber }}</i>
 				    </div>
+				    <a href="{{route('cabinet.card.show', $card)}}" class="btn btn-primary">Show</a>
 				</div>
 			</div>
 		</div>

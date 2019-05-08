@@ -16,6 +16,8 @@ class AddCardNameDeleteSlug extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('name');
+        Schema::table('cards', function (Blueprint $table) {
+            $table->dropColumn('name');
+        });
     }
 }

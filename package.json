@@ -13,7 +13,7 @@
         "axios": "^0.18",
         "bootstrap": "^4.3.1",
         "cross-env": "^5.1",
-        "jquery": "^3.2",
+        "jquery": "^3.4.1",
         "laravel-mix": "^2.1.14",
         "lodash": "^4.17.4",
         "popper.js": "^1.14.7"
@@ -23,6 +23,6 @@
         "@ckeditor/ckeditor5-build-classic": "^12.0.0",
         "@ckeditor/ckeditor5-build-inline": "^12.0.0",
         "croppie": "^2.6.3",
-        "yarn": "^1.15.2"
+        "yarn": "^1.16.0"
     }
 }

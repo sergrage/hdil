@@ -7744,7 +7744,7 @@ function isSlowBuffer (obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.4.0
+ * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -7754,7 +7754,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2019-04-10T19:48Z
+ * Date: 2019-05-01T21:04Z
  */
 ( function( global, factory ) {
 
@@ -7887,7 +7887,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.4.0",
+	version = "3.4.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -12243,8 +12243,12 @@ var documentElement = document.documentElement;
 		},
 		composed = { composed: true };
 
+	// Support: IE 9 - 11+, Edge 12 - 18+, iOS 10.0 - 10.2 only
 	// Check attachment across shadow DOM boundaries when possible (gh-3504)
-	if ( documentElement.attachShadow ) {
+	// Support: iOS 10.0-10.2 only
+	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
+	// leading to errors. We need to check for `getRootNode`.
+	if ( documentElement.getRootNode ) {
 		isAttached = function( elem ) {
 			return jQuery.contains( elem.ownerDocument, elem ) ||
 				elem.getRootNode( composed ) === elem.ownerDocument;
@@ -13104,8 +13108,7 @@ jQuery.event = {
 
 				// Claim the first handler
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) &&
-					dataPriv.get( el, "click" ) === undefined ) {
+					el.click && nodeName( el, "input" ) ) {
 
 					// dataPriv.set( el, "click", ... )
 					leverageNative( el, "click", returnTrue );
@@ -13122,8 +13125,7 @@ jQuery.event = {
 
 				// Force setup before triggering a click
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) &&
-					dataPriv.get( el, "click" ) === undefined ) {
+					el.click && nodeName( el, "input" ) ) {
 
 					leverageNative( el, "click" );
 				}
@@ -13164,7 +13166,9 @@ function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
 	if ( !expectSync ) {
-		jQuery.event.add( el, type, returnTrue );
+		if ( dataPriv.get( el, type ) === undefined ) {
+			jQuery.event.add( el, type, returnTrue );
+		}
 		return;
 	}
 
@@ -13179,9 +13183,13 @@ function leverageNative( el, type, expectSync ) {
 			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
 
 				// Interrupt processing of the outer synthetic .trigger()ed event
-				if ( !saved ) {
+				// Saved data should be false in such cases, but might be a leftover capture object
+				// from an async native handler (gh-4350)
+				if ( !saved.length ) {
 
 					// Store arguments for use when handling the inner native event
+					// There will always be at least one argument (an event object), so this array
+					// will not be confused with a leftover capture object.
 					saved = slice.call( arguments );
 					dataPriv.set( this, type, saved );
 
@@ -13194,14 +13202,14 @@ function leverageNative( el, type, expectSync ) {
 					if ( saved !== result || notAsync ) {
 						dataPriv.set( this, type, false );
 					} else {
-						result = undefined;
+						result = {};
 					}
 					if ( saved !== result ) {
 
 						// Cancel the outer synthetic event
 						event.stopImmediatePropagation();
 						event.preventDefault();
-						return result;
+						return result.value;
 					}
 
 				// If this is an inner synthetic event for an event with a bubbling surrogate
@@ -13216,17 +13224,19 @@ function leverageNative( el, type, expectSync ) {
 
 			// If this is a native event triggered above, everything is now in order
 			// Fire an inner synthetic event with the original arguments
-			} else if ( saved ) {
+			} else if ( saved.length ) {
 
 				// ...and capture the result
-				dataPriv.set( this, type, jQuery.event.trigger(
+				dataPriv.set( this, type, {
+					value: jQuery.event.trigger(
 
-					// Support: IE <=9 - 11+
-					// Extend with the prototype to reset the above stopImmediatePropagation()
-					jQuery.extend( saved.shift(), jQuery.Event.prototype ),
-					saved,
-					this
-				) );
+						// Support: IE <=9 - 11+
+						// Extend with the prototype to reset the above stopImmediatePropagation()
+						jQuery.extend( saved[ 0 ], jQuery.Event.prototype ),
+						saved.slice( 1 ),
+						this
+					)
+				} );
 
 				// Abort handling of the native event
 				event.stopImmediatePropagation();
@@ -38587,6 +38597,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_MobileMenu__ = __webpack_require__("./resources/app/js/modules/MobileMenu.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_DeleteInputPlaseholder__ = __webpack_require__("./resources/app/js/modules/DeleteInputPlaseholder.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_CabinetFormSize__ = __webpack_require__("./resources/app/js/modules/CabinetFormSize.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_Tooltip__ = __webpack_require__("./resources/app/js/modules/Tooltip.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_AddSkill__ = __webpack_require__("./resources/app/js/modules/AddSkill.js");
 // $(document).ready(function(){  
 
 __webpack_require__("./resources/app/js/bootstrap.js");
@@ -38605,16 +38617,15 @@ var headerSearch = new __WEBPACK_IMPORTED_MODULE_1__modules_DeleteInputPlasehold
 
 var cabinetMenuToggle = new __WEBPACK_IMPORTED_MODULE_2__modules_CabinetFormSize__["a" /* default */]();
 
-// ClassicEditor
-// .create( document.querySelector( '#editor' ), {
-//   placeholder: 'Type the content here!' })
-// .then( editor => {
-//     // console.log( editor );
-// })
-// .catch( error => {
-//     console.error( error );
-// });
 
+var tooltip = new __WEBPACK_IMPORTED_MODULE_3__modules_Tooltip__["a" /* default */]();
+
+
+var sddSkill = new __WEBPACK_IMPORTED_MODULE_4__modules_AddSkill__["a" /* default */]();
+
+$(document).on('click', '#dynamic_field >span.badge', function () {
+  $(this).remove();
+});
 
 //--------------------------------------------------------
 // вернуть/развернцть карточку в cabinet(личном кабинете)
@@ -38625,114 +38636,24 @@ var cabinetMenuToggle = new __WEBPACK_IMPORTED_MODULE_2__modules_CabinetFormSize
 //     $(this).parent().parent().find('.card-body').slideToggle();
 // });
 
-//--------------------------------------------------------
-// автоматически добавляет поле формы skill в profile
-
-// var postURL = "<?php echo url('addmore'); ?>";
-// var i=1;  
-
-
-// $('#add').click(function(){  
-//      i++;  
-//      $('#dynamic_field')
-//      .append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" autocomplete="off" name="skills[]" placeholder="Enter your Skill" class="form-control skills_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
-// });  
-
-
-// $(document).on('click', '.btn_remove', function(){  
-
-//      var button_id = $(this).attr("id");
-//      console.log(button_id);   
-//      $('#row'+button_id+'').remove();
-//      i--;  
-// });  
-
-
 $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
 });
-
-var bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info', 'badge-light', 'badge-dark'];
-
-// var skillList = [];
-
-$('#add').click(function () {
-    var item = bootstrapColors[Math.floor(Math.random() * bootstrapColors.length)];
-    var skill = $('#addSkill').val();
-
-    // skillList.push(skill);
-
-    // console.log(skillList);
-
-    if (skill) {
-        $('#dynamic_field').append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
-        $('#addSkill').val('');
-    }
-});
-
-$(document).on('click', '.badge', function () {
-
-    // var index = skillList.indexOf($(this).text().trim());
-
-    // if(index > -1) {
-    //   skillList.splice(index, 1);
-    // }
-    // console.log(skillList);
-    $(this).remove();
-});
-
-// $(function() {
-//     var Accordion = function(el, multiple) {
-//     this.el = el || {};
-//     this.multiple = multiple || false;
-
-//     // Variables privadas
-//     var links = this.el.find('.link');
-//     // Evento
-//     links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
-//   }
-
-//   Accordion.prototype.dropdown = function(e) {
-//     var $el = e.data.el;
-//       $this = $(this),
-//       $next = $this.next();
-
-//     $next.slideToggle();
-//     $this.parent().toggleClass('open');
-
-//     if (!e.data.multiple) {
-//       $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-//     };
-//   } 
-
-//   var accordion = new Accordion($('#accordion'), false);
-// });
-
-
-// Check browser support
-// if (typeof(Storage) != "undefined") {
-//     // Store
-//     localStorage.setItem("toggleState", value);
-//     // Retrieve
-//     localStorage.getItem("toggleState");
-// } else {
-//     "Sorry, your browser does not support Web Storage...";
-// }
-
 
 $('#dropdownMenuButtonChallenge').on('click', function (event) {
-    $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
+  $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
 });
 
 $('#friendRadios').on('change', function () {
-    $('.cabinet-content__challenge-email').slideDown("slow");
-    $('#challengeEmailInput').prop("disabled", false);
+  $('.cabinet-content__challenge-email').slideDown("slow");
+  $('#challengeEmailInput').prop("disabled", false);
 });
+
 $('#communityRadios').on('change', function () {
-    $('.cabinet-content__challenge-email').slideUp("slow");
-    $('#challengeEmailInput').prop("disabled", true);
+  $('.cabinet-content__challenge-email').slideUp("slow");
+  $('#challengeEmailInput').prop("disabled", true);
 });
 
 /***/ }),
@@ -38796,6 +38717,65 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/app/js/modules/AddSkill.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var AddSkill = function () {
+    function AddSkill() {
+        _classCallCheck(this, AddSkill);
+
+        this.addButton = __WEBPACK_IMPORTED_MODULE_0_jquery___default()("#add");
+        this.addInput = __WEBPACK_IMPORTED_MODULE_0_jquery___default()("#addSkill");
+        this.dynamicField = __WEBPACK_IMPORTED_MODULE_0_jquery___default()("#dynamic_field");
+        this.bootstrapColors = ['badge-primary', 'badge-secondary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info', 'badge-light', 'badge-dark'];
+        this.skill = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#dynamic_field >span.badge');
+        this.document = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(document);
+
+        this.events();
+    }
+
+    _createClass(AddSkill, [{
+        key: "events",
+        value: function events() {
+            this.addButton.click(this.addSkill.bind(this));
+            // this.document.on('click', this.skill, function(){
+            //     console.log(this.skill);
+            //     this.skill.remove();
+            // });
+        }
+    }, {
+        key: "addSkill",
+        value: function addSkill() {
+            var item = this.bootstrapColors[Math.floor(Math.random() * this.bootstrapColors.length)];
+            var skill = this.addInput.val();
+            if (skill) {
+                this.dynamicField.append('<span class="badge ' + item + ' m-1" id="' + item + '">' + skill + ' <i class="fas fa-minus-square p-1"></i><input type="hidden" name="skills[]" value="' + skill + '"></span>');
+                this.addInput.val('');
+            }
+        }
+
+        // deleteSkill(){
+
+        // }
+
+    }]);
+
+    return AddSkill;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (AddSkill);
 
 /***/ }),
 
@@ -38871,6 +38851,17 @@ var CabinetFormSize = function () {
 /* harmony default export */ __webpack_exports__["a"] = (CabinetFormSize);
 
 // $("input").attr("disabled", true);
+
+
+// Check browser support
+// if (typeof(Storage) != "undefined") {
+//     // Store
+//     localStorage.setItem("toggleState", value);
+//     // Retrieve
+//     localStorage.getItem("toggleState");
+// } else {
+//     "Sorry, your browser does not support Web Storage...";
+// }
 
 /***/ }),
 
@@ -38967,6 +38958,39 @@ var MobileMenu = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (MobileMenu);
+
+/***/ }),
+
+/***/ "./resources/app/js/modules/Tooltip.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Tooltip = function () {
+	function Tooltip() {
+		_classCallCheck(this, Tooltip);
+
+		this.tooltip = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('[data-toggle="tooltip"]');
+	}
+
+	_createClass(Tooltip, [{
+		key: 'events',
+		value: function events() {
+			this.tooltip.tooltip();
+		}
+	}]);
+
+	return Tooltip;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Tooltip);
 
 /***/ }),
 

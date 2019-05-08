@@ -173,10 +173,16 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
+  <style type="text/css">
+    .like-post{
+        color: #e21309 !important;
+      }
+  </style>
 </body>
 </html>
 
 
 @yield('modalImage')
+@yield('cardLikes')
 @yield('ClassicEditor')
 
