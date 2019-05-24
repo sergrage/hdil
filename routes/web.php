@@ -46,6 +46,7 @@ Route::group(
     function () {
         Route::get('/', 'CabinetController@index')->name('home');
         Route::post('/', 'CabinetController@store')->name('store');
+        Route::post('/addComment/{id}', 'CommentController@store')->name('addComment');
         Route::get('/card/edit/{card}', 'CardController@edit')->name('card.edit');
         Route::get('/card/show/{card}', 'CardController@show')->name('card.show');
         Route::put('/card/update/{card}', 'CardController@update')->name('card.update');

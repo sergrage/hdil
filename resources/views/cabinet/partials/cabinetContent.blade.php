@@ -38,18 +38,25 @@
 				</div>
 				<div class="card-body">
 					<h5 class="card-title">{{ $card->name }}</h5>
-					<p class="card-text">{!! $card->content !!}</p>
+					<p class="card-text">{!! $card->html_cut($card->content, 550) !!}</p>
 				</div>
 		     	<div class="card-footer">
-			    	<small>Last updated 3 mins ago</small>
-			    	<div class="pull-right">
-				    	<span class="btn {{ auth()->user()->hasLiked($card) ? 'like-post' : '' }}">
+			    	
+			    	<div class="float-left">
+				    	<span class="btn p-0 border-0 align-middle {{ auth()->user()->hasLiked($card) ? 'like-post' : '' }}">
                             <i id="like{{$card->id}}" class="far fa-thumbs-up "></i> <span id="like{{$card->id}}-bs3">{{ $card->likers()->get()->count() }}</span>
                         </span>
-				    	<i class="far fa-eye p-1">{{ $card->views }}</i>
-				    	<i class="far fa-comment p-1">{{ $card->commentsNumber }}</i>
+                        /
+                        <span class="align-middle">
+				    	<i class="far fa-eye p-1"><span class="pl-1">{{ $card->views }}</span></i>
+				    	</span>
+				    	/
+                        <span class="align-middle">
+				    	<i class="far fa-comment p-1"><span class="pl-1">{{ $card->commentsNumber }}</span></i>
+				    	</span>
+                        <div class=""><small> Created at {{$card->createdAtForHumans()}}</small></div>
 				    </div>
-				    <a href="{{route('cabinet.card.show', $card)}}" class="btn btn-primary">Show</a>
+				    <a href="{{route('cabinet.card.show', $card)}}" class="btn btn-info float-right">Show</a>
 				</div>
 			</div>
 		</div>

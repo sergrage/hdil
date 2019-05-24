@@ -38624,7 +38624,7 @@ var tooltip = new __WEBPACK_IMPORTED_MODULE_3__modules_Tooltip__["a" /* default 
 var sddSkill = new __WEBPACK_IMPORTED_MODULE_4__modules_AddSkill__["a" /* default */]();
 
 $(document).on('click', '#dynamic_field >span.badge', function () {
-  $(this).remove();
+	$(this).remove();
 });
 
 //--------------------------------------------------------
@@ -38637,24 +38637,50 @@ $(document).on('click', '#dynamic_field >span.badge', function () {
 // });
 
 $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
 });
 
 $('#dropdownMenuButtonChallenge').on('click', function (event) {
-  $('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
+	$('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
 });
 
 $('#friendRadios').on('change', function () {
-  $('.cabinet-content__challenge-email').slideDown("slow");
-  $('#challengeEmailInput').prop("disabled", false);
+	$('.cabinet-content__challenge-email').slideDown("slow");
+	$('#challengeEmailInput').prop("disabled", false);
 });
 
 $('#communityRadios').on('change', function () {
-  $('.cabinet-content__challenge-email').slideUp("slow");
-  $('#challengeEmailInput').prop("disabled", true);
+	$('.cabinet-content__challenge-email').slideUp("slow");
+	$('#challengeEmailInput').prop("disabled", true);
 });
+
+//--------------------------------------------------------
+//--------------------------------------------------------
+//--------------------------------------------------------
+
+var replyBtn = $('comment-reply-btn');
+
+$('body').click(function (e) {
+	if (e.target.nodeName == 'BUTTON' && $(e.target).hasClass('comment-reply-btn')) {
+		var commentId = $(e.target).data('commentid');
+		var commentRate = $(e.target).data('rate');
+		var commentNameParent = $(e.target).data('username');
+	}
+
+	// var id = $(this).parents(".commentBtn").data('id');
+	// console.log(id);
+	// var commentNameParent = $(this).data('username');
+	// var commentRate = $(this).data('rate');
+	// var commentId = $(this).data('commentId');
+	console.log(commentNameParent);
+	console.log(commentRate);
+	console.log(commentId);
+});
+
+var commentRateInput = $('#input-comment-rate');
+var commentIdInput = $('#input-comment-id');
 
 /***/ }),
 

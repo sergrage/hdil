@@ -56,3 +56,33 @@ $('#communityRadios').on('change', function() {
    $('#challengeEmailInput').prop("disabled", true);
 });
 
+//--------------------------------------------------------
+//--------------------------------------------------------
+//--------------------------------------------------------
+
+var replyBtn = $('comment-reply-btn');
+
+$('body').click(function(e){
+	if(e.target.nodeName == 'BUTTON' && $(e.target).hasClass('comment-reply-btn')) {
+		var commentId = $(e.target).data('commentid');	
+		var commentRate = $(e.target).data('rate');	
+		var commentNameParent = $(e.target).data('username');	
+	}
+	
+ 
+	// var id = $(this).parents(".commentBtn").data('id');
+	// console.log(id);
+	// var commentNameParent = $(this).data('username');
+	// var commentRate = $(this).data('rate');
+	// var commentId = $(this).data('commentId');
+	console.log(commentNameParent);
+	console.log(commentRate);
+	console.log(commentId);
+
+});
+
+var commentRateInput = $('#input-comment-rate');
+var commentIdInput = $('#input-comment-id');
+
+
+

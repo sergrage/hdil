@@ -21,7 +21,6 @@ class FillProfileController extends Controller
         $this->service = $service;
     }
 
-
     public function index()
     {
     	$user = Auth::user();

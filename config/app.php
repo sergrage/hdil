@@ -155,6 +155,7 @@ return [
         yasmuru\LaravelTinify\LaravelTinifyServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
         Overtrue\LaravelFollow\FollowServiceProvider::class,
+        Actuallymab\LaravelComment\LaravelCommentServiceProvider::class,
         /*
          * Application Service Providers...
          */

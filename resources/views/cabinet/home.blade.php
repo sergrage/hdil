@@ -33,7 +33,10 @@
         // берет значение числа лайков
             var c = $('#'+this.id+'-bs3').html();
             console.log(c);
-        // 
+        // span с числом лайков
+        	var likeNumber = $('#like'+id+'-bs3');
+        	console.log(likeNumber);
+
             var cObjId = this.id;
             console.log(cObjId);
             var cObj = $(this);
@@ -46,10 +49,12 @@
                data:{id:id},
                success:function(data){
                   if(jQuery.isEmptyObject(data.success.attached)){
-                    $('#'+cObjId+'-bs3').html(parseInt(c)-1);
+                    likeNumber.html(parseInt(c)-1);
+                    likeNumber.removeClass("like-post");
                     $(cObj).removeClass("like-post");
                   }else{
-                    $('#'+cObjId+'-bs3').html(parseInt(c)+1);
+                    likeNumber.html(parseInt(c)+1);
+                    likeNumber.addClass("like-post");
                     $(cObj).addClass("like-post");
                   }
                }

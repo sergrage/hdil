@@ -30,7 +30,7 @@ class CabinetController extends Controller
 
     	$parents = Category::defaultOrder()->withDepth()->get();
     	$category = Category::all();
-        $cards = $user->cards;
+        $cards = Card::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
 
         $currentPath= Route::getFacadeRoot()->current()->uri();
 

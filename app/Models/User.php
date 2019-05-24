@@ -7,7 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Kalnoy\Nestedset\NodeTrait;
 use Cmgmyr\Messenger\Traits\Messagable;
+
 use Overtrue\LaravelFollow\Traits\CanLike;
+
+use Actuallymab\LaravelComment\CanComment;
 
 use Illuminate\Support\Carbon;
 
@@ -21,6 +24,7 @@ class User extends Authenticatable
     use Sluggable;
     use Messagable;
     use CanLike;
+    use CanComment;
 
     public const STATUS_WAIT = 'wait';
     public const STATUS_ACTIVE = 'active';
@@ -69,10 +73,10 @@ class User extends Authenticatable
             return $this->hasMany(Card::class);
         }
 
-    public function comments()
-        {
-            return $this->hasMany(Comment::class);
-        }
+    // public function comments()
+    //     {
+    //         return $this->hasMany(Comment::class);
+    //     }
 
     public function skills()
     {
