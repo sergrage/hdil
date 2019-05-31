@@ -52,6 +52,11 @@ class Card extends Model implements Commentable
         return $this->user->name;
     }
 
+    public function getUserId()
+    {
+        return $this->user->id;
+    }
+
     public function contentStrLimit()
     {
         return str_limit($this->content, 60);

@@ -38624,7 +38624,7 @@ var tooltip = new __WEBPACK_IMPORTED_MODULE_3__modules_Tooltip__["a" /* default 
 var sddSkill = new __WEBPACK_IMPORTED_MODULE_4__modules_AddSkill__["a" /* default */]();
 
 $(document).on('click', '#dynamic_field >span.badge', function () {
-	$(this).remove();
+		$(this).remove();
 });
 
 //--------------------------------------------------------
@@ -38637,23 +38637,23 @@ $(document).on('click', '#dynamic_field >span.badge', function () {
 // });
 
 $.ajaxSetup({
-	headers: {
-		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	}
+		headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
 });
 
 $('#dropdownMenuButtonChallenge').on('click', function (event) {
-	$('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
+		$('#dropdown-menu-challenge').toggleClass('show cabinet-content__challenge-open');
 });
 
 $('#friendRadios').on('change', function () {
-	$('.cabinet-content__challenge-email').slideDown("slow");
-	$('#challengeEmailInput').prop("disabled", false);
+		$('.cabinet-content__challenge-email').slideDown("slow");
+		$('#challengeEmailInput').prop("disabled", false);
 });
 
 $('#communityRadios').on('change', function () {
-	$('.cabinet-content__challenge-email').slideUp("slow");
-	$('#challengeEmailInput').prop("disabled", true);
+		$('.cabinet-content__challenge-email').slideUp("slow");
+		$('#challengeEmailInput').prop("disabled", true);
 });
 
 //--------------------------------------------------------
@@ -38663,24 +38663,33 @@ $('#communityRadios').on('change', function () {
 var replyBtn = $('comment-reply-btn');
 
 $('body').click(function (e) {
-	if (e.target.nodeName == 'BUTTON' && $(e.target).hasClass('comment-reply-btn')) {
-		var commentId = $(e.target).data('commentid');
-		var commentRate = $(e.target).data('rate');
-		var commentNameParent = $(e.target).data('username');
-	}
+		if (e.target.nodeName == 'BUTTON' && $(e.target).hasClass('comment-reply-btn')) {
 
-	// var id = $(this).parents(".commentBtn").data('id');
-	// console.log(id);
-	// var commentNameParent = $(this).data('username');
-	// var commentRate = $(this).data('rate');
-	// var commentId = $(this).data('commentId');
-	console.log(commentNameParent);
-	console.log(commentRate);
-	console.log(commentId);
+				var commentId = $(e.target).data('commentid');
+				var commentRate = $(e.target).data('rate');
+				var commentNameParent = $(e.target).data('username');
+
+				var commentRateInput = $('#input-comment-rate');
+				var commentNameInput = $('#input-comment-name');
+				var commentIdInput = $('#input-comment-id');
+				var commentTextarea = $('#comment-textarea');
+
+				commentTextarea.empty();
+				commentTextarea.append(commentNameParent).append(', ');
+				commentTextarea.focus();
+				$([document.documentElement, document.body]).animate({
+						scrollTop: commentTextarea.offset().top
+				}, 500);
+
+				// commentIdInput.val(commentId);
+				// commentRateInput.val(commentRate);
+				// commentNameInput.val(commentNameParent);
+		}
+
+		console.log(commentNameParent);
+		console.log(commentRate);
+		console.log(commentId);
 });
-
-var commentRateInput = $('#input-comment-rate');
-var commentIdInput = $('#input-comment-id');
 
 /***/ }),
 

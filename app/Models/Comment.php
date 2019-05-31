@@ -7,6 +7,11 @@ use Actuallymab\LaravelComment\Models\Comment as LaravelComment;
 
 class Comment extends LaravelComment
 {
+	public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
+    
     public function getUserName()
     {
     	return User::findOrFail($this->commented_id)->name;

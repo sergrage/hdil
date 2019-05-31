@@ -16,20 +16,11 @@
 
       <div class="card text-center">
         <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Card</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Author</a>
-            </li>
-          </ul>
-
+          @include('admin.cards.partials.cardHeader')
         </div>
         <div class="card-body">
           <h5 class="card-title">How did I Learn {{ $card->getCategoryName() }}</h5>
           <p class="card-text">{!! $card->content !!}</p>
-          <a href="#" class="btn btn-primary">Read Comments</a>
         </div>
       </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LTE;
 
 use Illuminate\Http\Request;
 use App\Models\Card;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class CardController extends Controller
@@ -34,19 +35,16 @@ class CardController extends Controller
         return view('admin.cards.show', compact('card'));
 
     }
+
+    public function showUser($id)
+    {
+        $card = Card::find($id);
+        dd($card);
+        $user = User::findOrFail($card->getUserId());
+        return view('admin.cards.user', compact('user', 'card'));
+
+    }
     
-    // public function edit($id)
-    // {
-    //     //
-    // }
-
-
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-
     public function destroy(Card $card)
     {
         $card->delete();

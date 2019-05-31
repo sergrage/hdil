@@ -99,4 +99,5 @@ Route::group(
         Route::post('/categories/{category}/down', 'CategoryController@down')->name('category.down');
 
         Route::resource('/cards', 'CardController');
+        Route::get('/cards/user/{id}', 'CardController@showUser')->name('card.user');
 });

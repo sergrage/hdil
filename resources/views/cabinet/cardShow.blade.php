@@ -56,9 +56,10 @@
                                                         <i class="fas fa-pencil-alt prefix"></i>
                                                     </span>
                                                 </div>
-                                                <textarea class="form-control" name="comment" rows="5"></textarea>
+                                                <textarea id="comment-textarea" class="form-control" name="comment" rows="5"></textarea>
                                                 <input id="input-comment-rate" type="hidden" name="comment-rate" value="">
                                                 <input id="input-comment-id" type="hidden" name="comment-id" value="">
+                                                <input id="input-comment-name" type="hidden" name="comment-name" value="">
                                             </div>
                                         </div>
                                           <div class="form-group">
