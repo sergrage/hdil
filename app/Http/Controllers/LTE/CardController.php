@@ -39,8 +39,9 @@ class CardController extends Controller
     public function showUser($id)
     {
         $card = Card::find($id);
-        dd($card);
+
         $user = User::findOrFail($card->getUserId());
+
         return view('admin.cards.user', compact('user', 'card'));
 
     }

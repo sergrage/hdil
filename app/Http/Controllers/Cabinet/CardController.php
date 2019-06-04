@@ -33,6 +33,7 @@ class CardController extends Controller
     public function show(Card $card)
     {
        $user = Auth::user();
+       $card = $card->with('comments')
        $card->increment('views');
        return view('cabinet.cardShow', compact( 'card', 'user'));
     }

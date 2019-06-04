@@ -64,14 +64,16 @@ var replyBtn = $('comment-reply-btn');
 
 $('body').click(function(e){
 	if(e.target.nodeName == 'BUTTON' && $(e.target).hasClass('comment-reply-btn')) {
-		
-		var commentId = $(e.target).data('commentid');	
-		var commentRate = $(e.target).data('rate');	
+		// Id комментария.
+		var commentId = $(e.target).data('commentid');
+
+		// var commentRate = $(e.target).data('rate');	
 		var commentNameParent = $(e.target).data('username');
 
-		var commentRateInput = $('#input-comment-rate');
-		var commentNameInput = $('#input-comment-name');
-		var commentIdInput = $('#input-comment-id');
+		// var commentRateInput = $('#input-comment-rate');
+		// var commentNameInput = $('#input-comment-name');
+		// input куда добавляется id комментария
+		var commentIdInput = $('#comment-parent_id');
 		var commentTextarea = $('#comment-textarea');
 
 		commentTextarea.empty();
@@ -81,15 +83,16 @@ $('body').click(function(e){
         scrollTop: commentTextarea.offset().top
     }, 500);
 
-		// commentIdInput.val(commentId);
+		// в value добавляется Id
+		commentIdInput.val(commentId);
 		// commentRateInput.val(commentRate);
 		// commentNameInput.val(commentNameParent);
 
 	}
 	
  
-	console.log(commentNameParent);
-	console.log(commentRate);
-	console.log(commentId);
+	// console.log(commentNameParent);
+	// console.log(commentRate);
+	// console.log(commentId);
 
 });
