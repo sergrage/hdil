@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Card;
 use App\Models\Category;
+use App\Models\Comment;
 
 use App\UseCases\Card\CardService;
 use App\Http\Requests\Card\EditCardRequest;
@@ -33,9 +34,14 @@ class CardController extends Controller
     public function show(Card $card)
     {
        $user = Auth::user();
-       $card = $card->with('comments')
+       // $card = $card->with('comments')->get();
+
        $card->increment('views');
-       return view('cabinet.cardShow', compact( 'card', 'user'));
+       $comments = $card->comments;
+
+       $comments = Comment::buildTree($comments, 0);
+
+       return view('cabinet.cardShow', compact( 'card', 'user', 'comments'));
     }
 
     public function update(Card $card, EditCardRequest $request)

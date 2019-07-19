@@ -68,7 +68,7 @@ $('body').click(function(e){
 		var commentId = $(e.target).data('commentid');
 
 		// var commentRate = $(e.target).data('rate');	
-		var commentNameParent = $(e.target).data('username');
+		var commentNameParent = '<b>' + $(e.target).data('username') + '</b>';
 
 		// var commentRateInput = $('#input-comment-rate');
 		// var commentNameInput = $('#input-comment-name');

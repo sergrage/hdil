@@ -16,7 +16,7 @@ class CommentController extends Controller
     	$card = Card::findOrFail($id);
     	$user = Auth::user();
 
-        dd($request);
+        // dd($request);
 
         $comment = new Comment([
             'commentable_id' => $request['card_id'],

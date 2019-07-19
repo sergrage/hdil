@@ -37,7 +37,7 @@
 					                        <span class="align-middle">
 									    	<i class="far fa-comment p-1"><span class="pl-1">{{ $card->commentsNumber }}</span></i>
 									    	</span>
-					                        <div class=""><small>Last updated 3 mins ago</small></div>
+					                        <div class=""><small>Last updated {{$card->createdAtForHumans()}}</small></div>
 									    </div>
 									    <a href="{{route('cabinet.home')}}" class="btn btn-primary float-right">Back</a>
 									</div>
